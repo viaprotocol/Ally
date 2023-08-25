@@ -22,7 +22,7 @@ const ITEM_H = 208 / 4;
 const ROW_COUNT = 3;
 
 const NumberFlag = styled.div`
-  color: ${LessPalette['@color-comment-2']};
+  color: white;
   font-weight: 400;
   font-size: 12px;
   height: 14px;
@@ -348,7 +348,7 @@ function MnemonicsInputs({
           return (
             <div
               key={`word-item-${word}-${idx}`}
-              className={clsx('matrix-word-item is-mnemonics-input bg-gray-bg')}
+              className={clsx('matrix-word-item is-mnemonics-input bg-form-bg')}
               onClick={() => {
                 setFocusing({ index: idx, visible: isCurrentVisible });
                 setMnemonics(word);
@@ -358,7 +358,7 @@ function MnemonicsInputs({
                 debounce={150}
                 key={`word-input-${ver}-${word}-${idx}`}
                 className={clsx(
-                  'mnemonics-input px-[28px] bg-gray-bg',
+                  'mnemonics-input px-[28px] bg-form-bg text-white',
                   isCurrentFocusing && 'ant-input-focused'
                 )}
                 type={isCurrentVisible ? 'text' : 'password'}

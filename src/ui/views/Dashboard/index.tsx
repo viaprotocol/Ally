@@ -22,6 +22,7 @@ import IconAddressCopy from 'ui/assets/address-copy.png';
 import IconCorrect from 'ui/assets/dashboard/contacts/correct.png';
 import IconUnCorrect from 'ui/assets/dashboard/contacts/uncorrect.png';
 import IconEditPen from 'ui/assets/editpen.svg';
+import { SvgViaScore } from 'ui/assets';
 import { ReactComponent as RcIconCopy } from 'ui/assets/icon-copy.svg';
 
 import IconSuccess from 'ui/assets/success.svg';
@@ -34,6 +35,7 @@ import {
 } from 'ui/store';
 import { isSameAddress, useWallet } from 'ui/utils';
 import {
+  BalanceInfo,
   BalanceView,
   ChainAndSiteSelector,
   GnosisWrongChainAlertBar,
@@ -54,6 +56,7 @@ import { useWalletConnectIcon } from '@/ui/component/WalletConnect/useWalletConn
 import { useGnosisNetworks } from '@/ui/hooks/useGnosisNetworks';
 import { useGnosisPendingTxs } from '@/ui/hooks/useGnosisPendingTxs';
 import { CommonSignal } from '@/ui/component/ConnectStatus/CommonSignal';
+import PageWrapper from '@/ui/component/PageWrapper';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -331,12 +334,71 @@ const Dashboard = () => {
   return (
     <>
       <div
-        className={clsx('dashboard', {
+        className={clsx('dashboard', 'h-full', {
           'metamask-active': showGnosisWrongChainAlert && isGnosis,
         })}
       >
-        <div className={clsx('main', showChain && 'show-chain-bg')}>
+        <div
+          className={clsx(
+            'main px-[12px] flex flex-col',
+            showChain && 'show-chain-bg'
+          )}
+        >
           {currentAccount && (
+            <>
+              <div
+                className="flex p-[12px] gap-[10px] m-auto w-full items-center mb-[12px]"
+                onClick={switchAddress}
+              >
+                <div className="flex items-center justify-center flex-col">
+                  <img
+                    className={clsx(
+                      'icon w-[32px] h-[32px]',
+                      opacity60 && 'opacity-60'
+                    )}
+                    src={
+                      brandIcon ||
+                      WALLET_BRAND_CONTENT[currentAccount.brandName]?.image ||
+                      KEYRING_ICONS_WHITE[currentAccount.type]
+                    }
+                  />
+                  <CommonSignal
+                    type={currentAccount.type}
+                    brandName={currentAccount.brandName}
+                    address={currentAccount.address}
+                  />
+                </div>
+                <div className="flex-1 flex flex-col">
+                  <div className="flex gap-[8px]">
+                    <div
+                      className="text-white font-semibold"
+                      title={displayName}
+                    >
+                      {displayName}
+                    </div>
+                    <div className="font-semibold text-[#7A7A7A]">
+                      <BalanceInfo
+                        currentAccount={currentAccount}
+                        accountBalanceUpdateNonce={accountBalanceUpdateNonce}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <AddressViewer
+                      address={currentAccount.address}
+                      showArrow={false}
+                      className={'text-12 text-[#7A7A7A]'}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center justify-center text-12 text-[#3D3D3D]">
+                  W
+                </div>
+              </div>
+              <div className="border-b border-[#1F1F1F] h-[1px] w-full" />
+            </>
+          )}
+          {/* {currentAccount && (
             <div
               className={clsx('flex header items-center relative', topAnimate)}
             >
@@ -411,11 +473,11 @@ const Dashboard = () => {
                 <IconAddAddress className="text-white w-[20px] h-[20px]" />
               </div>
             </div>
-          )}
-          <BalanceView
+          )} */}
+          {/* <BalanceView
             currentAccount={currentAccount}
             accountBalanceUpdateNonce={accountBalanceUpdateNonce}
-          />
+          /> */}
           {isGnosis ? (
             <Queue
               count={gnosisPendingCount || 0}
@@ -429,7 +491,55 @@ const Dashboard = () => {
             !showChain && <PendingTxs pendingTxCount={pendingTxCount} />
           )}
         </div>
-        <ChainAndSiteSelector
+        <section className="flex w-full flex-col h-full justify-between pb-[12px] px-[24px] mt-[12px]">
+          <main className="flex items-center justify-center flex-col gap-[12px]">
+            <div className="flex flex-col w-[240px] h-[240px] relative gap-[24px] items-center justify-center">
+              <div className="absolute z-[100] top-0 left-0 w-full h-full animate-spin duration-[5000]">
+                <SvgViaScore width={240} height={240} />
+              </div>
+              <div className="flex flex-col text-[#3D3D3D] items-center justify-center">
+                <div className="text-[14px] text-[#7A7A7A]">Total</div>
+                <div className="text-[32px] font-semibold">
+                  <span className="text-white">1,492</span>.219
+                </div>
+              </div>
+              <div className="flex flex-col text-[#7A7A7A] items-center justify-center">
+                <div>Ads viewed</div>
+                <div className="text-white font-semibold">41,120</div>
+              </div>
+            </div>
+            <div className="flex justify-between mt-[26px] w-full">
+              <div className="flex flex-col items-center justify-center w-full gap-[12px]">
+                <div>Ads viewed</div>
+                <div className="flex flex-col items-center justify-center">
+                  <div className="text-white font-semibold text-[24px] ">
+                    46
+                  </div>
+                  <div className="text-[#529A66] text-[12px] ">+21</div>
+                </div>
+              </div>
+              <div className="flex flex-col items-center justify-center w-full gap-[12px]">
+                <div>Earned tokens</div>
+                <div className="flex flex-col items-center justify-center">
+                  <div className="text-white font-semibold text-[24px] ">
+                    4.621
+                  </div>
+                  <div className="text-[#529A66] text-[12px] ">+12</div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <footer className="py-[14px] flex justify-between items-center">
+            <div>Claimable tokens</div>
+            <div className="flex gap-[12px] items-center">
+              <div className="text-white font-semibold">12.921</div>
+              <button className="p-[6px] bg-buttonGradient rounded text-12 font-semibold text-white/80 active:scale-125 transition-all hover:opacity/80">
+                Claim
+              </button>
+            </div>
+          </footer>
+        </section>
+        {/* <ChainAndSiteSelector
           onChange={(currentConnection) => {
             dispatch.chains.setField({ currentConnection });
           }}
@@ -440,7 +550,7 @@ const Dashboard = () => {
           isGnosis={isGnosis}
           higherBottom={isGnosis}
           setDashboardReload={() => setDashboardReload(true)}
-        />
+        /> */}
         {showGnosisAlert && <GnosisWrongChainAlertBar />}
       </div>
       <Modal
@@ -553,7 +663,7 @@ const Dashboard = () => {
           </div>
         </div>
       </Modal>
-      {!(showToken || showAssets || showNFT) && <DefaultWalletSetting />}
+      {/* {!(showToken || showAssets || showNFT) && <DefaultWalletSetting />} */}
       {pendingApprovalCount > 0 && (
         <PendingApproval
           onRejectAll={() => {
