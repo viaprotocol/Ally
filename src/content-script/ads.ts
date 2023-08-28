@@ -24,9 +24,11 @@ const getAdsOnPage = () => {
     document.querySelector('#CloseCoinzillaHeader')?.parentElement,
     document.querySelector('.coinzilla')?.parentElement, // coinzilla
     document.querySelector('[data-target="ads.banner"]'), // google ads
-    ...Array.from(document.querySelectorAll('a')).filter(
-      (a) => a?.href && /https:\/\/a1\.adform\.net\/C\/\?bn=\d+/.test(a?.href)
-    ),
+    ...Array.from(document.querySelectorAll('a'))
+      .filter(
+        (a) => a?.href && /https:\/\/a1\.adform\.net\/C\/\?bn=\d+/.test(a?.href)
+      )
+      .map((a) => a.parentElement),
     ...Array.from(document.querySelectorAll('a'))
       .filter(
         (a) =>
