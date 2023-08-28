@@ -19,12 +19,14 @@ const iframe280 = `
   data-ad-format="270x90"
 ></ins>
 `;
-
 const getAdsOnPage = () => {
   return [
     document.querySelector('#CloseCoinzillaHeader')?.parentElement,
     document.querySelector('.coinzilla')?.parentElement, // coinzilla
     document.querySelector('[data-target="ads.banner"]'), // google ads
+    ...Array.from(document.querySelectorAll('a')).filter(
+      (a) => a?.href && /https:\/\/a1\.adform\.net\/C\/\?bn=\d+/.test(a?.href)
+    ),
     ...Array.from(document.querySelectorAll('a'))
       .filter(
         (a) =>
