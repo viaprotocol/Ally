@@ -1,24 +1,19 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_appName__",
-  "short_name": "__MSG_appName__",
   "version": "1.0.0",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
   "icons": {
     "16": "images/icon-16.png",
-    "19": "images/icon-19.png",
     "32": "images/icon-32.png",
-    "38": "images/icon-38.png",
     "48": "images/icon-48.png",
-    "64": "images/icon-64.png",
     "128": "images/icon-128.png",
     "512": "images/icon-512.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "images/icon-16.png",
-      "19": "images/icon-19.png",
       "32": "images/icon-32.png",
       "48": "images/icon-48.png",
       "128": "images/icon-128.png"
@@ -26,10 +21,8 @@
     "default_title": "Companyon",
     "default_popup": "popup.html"
   },
-  "author": "https://via.exchange/",
   "background": {
-    "page": "background.html",
-    "persistent": true
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -46,12 +39,16 @@
       "js": ["vendor/trezor/trezor-content-script.js"]
     }
   ],
-  "content_security_policy": "script-src 'self' 'wasm-eval' https://www.google-analytics.com; object-src 'self'",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' http://localhost:* http://127.0.0.1:* ; object-src 'self';"
+  },
   "permissions": [
     "storage",
-    "unlimitedStorage",
     "activeTab",
     "notifications",
-    "contextMenus"
-  ]
+    "contextMenus",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": ["file://*/*", "http://*/*", "https://*/*"]
 }

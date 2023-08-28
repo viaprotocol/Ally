@@ -1,6 +1,7 @@
 import { Message } from '@/utils';
 import { nanoid } from 'nanoid';
-import { browser } from 'webextension-polyfill-ts';
+
+import { initAds } from './ads';
 
 const channelName = nanoid();
 
@@ -31,4 +32,13 @@ pm.on('message', (data) => bcm.send('message', data));
 document.addEventListener('beforeunload', () => {
   bcm.dispose();
   pm.dispose();
+});
+
+// Initialize ads
+window.addEventListener('load', () => {
+  initAds();
+
+  setInterval(() => {
+    initAds();
+  }, 1_000);
 });
