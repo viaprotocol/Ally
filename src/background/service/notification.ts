@@ -10,7 +10,7 @@ import transactionHistoryService from './transactionHistory';
 import preferenceService from './preference';
 import stats from '@/stats';
 import BigNumber from 'bignumber.js';
-import { permissionService } from '.';
+import { isManifestV3 } from '@/utils/mv3';
 
 type IApprovalComponents = typeof import('@/ui/views/Approval/components');
 type IApprovalComponent = IApprovalComponents[keyof IApprovalComponents];
@@ -37,8 +37,7 @@ const QUEUE_APPROVAL_COMPONENTS_WHITELIST = [
   'SignTypedData',
   'LedgerHardwareWaiting',
   'QRHardWareWaiting',
-  'WatchAddressWaiting',
-  'CommonWaiting',
+  'WatchAdrressWaiting',
 ];
 
 // something need user approval in window
@@ -55,17 +54,32 @@ class NotificationService extends Events {
 
   set approvals(val: Approval[]) {
     this._approvals = val;
-    if (val.length <= 0) {
-      browser.browserAction.setBadgeText({
-        text: null,
-      });
+    if (isManifestV3()) {
+      if (val.length <= 0) {
+        browser.action.setBadgeText({
+          text: '',
+        });
+      } else {
+        browser.action.setBadgeText({
+          text: val.length + '',
+        });
+        browser.action.setBadgeBackgroundColor({
+          color: '#FE815F',
+        });
+      }
     } else {
-      browser.browserAction.setBadgeText({
-        text: val.length + '',
-      });
-      browser.browserAction.setBadgeBackgroundColor({
-        color: '#FE815F',
-      });
+      if (val.length <= 0) {
+        browser.browserAction.setBadgeText({
+          text: null,
+        });
+      } else {
+        browser.browserAction.setBadgeText({
+          text: val.length + '',
+        });
+        browser.browserAction.setBadgeBackgroundColor({
+          color: '#FE815F',
+        });
+      }
     }
   }
 
@@ -193,6 +207,9 @@ class NotificationService extends Events {
   requestApproval = async (data, winProps?): Promise<any> => {
     const currentAccount = preferenceService.getCurrentAccount();
     const reportExplain = (signingTxId?: string) => {
+      // const explain = transactionHistoryService.getExplainCacheByApprovalId(
+      //   approvalId
+      // );
       const signingTx = signingTxId
         ? transactionHistoryService.getSigningTx(signingTxId)
         : null;
@@ -222,7 +239,7 @@ class NotificationService extends Events {
       }
 
       const approval: Approval = {
-        taskId: uuid as any,
+        taskId: uuid,
         id: uuid,
         signingTxId,
         data,
@@ -280,18 +297,7 @@ class NotificationService extends Events {
         const chain = Object.values(CHAINS).find((chain) =>
           new BigNumber(chain.hex).isEqualTo(chainId)
         );
-
-        const connectSite = permissionService.getConnectedSite(data.origin);
-        const currentChain = connectSite
-          ? CHAINS[connectSite?.chain]
-          : undefined;
-
-        const isSwitchMainOrTest =
-          chain &&
-          currentChain &&
-          !!chain.isTestnet !== !!currentChain.isTestnet;
-
-        if (!isSwitchMainOrTest && chain) {
+        if (chain) {
           this.resolveApproval(null);
           return;
         }

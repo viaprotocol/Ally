@@ -1,9 +1,5 @@
-import 'regenerator-runtime/runtime';
 import EventEmitter from 'events';
 import { browser } from 'webextension-polyfill-ts';
-
-import { BitBox02API, getDevicePath, constants } from 'bitbox02-api';
-
 import * as ethUtil from 'ethereumjs-util';
 import * as sigUtil from '@metamask/eth-sig-util';
 import * as HDKey from 'hdkey';
@@ -14,8 +10,7 @@ import {
   JsonTx,
   TransactionFactory,
 } from '@ethereumjs/tx';
-import { EVENTS } from '@/constant';
-import { SignHelper } from './helper';
+import { initHDKeyring, invokeHDKeyring } from './hd-proxy';
 
 const hdPathString = "m/44'/60'/0'/0";
 const keyringType = 'BitBox02 Hardware';
@@ -32,9 +27,7 @@ class BitBox02Keyring extends EventEmitter {
   unlockedAccount = 0;
   paths = {};
   hdPath = '';
-  signHelper = new SignHelper({
-    errorEventName: EVENTS.COMMON_HARDWARE.REJECTED,
-  });
+  keyringId: string = '';
 
   constructor(opts = {}) {
     super();
@@ -60,10 +53,6 @@ class BitBox02Keyring extends EventEmitter {
     return Promise.resolve();
   }
 
-  resend() {
-    this.signHelper.resend();
-  }
-
   async openPopup(url) {
     await browser.windows.create({
       url,
@@ -78,46 +67,49 @@ class BitBox02Keyring extends EventEmitter {
   }
 
   async withDevice(f) {
-    const devicePath = await getDevicePath({ forceBridge: true });
-    const bitbox02 = new BitBox02API(devicePath);
+    // const devicePath = await getDevicePath({ forceBridge: true });
+    // const bitbox02 = new BitBox02API(devicePath);
     try {
-      await bitbox02.connect(
-        (pairingCode) => {
-          this.openPopup(
-            `vendor/bitbox02/bitbox02-pairing.html?code=${encodeURIComponent(
-              pairingCode
-            )}`
-          );
-        },
-        async () => {
-          this.maybeClosePopup();
-        },
-        (attestationResult) => {
-          console.info(attestationResult);
-        },
-        () => {
-          this.maybeClosePopup();
-        },
-        (status) => {
-          if (status === constants.Status.PairingFailed) {
-            this.maybeClosePopup();
-          }
-        }
-      );
+      await initHDKeyring('BITBOX02');
 
-      if (bitbox02.firmware().Product() !== constants.Product.BitBox02Multi) {
-        throw new Error('Unsupported device');
-      }
+      //   await bitbox02.connect(
+      //     (pairingCode) => {
+      //       this.openPopup(
+      //         `vendor/bitbox02/bitbox02-pairing.html?code=${encodeURIComponent(
+      //           pairingCode
+      //         )}`
+      //       );
+      //     },
+      //     async () => {
+      //       this.maybeClosePopup();
+      //     },
+      //     (attestationResult) => {
+      //       console.info(attestationResult);
+      //     },
+      //     () => {
+      //       this.maybeClosePopup();
+      //     },
+      //     (status) => {
+      //       if (status === constants.Status.PairingFailed) {
+      //         this.maybeClosePopup();
+      //       }
+      //     }
+      //   );
 
-      const rootPub = await bitbox02.ethGetRootPubKey(this.hdPath);
+      //   if (bitbox02.firmware().Product() !== constants.Product.BitBox02Multi) {
+      //     throw new Error('Unsupported device');
+      //   }
+      const rootPub = await invokeHDKeyring('BITBOX02', 'ethGetRootPubKey', [
+        this.hdPath,
+      ]);
       const hdk = HDKey.fromExtendedKey(rootPub);
       this.hdk = hdk;
-      const result = await f(bitbox02);
-      bitbox02.close();
+      const result = await f();
+      invokeHDKeyring('BITBOX02', 'close');
       return result;
     } catch (err) {
       console.error(err);
-      bitbox02.close();
+      invokeHDKeyring('BITBOX02', 'close');
       throw err;
     }
   }
@@ -227,21 +219,21 @@ class BitBox02Keyring extends EventEmitter {
 
   // tx is an instance of the ethereumjs-transaction class.
   async signTransaction(address, tx: TypedTransaction) {
-    return this.signHelper.invoke(async () => {
-      return await this.withDevice(async (bitbox02) => {
-        const txData: JsonTx = {
-          to: tx.to!.toString(),
-          value: `0x${tx.value.toString('hex')}`,
-          data: this._normalize(tx.data),
-          nonce: `0x${tx.nonce.toString('hex')}`,
-          gasLimit: `0x${tx.gasLimit.toString('hex')}`,
-          gasPrice: `0x${
-            (tx as Transaction).gasPrice
-              ? (tx as Transaction).gasPrice.toString('hex')
-              : (tx as FeeMarketEIP1559Transaction).maxFeePerGas.toString('hex')
-          }`,
-        };
-        const result = await bitbox02.ethSignTransaction({
+    return await this.withDevice(async () => {
+      const txData: JsonTx = {
+        to: tx.to!.toString(),
+        value: `0x${tx.value.toString('hex')}`,
+        data: this._normalize(tx.data),
+        nonce: `0x${tx.nonce.toString('hex')}`,
+        gasLimit: `0x${tx.gasLimit.toString('hex')}`,
+        gasPrice: `0x${
+          (tx as Transaction).gasPrice
+            ? (tx as Transaction).gasPrice.toString('hex')
+            : (tx as FeeMarketEIP1559Transaction).maxFeePerGas.toString('hex')
+        }`,
+      };
+      const result = await invokeHDKeyring('BITBOX02', 'ethSignTransaction', [
+        {
           keypath: this._pathFromAddress(address),
           chainId: tx.common.chainIdBN().toNumber(),
           tx: {
@@ -252,20 +244,20 @@ class BitBox02Keyring extends EventEmitter {
             value: tx.value.toArrayLike(Buffer),
             data: tx.data,
           },
-        });
-        txData.r = result.r;
-        txData.s = result.s;
-        txData.v = result.v;
-        const signedTx = TransactionFactory.fromTxData(txData);
-        const addressSignedWith = ethUtil.toChecksumAddress(
-          signedTx.getSenderAddress().toString()
-        );
-        const correctAddress = ethUtil.toChecksumAddress(address);
-        if (addressSignedWith !== correctAddress) {
-          throw new Error('signature doesnt match the right address');
-        }
-        return signedTx;
-      });
+        },
+      ]);
+      txData.r = result.r;
+      txData.s = result.s;
+      txData.v = result.v;
+      const signedTx = TransactionFactory.fromTxData(txData);
+      const addressSignedWith = ethUtil.toChecksumAddress(
+        signedTx.getSenderAddress().toString()
+      );
+      const correctAddress = ethUtil.toChecksumAddress(address);
+      if (addressSignedWith !== correctAddress) {
+        throw new Error('signature doesnt match the right address');
+      }
+      return signedTx;
     });
   }
 
@@ -274,21 +266,21 @@ class BitBox02Keyring extends EventEmitter {
   }
 
   async signPersonalMessage(withAccount, message) {
-    return this.signHelper.invoke(async () => {
-      return await this.withDevice(async (bitbox02) => {
-        const result = await bitbox02.ethSignMessage({
+    return await this.withDevice(async () => {
+      const result = await invokeHDKeyring('BITBOX02', 'ethSignMessage', [
+        {
           keypath: this._pathFromAddress(withAccount),
           message: ethUtil.toBuffer(message),
-        });
-        const sig = Buffer.concat([
-          Buffer.from(result.r),
-          Buffer.from(result.s),
-          Buffer.from(result.v),
-        ]);
+        },
+      ]);
+      const sig = Buffer.concat([
+        Buffer.from(result.r),
+        Buffer.from(result.s),
+        Buffer.from(result.v),
+      ]);
 
-        const sigHex = `0x${sig.toString('hex')}`;
-        return sigHex;
-      });
+      const sigHex = `0x${sig.toString('hex')}`;
+      return sigHex;
     });
   }
 
@@ -298,32 +290,32 @@ class BitBox02Keyring extends EventEmitter {
         `Only version 4 of typed data signing is supported. Provided version: ${options.version}`
       );
     }
-    return this.signHelper.invoke(async () => {
-      return await this.withDevice(async (bitbox02) => {
-        const result = await bitbox02.ethSignTypedMessage({
+    return await this.withDevice(async () => {
+      const result = await invokeHDKeyring('BITBOX02', 'ethSignTypedMessage', [
+        {
           chainId: data.domain.chainId || 1,
           keypath: this._pathFromAddress(withAccount),
           message: data,
-        });
-        const sig = Buffer.concat([
-          Buffer.from(result.r),
-          Buffer.from(result.s),
-          Buffer.from(result.v),
-        ]);
-        const sigHex = `0x${sig.toString('hex')}`;
-        const addressSignedWith = sigUtil.recoverTypedSignature({
-          data,
-          signature: sigHex,
-          version: options.version,
-        });
-        if (
-          ethUtil.toChecksumAddress(addressSignedWith) !==
-          ethUtil.toChecksumAddress(withAccount)
-        ) {
-          throw new Error('The signature doesnt match the right address');
-        }
-        return sigHex;
+        },
+      ]);
+      const sig = Buffer.concat([
+        Buffer.from(result.r),
+        Buffer.from(result.s),
+        Buffer.from(result.v),
+      ]);
+      const sigHex = `0x${sig.toString('hex')}`;
+      const addressSignedWith = sigUtil.recoverTypedSignature({
+        data,
+        signature: sigHex,
+        version: options.version,
       });
+      if (
+        ethUtil.toChecksumAddress(addressSignedWith) !==
+        ethUtil.toChecksumAddress(withAccount)
+      ) {
+        throw new Error('The signature doesnt match the right address');
+      }
+      return sigHex;
     });
   }
 
@@ -370,20 +362,6 @@ class BitBox02Keyring extends EventEmitter {
       throw new Error('Unknown address');
     }
     return `${this.hdPath}/${index}`;
-  }
-
-  async getCurrentAccounts() {
-    return this.withDevice(async () => {
-      const addrs = await this.getAccounts();
-
-      return addrs.map((address) => {
-        const checksummedAddress = ethUtil.toChecksumAddress(address);
-        return {
-          address,
-          index: this.paths[checksummedAddress] + 1,
-        };
-      });
-    });
   }
 }
 

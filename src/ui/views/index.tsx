@@ -82,6 +82,7 @@ const Main = () => {
 };
 
 const App = ({ wallet }: { wallet: any }) => {
+  console.log('app!');
   return (
     <WalletProvider wallet={wallet}>
       <Router>

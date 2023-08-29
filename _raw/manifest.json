@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
+  "author": "https://via.exchange/",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",
@@ -21,9 +22,7 @@
     "default_title": "Companyon",
     "default_popup": "popup.html"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
+  "background": { "service_worker": "sw.js" },
   "content_scripts": [
     {
       "all_frames": true,
@@ -40,7 +39,7 @@
     }
   ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self' http://localhost:* http://127.0.0.1:* ; object-src 'self';"
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
   },
   "permissions": [
     "storage",
@@ -50,5 +49,16 @@
     "tabs",
     "scripting"
   ],
-  "host_permissions": ["file://*/*", "http://*/*", "https://*/*"]
+  "host_permissions": ["<all_urls>"],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "user-media-permission.html",
+        "pageProvider.js",
+        "vendor/matomo.js",
+        "/vendor/matomo.client.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
