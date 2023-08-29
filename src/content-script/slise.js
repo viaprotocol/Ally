@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable no-empty */
+/* eslint-disable require-yield */
 export default () => {
   'use strict';
   const t = {
-      965: (t, e) => {
+      965: (_t, e) => {
         function n() {
           return {
             origin: window.location.origin,
@@ -82,7 +85,7 @@ export default () => {
           }
         };
       },
-      249: function (t, e, n) {
+      249: function (_t, e, n) {
         const i =
           (this && this.__awaiter) ||
           function (t, e, n, i) {
@@ -157,12 +160,12 @@ export default () => {
           }
         };
       },
-      737: (t, e) => {
+      737: (_t, e) => {
         Object.defineProperty(e, '__esModule', { value: !0 }),
           (e.getSliseAPIUrl = void 0),
           (e.getSliseAPIUrl = () => 'https://v1.slise.xyz');
       },
-      356: (t, e) => {
+      356: (_t, e) => {
         function n(...t) {
           return function (e) {
             e.apply(null, t);
@@ -198,7 +201,7 @@ export default () => {
             }
           });
       },
-      64: (t, e, n) => {
+      64: (_t, e, n) => {
         Object.defineProperty(e, '__esModule', { value: !0 }),
           (e.subscribeToPeraWalletChange = e.getPeraInfo = e.getPeraAccounts = void 0);
         const i = n(315);
@@ -222,7 +225,7 @@ export default () => {
             return (0, i.pollForChange)(o, 1e3, i.compareArrays, 1.1).event;
           });
       },
-      375: function (t, e, n) {
+      375: function (_t, e, n) {
         const i =
           (this && this.__awaiter) ||
           function (t, e, n, i) {
@@ -396,7 +399,7 @@ export default () => {
           }
         };
       },
-      630: (t, e, n) => {
+      630: (_t, e, n) => {
         Object.defineProperty(e, '__esModule', { value: !0 }),
           (e.subscribeToSolanaWalletChange = e.getSolanaInfo = void 0);
         const i = n(315),
@@ -416,7 +419,7 @@ export default () => {
             return (0, i.pollForChange)(o, 1e3, i.compareArrays, 1.1).event;
           });
       },
-      315: (t, e, n) => {
+      315: (_t, e, n) => {
         Object.defineProperty(e, '__esModule', { value: !0 }),
           (e.compareArrays = e.pollForChange = void 0);
         const i = n(356);

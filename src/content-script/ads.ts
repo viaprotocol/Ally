@@ -19,6 +19,7 @@ const iframe280 = `
   data-ad-format="270x90"
 ></ins>
 `;
+
 const getAdsOnPage = () => {
   return [
     document.querySelector('#CloseCoinzillaHeader')?.parentElement,
@@ -51,8 +52,6 @@ async function initAds() {
 
   const ads = getAdsOnPage();
 
-  console.log('ads', ads);
-
   for (const ad of ads) {
     if (ad) {
       console.log('ad.clientWidth', ad.clientWidth);
@@ -66,55 +65,12 @@ async function initAds() {
 
   sliseSdk();
 
-  (window.adsbyslise = window.adsbyslise || []).push({
+  ((window as any).adsbyslise = (window as any).adsbyslise || []).push({
     slot: 'injected-leaderboard',
   });
-  if (window.adsbyslisesync) {
-    window.adsbyslisesync();
+  if ((window as any).adsbyslisesync) {
+    (window as any).adsbyslisesync();
   }
-
-  // if (container) {
-  //   // Remove previous content
-  //   container.innerHTML = iframe728;
-
-  //   sliseSdk();
-  //   //     // Удалить предыдущий контент
-  //   // conizillaWrapper.innerHTML = '';
-
-  //   // setTimeout(() => {
-  //   (window.adsbyslise = window.adsbyslise || []).push({
-  //     slot: 'injected-leaderboard',
-  //   });
-  //   if (window.adsbyslisesync) {
-  //     window.adsbyslisesync();
-  //   }
-  //   // }, 1000);
-  // }
-
-  //     // Создать элемент <ins>
-  //     const ins = document.createElement('ins');
-  //     ins.className = 'adsbyslise';
-  //     ins.style.display = 'inline-block';
-  //     ins.style.width = '728px';
-  //     ins.style.height = '90px';
-  //     ins.setAttribute('data-ad-slot', 'injected-leaderboard');
-  //     ins.setAttribute('data-ad-pub', 'pub-22');
-  //     ins.setAttribute('data-ad-format', '728x90');
-  //     conizillaWrapper.append(ins);
-
-  //     // Создать и загрузить скрипт
-  //     await loadAndRunScript('https://v1.slise.xyz/scripts/embed.js');
-
-  //     // Выполнить дополнительную логику скрипта
-  // (adsbyslise = window.adsbyslise || []).push({
-  //   slot: 'injected-leaderboard',
-  // });
-  // if (window.adsbyslisesync) {
-  //   window.adsbyslisesync();
-  // }
-  //   }
-
-  // console.log('coninzillaComponent', coninzillaComponent);
 }
 
 export { initAds };
