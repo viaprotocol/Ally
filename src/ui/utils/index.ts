@@ -100,7 +100,7 @@ export const isMetaMaskActive = async () => {
   if (!url) return false;
 
   try {
-    const res = await window.fetch(url);
+    const res = await fetch(url);
     await res.text();
 
     return true;
@@ -157,3 +157,10 @@ export const getAccountIcon = (account: Account) => {
 export const isStringOrNumber = (data) => {
   return typeof data === 'string' || typeof data === 'number';
 };
+
+declare global {
+  interface Window {
+    __is_rd__?: boolean;
+  }
+}
+export const IS_RD = () => window.__is_rd__;

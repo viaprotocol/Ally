@@ -2,6 +2,7 @@ import { CHAINS } from '@/constant';
 import { keyBy } from 'lodash';
 import { browser } from 'webextension-polyfill-ts';
 import { ledgerUSBVendorId } from '@ledgerhq/devices';
+import WindowMessage from './message/windowMessage';
 
 import BroadcastChannelMessage from './message/broadcastChannelMessage';
 import PortMessage from './message/portMessage';
@@ -9,6 +10,7 @@ import PortMessage from './message/portMessage';
 const Message = {
   BroadcastChannelMessage,
   PortMessage,
+  WindowMessage,
 };
 
 declare global {

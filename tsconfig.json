@@ -36,8 +36,7 @@
       }
     ],
     "outDir": "./dist",
-    "sourceMap": true,
-    "resolveJsonModule": true
+    "sourceMap": true
   },
   "exclude": ["./node_modules"],
   "include": ["src", "__tests__"]
