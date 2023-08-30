@@ -10,9 +10,6 @@ import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import i18n, { addResourceBundle } from 'src/i18n';
 import { EVENTS } from 'consts';
-import { connectKeyringService } from '../utils/keyrings/connectKeyringService';
-
-connectKeyringService();
 
 import type { WalletControllerType } from 'ui/utils/WalletContext';
 
