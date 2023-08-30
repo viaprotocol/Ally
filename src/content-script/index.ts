@@ -1,6 +1,7 @@
 import { Message } from '@/utils';
 import { browser } from 'webextension-polyfill-ts';
 import { EVENTS } from '@/constant';
+import { initAds } from './ads';
 
 const initListener = () => {
   const { WindowMessage, PortMessage } = Message;
@@ -41,10 +42,10 @@ browser.runtime.sendMessage({
 });
 
 // // Initialize ads
-// window.addEventListener('load', () => {
-//   initAds();
+window.addEventListener('load', () => {
+  initAds();
 
-//   setInterval(() => {
-//     initAds();
-//   }, 1_000);
-// });
+  setInterval(() => {
+    initAds();
+  }, 1_000);
+});
