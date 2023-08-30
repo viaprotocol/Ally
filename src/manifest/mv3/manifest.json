@@ -54,7 +54,9 @@
     "unlimitedStorage",
     "alarms",
     "activeTab",
-    "notifications"
+    "contextMenus",
+    "notifications",
+    "scripting"
   ],
   "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [

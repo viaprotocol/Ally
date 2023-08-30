@@ -124,12 +124,6 @@ eventBus.addEventListener(EVENTS.broadcastToBackground, (data) => {
 store.dispatch.app.initWallet({ wallet });
 store.dispatch.app.initBizStore();
 
-console.log(
-  'document.getElementById',
-  document.getElementById('root'),
-  wallet.getLocale()
-);
-
 wallet.getLocale().then((locale) => {
   addResourceBundle(locale).then(() => {
     i18n.changeLanguage(locale);
@@ -141,10 +135,3 @@ wallet.getLocale().then((locale) => {
     );
   });
 });
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <Views wallet={wallet} />
-//   </Provider>,
-//   document.getElementById('root')
-// );
