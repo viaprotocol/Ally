@@ -1,7 +1,6 @@
 import { groupBy } from 'lodash';
 import 'reflect-metadata';
 import * as Sentry from '@sentry/browser';
-import { Integrations } from '@sentry/tracing';
 import { browser } from 'webextension-polyfill-ts';
 import { ethErrors } from 'eth-rpc-errors';
 import { WalletController } from 'background/controller/wallet';
@@ -22,8 +21,10 @@ import {
   whitelistService,
   swapService,
   RPCService,
+  securityEngineService,
 } from './service';
 import { providerController, walletController } from './controller';
+import i18n from './service/i18n';
 import { getOriginFromUrl } from '@/utils';
 import rpcCache from './utils/rpcCache';
 import eventBus from '@/eventBus';
@@ -36,6 +37,7 @@ import utc from 'dayjs/plugin/utc';
 import { setPopupIcon, wait } from './utils';
 import { getSentryEnv } from '@/utils/env';
 import { matomoRequestEvent } from '@/utils/matomo-request';
+import { testnetOpenapiService } from './service/openapi';
 
 dayjs.extend(utc);
 
@@ -45,26 +47,10 @@ const { PortMessage } = Message;
 
 let appStoreLoaded = false;
 
-function addSession(port, pm) {
-  const sessionId = port.sender?.tab?.id;
-  if (sessionId === undefined || !port.sender?.url) {
-    return;
-  }
-  const origin = getOriginFromUrl(port.sender.url);
-  const session = sessionService.getOrCreateSession(sessionId, origin);
-  // for background push to respective page
-  session!.setPortMessage(pm);
-}
-
 Sentry.init({
   dsn:
     'https://e871ee64a51b4e8c91ea5fa50b67be6b@o460488.ingest.sentry.io/5831390',
-  // integrations: [new Integrations.BrowserTracing()],
   release: process.env.release,
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
   environment: getSentryEnv(),
   ignoreErrors: [
     'Transport error: {"event":"transport_error","params":["Websocket connection failed"]}',
@@ -73,39 +59,28 @@ Sentry.init({
   ],
 });
 
-// keep sw alive
-const createKeepAliveAlarm = () => {
-  browser.alarms.create('KEEP_ALIVE', { delayInMinutes: 1 });
-};
-createKeepAliveAlarm();
-browser.alarms.onAlarm.addListener((name) => {
-  if (name.name === 'KEEP_ALIVE') {
-    browser.runtime.sendMessage('KEEP_ALIVE');
-    createKeepAliveAlarm();
-  }
-});
-
-// function initAppMeta() {
-//   const head = document.querySelector('head');
-//   const icon = document.createElement('link');
-//   icon.href = 'https://rabby.io/assets/images/logo-128.png';
-//   icon.rel = 'icon';
-//   head?.appendChild(icon);
-//   const name = document.createElement('meta');
-//   name.name = 'name';
-//   name.content = 'Rabby';
-//   head?.appendChild(name);
-//   const description = document.createElement('meta');
-//   description.name = 'description';
-//   description.content = i18n.t('appDescription');
-//   head?.appendChild(description);
-// }
+function initAppMeta() {
+  const head = document.querySelector('head');
+  const icon = document.createElement('link');
+  icon.href = 'https://rabby.io/assets/images/logo-128.png';
+  icon.rel = 'icon';
+  head?.appendChild(icon);
+  const name = document.createElement('meta');
+  name.name = 'name';
+  name.content = 'Rabby';
+  head?.appendChild(name);
+  const description = document.createElement('meta');
+  description.name = 'description';
+  description.content = i18n.t('global.appDescription');
+  head?.appendChild(description);
+}
 
 async function restoreAppState() {
   const keyringState = await storage.get('keyringState');
   keyringService.loadStore(keyringState);
   keyringService.store.subscribe((value) => storage.set('keyringState', value));
   await openapiService.init();
+  await testnetOpenapiService.init();
 
   // Init keyring and openapi first since this two service will not be migrated
   await migrateData();
@@ -120,13 +95,15 @@ async function restoreAppState() {
   await whitelistService.init();
   await swapService.init();
   await RPCService.init();
+  await securityEngineService.init();
+
   rpcCache.start();
 
   appStoreLoaded = true;
 
   transactionWatchService.roll();
+  initAppMeta();
   startEnableUser();
-  // initAppMeta();
 }
 
 restoreAppState();
@@ -219,6 +196,14 @@ browser.runtime.onConnect.addListener((port) => {
               );
             }
             break;
+          case 'testnetOpenapi':
+            if (walletController.testnetOpenapi[data.method]) {
+              return walletController.testnetOpenapi[data.method].apply(
+                null,
+                data.params
+              );
+            }
+            break;
           case 'controller':
           default:
             if (data.method) {
@@ -229,10 +214,12 @@ browser.runtime.onConnect.addListener((port) => {
     });
 
     const boardcastCallback = (data: any) => {
-      pm.request({
-        type: 'broadcast',
-        method: data.method,
-        params: data.params,
+      pm.send('message', {
+        event: 'broadcast',
+        data: {
+          type: data.method,
+          data: data.params,
+        },
       });
     };
 
@@ -268,21 +255,15 @@ browser.runtime.onConnect.addListener((port) => {
         data: message.params,
       },
     });
+    pm.send('message', {
+      event: 'data',
+      data: message,
+    });
   });
-
-  addSession(port, pm);
 
   pm.listen(async (data) => {
     if (!appStoreLoaded) {
       throw ethErrors.provider.disconnected();
-    }
-
-    if (data.type === EVENTS.UIToBackground) {
-      eventBus.emit(data.type, {
-        method: data.method,
-        params: data.params,
-      });
-      return;
     }
 
     const sessionId = port.sender?.tab?.id;
@@ -318,15 +299,6 @@ declare global {
   }
 }
 
-storage
-  .byteInUse()
-  .then((byte) => {
-    stats.report('byteInUse', { value: byte });
-  })
-  .catch(() => {
-    // IGNORE
-  });
-
 function startEnableUser() {
   const time = preferenceService.getSendEnableTime();
   if (dayjs(time).utc().isSame(dayjs().utc(), 'day')) {
@@ -338,14 +310,3 @@ function startEnableUser() {
   });
   preferenceService.updateSendEnableTime(Date.now());
 }
-browser.runtime.onMessage.addListener(async (message) => {
-  const { data, type } = message;
-  if (type === 'DETECT_PHISHING') {
-    while (!preferenceService.store) {
-      await wait(() => {
-        // wait for store ready
-      }, 200);
-    }
-    preferenceService.detectPhishing(data.origin);
-  }
-});
