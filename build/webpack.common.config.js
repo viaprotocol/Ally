@@ -243,6 +243,7 @@ const config = {
     }),
     new CopyPlugin({
       patterns: [
+        { from: paths.rootResolve('_raw'), to: paths.rootResolve('dist') },
         {
           from: process.env.ENABLE_MV3
             ? paths.rootResolve('src/manifest/mv3/manifest.json')
@@ -254,6 +255,7 @@ const config = {
   ],
   resolve: {
     alias: {
+      '@debank/common': require.resolve('@debank/common/dist/index-rabby'),
       moment: require.resolve('dayjs'),
     },
     plugins: [new TSConfigPathsPlugin()],
