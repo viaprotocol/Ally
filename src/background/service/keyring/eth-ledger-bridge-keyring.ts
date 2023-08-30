@@ -4,9 +4,6 @@ import * as Sentry from '@sentry/browser';
 import HDKey from 'hdkey';
 import * as ethUtil from 'ethereumjs-util';
 import * as sigUtil from 'eth-sig-util';
-import TransportWebHID from '@ledgerhq/hw-transport-webhid';
-import Transport from '@ledgerhq/hw-transport';
-import LedgerEth from '@ledgerhq/hw-app-eth';
 import { is1559Tx } from '@/utils/transaction';
 import {
   TransactionFactory,
@@ -16,6 +13,7 @@ import eventBus from '@/eventBus';
 import { EVENTS } from 'consts';
 import { isSameAddress, wait } from '@/background/utils';
 import { LedgerHDPathType } from '@/utils/ledger';
+import { initHDKeyring, invokeHDKeyring } from './hd-proxy';
 
 const pathBase = 'm';
 const hdPathString = `${pathBase}/44'/60'/0'`;
@@ -76,8 +74,8 @@ class LedgerBridgeKeyring extends EventEmitter {
   accounts: any;
   delayedPromise: any;
   isWebHID: boolean;
-  transport: null | Transport;
-  app: null | LedgerEth;
+  // transport: null | Transport;
+  app: any;
   hasHIDPermission: null | boolean;
   resolvePromise: null | ((value: any) => void) = null;
   rejectPromise: null | ((value: any) => void) = null;
@@ -101,14 +99,13 @@ class LedgerBridgeKeyring extends EventEmitter {
     this.hasHIDPermission = null;
     this.msgQueue = [];
     this.isWebHID = false;
-    this.transport = null;
     this.isWebUSB = false;
     this.app = null;
     this.usedHDPathTypeList = {};
     this.deserialize(opts);
 
     this.iframeLoaded = false;
-    this._setupIframe();
+    // this._setupIframe();
   }
 
   serialize() {
@@ -210,8 +207,9 @@ class LedgerBridgeKeyring extends EventEmitter {
   async makeApp(signing = false) {
     if (!this.app && this.isWebHID) {
       try {
-        this.transport = await TransportWebHID.create();
-        this.app = new LedgerEth(this.transport);
+        // this.transport = await TransportWebHID.create();
+        // this.app = new LedgerEth(this.transport);
+        this.app = await initHDKeyring('LEDGER');
       } catch (e: any) {
         if (signing) {
           if (
@@ -235,17 +233,13 @@ class LedgerBridgeKeyring extends EventEmitter {
             });
           }
         }
-        if (!e.message?.includes('The device is already open')) {
-          Sentry.captureException(e);
-        }
+        Sentry.captureException(e);
       }
     }
   }
 
   async cleanUp() {
-    this.app = null;
-    if (this.transport) this.transport.close();
-    this.transport = null;
+    await invokeHDKeyring('LEDGER', 'close');
     this.hdk = new HDKey();
   }
 
@@ -259,7 +253,11 @@ class LedgerBridgeKeyring extends EventEmitter {
     const path = hdPath ? this._toLedgerPath(hdPath) : this.hdPath;
     if (this.isWebHID) {
       await this.makeApp();
-      const res = await this.app!.getAddress(path, false, true);
+      const res = await invokeHDKeyring('LEDGER', 'getAddress', [
+        path,
+        false,
+        true,
+      ]);
       const { address, publicKey, chainCode } = res;
       this.hdk.publicKey = Buffer.from(publicKey, 'hex');
       this.hdk.chainCode = Buffer.from(chainCode!, 'hex');
@@ -357,32 +355,31 @@ class LedgerBridgeKeyring extends EventEmitter {
   }
 
   updateTransportMethod(useLedgerLive = false) {
-    return new Promise((resolve, reject) => {
-      // If the iframe isn't loaded yet, let's store the desired useLedgerLive value and
-      // optimistically return a successful promise
-      if (!this.iframeLoaded) {
-        this.delayedPromise = {
-          resolve,
-          reject,
-          useLedgerLive,
-        };
-        return;
-      }
-
-      this._sendMessage(
-        {
-          action: 'ledger-update-transport',
-          params: { useLedgerLive },
-        },
-        ({ success }) => {
-          if (success) {
-            resolve(true);
-          } else {
-            reject(new Error('Ledger transport could not be updated'));
-          }
-        }
-      );
-    });
+    // return new Promise((resolve, reject) => {
+    //   // If the iframe isn't loaded yet, let's store the desired useLedgerLive value and
+    //   // optimistically return a successful promise
+    //   if (!this.iframeLoaded) {
+    //     this.delayedPromise = {
+    //       resolve,
+    //       reject,
+    //       useLedgerLive,
+    //     };
+    //     return;
+    //   }
+    //   this._sendMessage(
+    //     {
+    //       action: 'ledger-update-transport',
+    //       params: { useLedgerLive },
+    //     },
+    //     ({ success }) => {
+    //       if (success) {
+    //         resolve(true);
+    //       } else {
+    //         reject(new Error('Ledger transport could not be updated'));
+    //       }
+    //     }
+    //   );
+    // });
   }
 
   resend() {
@@ -425,7 +422,7 @@ class LedgerBridgeKeyring extends EventEmitter {
               setTimeout(() => {
                 eventBus.emit(EVENTS.broadcastToUI, {
                   method: EVENTS.LEDGER.REJECTED,
-                  params: e.toString() || 'Ledger: Unknown error',
+                  params: e.message ?? e.toString() ?? 'Ledger: Unknown error',
                 });
               }, 500);
             });
@@ -469,7 +466,7 @@ class LedgerBridgeKeyring extends EventEmitter {
             setTimeout(() => {
               eventBus.emit(EVENTS.broadcastToUI, {
                 method: EVENTS.LEDGER.REJECTED,
-                params: e.toString() || 'Ledger: Unknown error',
+                params: e.message ?? e.toString() ?? 'Ledger: Unknown error',
               });
             }, 500);
           });
@@ -481,10 +478,10 @@ class LedgerBridgeKeyring extends EventEmitter {
   async _reconnect() {
     if (this.isWebHID) {
       await this.cleanUp();
-
+      this.app = null;
       let count = 0;
       // wait connect the WebHID
-      while (!this.app) {
+      while (!(await invokeHDKeyring('LEDGER', 'getClient'))) {
         await this.makeApp();
         await wait(() => {
           if (count++ > 50) {
@@ -500,7 +497,11 @@ class LedgerBridgeKeyring extends EventEmitter {
     if (this.isWebHID) {
       await this.makeApp(true);
       try {
-        const res = await this.app!.signTransaction(hdPath, rawTxHex);
+        // const res = await this.app!.signTransaction(hdPath, rawTxHex);
+        const res = await invokeHDKeyring('LEDGER', 'signTransaction', [
+          hdPath,
+          rawTxHex,
+        ]);
         const newOrMutatedTx = handleSigning(res);
         const valid = newOrMutatedTx.verifySignature();
         if (valid) {
@@ -510,7 +511,7 @@ class LedgerBridgeKeyring extends EventEmitter {
         }
       } catch (err: any) {
         throw new Error(
-          err.toString() || 'Ledger: Unknown error while signing transaction'
+          err.message ?? 'Ledger: Unknown error while signing transaction'
         );
       } finally {
         this.cleanUp();
@@ -561,10 +562,14 @@ class LedgerBridgeKeyring extends EventEmitter {
           try {
             await this.makeApp(true);
             const hdPath = await this.unlockAccountByAddress(withAccount);
-            const res = await this.app!.signPersonalMessage(
+            // const res = await this.app!.signPersonalMessage(
+            //   hdPath,
+            //   ethUtil.stripHexPrefix(message)
+            // );
+            const res = await invokeHDKeyring('LEDGER', 'signPersonalMessage', [
               hdPath,
-              ethUtil.stripHexPrefix(message)
-            );
+              ethUtil.stripHexPrefix(message),
+            ]);
             let v: string | number = res.v - 27;
             v = v.toString(16);
             if (v.length < 2) {
@@ -589,11 +594,11 @@ class LedgerBridgeKeyring extends EventEmitter {
               eventBus.emit(EVENTS.broadcastToUI, {
                 method: EVENTS.LEDGER.REJECTED,
                 params:
-                  e.toString() || 'Ledger: Unknown error while signing message',
+                  e?.message || 'Ledger: Unknown error while signing message',
               });
             }, 500);
             throw new Error(
-              e.toString() || 'Ledger: Unknown error while signing message'
+              e?.message || 'Ledger: Unknown error while signing message'
             );
           } finally {
             this.cleanUp();
@@ -718,10 +723,15 @@ class LedgerBridgeKeyring extends EventEmitter {
         if (this.isWebHID) {
           try {
             await this.makeApp(true);
-            const res = await this.app!.signEIP712HashedMessage(
-              hdPath,
-              domainSeparatorHex,
-              hashStructMessageHex
+            // const res = await this.app!.signEIP712HashedMessage(
+            //   hdPath,
+            //   domainSeparatorHex,
+            //   hashStructMessageHex
+            // );
+            const res = await invokeHDKeyring(
+              'LEDGER',
+              'signEIP712HashedMessage',
+              [hdPath, domainSeparatorHex, hashStructMessageHex]
             );
             let v: any = res.v - 27;
             v = v.toString(16);
@@ -754,6 +764,7 @@ class LedgerBridgeKeyring extends EventEmitter {
                   e.toString() || 'Ledger: Unknown error while signing message',
               });
             }, 500);
+            console.log('e', e);
             throw new Error(
               e.toString() || 'Ledger: Unknown error while signing message'
             );
@@ -837,30 +848,31 @@ class LedgerBridgeKeyring extends EventEmitter {
 
   /* PRIVATE METHODS */
 
+  // @deprecated
   _setupIframe() {
-    this.iframe = document.createElement('iframe');
-    this.iframe.src = this.bridgeUrl!;
-    this.iframe.onload = async () => {
-      // If the ledger live preference was set before the iframe is loaded,
-      // set it after the iframe has loaded
-      this.iframeLoaded = true;
-      if (this.delayedPromise) {
-        try {
-          const result = await this.updateTransportMethod(
-            this.delayedPromise.useLedgerLive
-          );
-          this.delayedPromise.resolve(result);
-        } catch (e) {
-          this.delayedPromise.reject(e);
-        } finally {
-          delete this.delayedPromise;
-        }
-      }
-      if (this.msgQueue.length > 0) {
-        this.msgQueue.forEach((fn) => fn());
-      }
-    };
-    document.body.appendChild(this.iframe);
+    // this.iframe = document.createElement('iframe');
+    // this.iframe.src = this.bridgeUrl!;
+    // this.iframe.onload = async () => {
+    //   // If the ledger live preference was set before the iframe is loaded,
+    //   // set it after the iframe has loaded
+    //   this.iframeLoaded = true;
+    //   if (this.delayedPromise) {
+    //     try {
+    //       const result = await this.updateTransportMethod(
+    //         this.delayedPromise.useLedgerLive
+    //       );
+    //       this.delayedPromise.resolve(result);
+    //     } catch (e) {
+    //       this.delayedPromise.reject(e);
+    //     } finally {
+    //       delete this.delayedPromise;
+    //     }
+    //   }
+    //   if (this.msgQueue.length > 0) {
+    //     this.msgQueue.forEach((fn) => fn());
+    //   }
+    // };
+    // document.body.appendChild(this.iframe);
   }
 
   _getOrigin() {
@@ -1055,7 +1067,7 @@ class LedgerBridgeKeyring extends EventEmitter {
 
   async _hasPreviousTransactions(address) {
     const apiUrl = this._getApiUrl();
-    const response = await window.fetch(
+    const response = await fetch(
       `${apiUrl}/api?module=account&action=txlist&address=${address}&tag=latest&page=1&offset=1`
     );
     const parsedResponse = await response.json();
@@ -1081,7 +1093,11 @@ class LedgerBridgeKeyring extends EventEmitter {
   }
   private async getPathBasePublicKey(hdPathType: HDPathType) {
     const pathBase = this.getHDPathBase(hdPathType);
-    const res = await this.app!.getAddress(pathBase, false, true);
+    const res = await invokeHDKeyring('LEDGER', 'getAddress', [
+      pathBase,
+      false,
+      true,
+    ]);
 
     return res.publicKey;
   }
@@ -1109,7 +1125,11 @@ class LedgerBridgeKeyring extends EventEmitter {
 
     // Ledger Live Account
     if (detail.bip44 && this._isLedgerLiveHdPath()) {
-      const res = await this.app!.getAddress(detail.hdPath, false, true);
+      const res = await invokeHDKeyring('LEDGER', 'getAddress', [
+        detail.hdPath,
+        false,
+        true,
+      ]);
       addressInDevice = res.address;
       // BIP44 OR Legacy Account
     } else {
@@ -1150,11 +1170,12 @@ class LedgerBridgeKeyring extends EventEmitter {
     await this.unlock();
     const addresses = await this.getAccounts();
     const pathBase = this.hdPath;
-    const { publicKey: currentPublicKey } = await this.app!.getAddress(
-      pathBase,
-      false,
-      true
+    const { publicKey: currentPublicKey } = await invokeHDKeyring(
+      'LEDGER',
+      'getAddress',
+      [pathBase, false, true]
     );
+
     const hdPathType = this.getHDPathTypeFromPath(pathBase);
     const accounts: Account[] = [];
     for (let i = 0; i < addresses.length; i++) {
@@ -1180,7 +1201,12 @@ class LedgerBridgeKeyring extends EventEmitter {
       ) {
         const info = this.getAccountInfo(address);
         if (info?.index === 1) {
-          const res = await this.app!.getAddress(detail.hdPath, false, true);
+          const res = await invokeHDKeyring('LEDGER', 'getAddress', [
+            detail.hdPath,
+            false,
+            true,
+          ]);
+
           if (isSameAddress(res.address, address)) {
             accounts.push(info);
           }
@@ -1194,13 +1220,12 @@ class LedgerBridgeKeyring extends EventEmitter {
   getAccountInfo(address: string) {
     const detail = this.accountDetails[ethUtil.toChecksumAddress(address)];
     if (detail) {
-      const { hdPath, hdPathType, hdPathBasePublicKey } = detail;
+      const { hdPath, hdPathType } = detail;
       return {
         address,
         index: this.getIndexFromPath(hdPath, hdPathType) + 1,
         balance: null,
         hdPathType,
-        hdPathBasePublicKey,
       };
     }
   }

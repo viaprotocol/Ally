@@ -1,4 +1,8 @@
+import { isManifestV3 } from '@/utils/mv3';
+import WalletConnectKeyring from '@rabby-wallet/eth-walletconnect-keyring';
 import * as ethUtil from 'ethereumjs-util';
+import { browser } from 'webextension-polyfill-ts';
+import i18n from '../service/i18n';
 import pageStateCache from '../service/pageStateCache';
 export { default as createPersistStore } from './persisitStore';
 
@@ -64,6 +68,14 @@ export const wait = (fn: () => void, ms = 1000) => {
   });
 };
 
+export const sleep = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, ms);
+  });
+};
+
 export const setPageStateCacheWhenPopupClose = (data) => {
   const cache = pageStateCache.get();
   if (cache && cache.path === '/import/wallet-connect') {
@@ -92,15 +104,22 @@ export const isSameAddress = (a: string, b: string) => {
 export const setPopupIcon = (type: 'default' | 'rabby' | 'metamask') => {
   const icons = [16, 19, 32, 48, 128].reduce((res, size) => {
     if (type === 'default') {
-      res[size] = `images/icon-${size}.png`;
+      res[size] = `/images/icon-${size}.png`;
     } else {
-      res[size] = `images/icon-default-${type}-${size}.png`;
+      res[size] = `/images/icon-default-${type}-${size}.png`;
     }
     return res;
   }, {});
-  return chrome.browserAction.setIcon({
-    path: icons,
-  });
+
+  if (isManifestV3()) {
+    return browser.action.setIcon({
+      path: icons,
+    });
+  } else {
+    return browser.browserAction.setIcon({
+      path: icons,
+    });
+  }
 };
 
 global.__rb_is = () => true;
@@ -108,3 +127,15 @@ global.__rb_is = () => true;
 declare global {
   function __rb_is(): boolean;
 }
+export const walletConnectClientMeta = {
+  description: i18n.t('appDescription'),
+  url: 'https://rabby.io',
+  icons: ['https://rabby.io/assets/images/logo-128.png'],
+  name: 'Rabby',
+};
+export const setWalletConnectClientMeta = (keyring: WalletConnectKeyring) => {
+  keyring.deserialize({
+    clientMeta: walletConnectClientMeta,
+  } as any);
+  return keyring;
+};

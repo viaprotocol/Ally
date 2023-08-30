@@ -5,7 +5,6 @@ const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const AssetReplacePlugin = require('./plugins/AssetReplacePlugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const { version } = require('../_raw/manifest.json');
 const path = require('path');
 
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
@@ -15,13 +14,15 @@ const isEnvDevelopment = process.env.NODE_ENV !== 'production';
 
 const paths = require('./paths');
 
+if (isEnvDevelopment) {
+  process.env.VERSION = require('../package.json').version;
+}
+
 const config = {
   entry: {
     background: paths.rootResolve('src/background/index.ts'),
     'content-script': paths.rootResolve('src/content-script/index.ts'),
-    pageProvider: paths.rootResolve(
-      'node_modules/@rabby-wallet/page-provider/dist/index.js'
-    ),
+    pageProvider: paths.rootResolve('src/content-script/pageProvider/index.ts'),
     ui: paths.rootResolve('src/ui/index.tsx'),
   },
   output: {
@@ -153,14 +154,35 @@ const config = {
       },
       {
         test: /\.svg$/,
-        use: [
-          '@svgr/webpack',
+        oneOf: [
           {
-            loader: 'url-loader',
-            options: {
-              limit: false,
-              outputPath: 'generated/svgs',
-            },
+            include: [
+              path.resolve(
+                __dirname,
+                '../src/content-script/pageProvider/assets'
+              ),
+            ],
+            use: [
+              '@svgr/webpack',
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: true,
+                },
+              },
+            ],
+          },
+          {
+            use: [
+              '@svgr/webpack',
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: false,
+                  outputPath: 'generated/svgs',
+                },
+              },
+            ],
           },
         ],
       },
@@ -216,19 +238,25 @@ const config = {
       '#PAGEPROVIDER#': 'pageProvider',
     }),
     new webpack.DefinePlugin({
-      'process.env.version': JSON.stringify(`version: ${version}`),
-      'process.env.release': JSON.stringify(version),
+      'process.env.version': JSON.stringify(`version: ${process.env.VERSION}`),
+      'process.env.release': JSON.stringify(process.env.VERSION),
     }),
     new CopyPlugin({
       patterns: [
         { from: paths.rootResolve('_raw'), to: paths.rootResolve('dist') },
+        {
+          from: process.env.ENABLE_MV3
+            ? paths.rootResolve('src/manifest/mv3/manifest.json')
+            : paths.rootResolve('src/manifest/mv2/manifest.json'),
+          to: paths.dist,
+        },
       ],
     }),
   ],
   resolve: {
     alias: {
-      moment: require.resolve('dayjs'),
       '@debank/common': require.resolve('@debank/common/dist/index-rabby'),
+      moment: require.resolve('dayjs'),
     },
     plugins: [new TSConfigPathsPlugin()],
     fallback: {

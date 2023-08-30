@@ -9,7 +9,9 @@ import {
 import semverSatisfies from 'semver/functions/satisfies';
 import EthSignSignature from '@gnosis.pm/safe-core-sdk/dist/src/utils/signatures/SafeSignature';
 import { SafeInfo } from '@rabby-wallet/gnosis-sdk/dist/api';
+import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 
+Safe.adapter = fetchAdapter;
 export const keyringType = 'Gnosis';
 export const TransactionBuiltEvent = 'TransactionBuilt';
 export const TransactionConfirmedEvent = 'TransactionConfirmed';

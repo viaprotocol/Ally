@@ -26,6 +26,13 @@ const flow = new PromiseFlow<{
   mapMethod: string;
   approvalRes: any;
 }>();
+let screenAvailHeight = 1000;
+eventBus.addEventListener(EVENTS.UIToBackground, (data) => {
+  if (data.method === 'getScreen') {
+    screenAvailHeight = data.params.availHeight;
+  }
+});
+
 const flowContext = flow
   .use(async (ctx, next) => {
     // check method
@@ -107,24 +114,15 @@ const flowContext = flow
         ctx.request.requestedApproval = true;
         connectOrigins.add(origin);
         try {
-          const {
-            defaultChain,
-            signPermission,
-          } = await notificationService.requestApproval(
+          const { defaultChain } = await notificationService.requestApproval(
             {
               params: { origin, name, icon },
               approvalComponent: 'Connect',
             },
-            { height: 800 }
+            { height: 390 }
           );
           connectOrigins.delete(origin);
-          permissionService.addConnectedSiteV2({
-            origin,
-            name,
-            icon,
-            defaultChain,
-            signPermission,
-          });
+          permissionService.addConnectedSite(origin, name, icon, defaultChain);
         } catch (e) {
           connectOrigins.delete(origin);
           throw e;
@@ -150,11 +148,8 @@ const flowContext = flow
       windowHeight = options.height;
     } else {
       const minHeight = 500;
-      // if (screen.availHeight > windowHeight) {
-      //   windowHeight = screen.availHeight;
-      // }
-      if (screen.availHeight < 880) {
-        windowHeight = screen.availHeight;
+      if (screenAvailHeight < 880) {
+        windowHeight = screenAvailHeight;
       }
       if (windowHeight < minHeight) {
         windowHeight = minHeight;
@@ -281,7 +276,8 @@ export default (request: ProviderRequest) => {
       flow.requestedApproval = false;
       // only unlock notification if current flow is an approval flow
       notificationService.unLock();
-      keyringService.resetResend();
+      // @todo: need check if unlock is needed
+      notificationService.clear();
     }
   });
 };

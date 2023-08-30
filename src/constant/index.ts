@@ -302,6 +302,7 @@ export const EVENTS = {
   broadcastToUI: 'broadcastToUI',
   broadcastToBackground: 'broadcastToBackground',
   TX_COMPLETED: 'TX_COMPLETED',
+  UIToBackground: 'UIToBackground',
   SIGN_FINISHED: 'SIGN_FINISHED',
   WALLETCONNECT: {
     STATUS_CHANGED: 'WALLETCONNECT_STATUS_CHANGED',
@@ -875,12 +876,12 @@ export const SecurityEngineLevel = {
   },
 };
 
-declare global {
-  interface Window {
-    __is_rd__?: boolean;
-  }
-}
-export const IS_RD = window.__is_rd__;
+// declare global {
+//   interface Window {
+//     __is_rd__?: boolean;
+//   }
+// }
+// export const IS_RD = window.__is_rd__;
 
 export const BRAND_ALIAN_TYPE_TEXT = {
   [KEYRING_TYPE.HdKeyring]: 'Seed Phrase',

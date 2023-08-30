@@ -105,10 +105,10 @@ export class ContextMenu {
       return;
     }
 
-    let site = permissionService.getSite(info.menuItemId);
+    let site = permissionService.getSite(String(info.menuItemId));
     if (!site && tab) {
       site = {
-        origin: info.menuItemId,
+        origin: String(info.menuItemId),
         icon: tab.favIconUrl || '',
         name: tab.title || '',
         isSigned: false,
@@ -125,7 +125,7 @@ export class ContextMenu {
     );
     site.preferMetamask = !site.preferMetamask;
     permissionService.setSite(site);
-    this.update(info.menuItemId);
+    this.update(String(info.menuItemId));
     const currentIsDefaultWallet = preferenceService.getIsDefaultWallet(
       site.origin
     );

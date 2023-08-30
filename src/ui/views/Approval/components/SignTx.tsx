@@ -1130,14 +1130,17 @@ const SignTx = ({ params, origin }: SignTxProps) => {
       );
     }
     const typedData = await wallet.gnosisGenerateTypedData();
-    resolveApproval({
-      data: [account.address, JSON.stringify(typedData)],
-      session: params.session,
-      isGnosis: true,
-      account: account,
-      method: 'ethSignTypedDataV4',
-      uiRequestComponent: 'SignTypedData',
-    });
+    resolveApproval(
+      {
+        data: [account.address, JSON.stringify(typedData)],
+        session: params.session,
+        isGnosis: true,
+        account: account,
+        method: 'ethSignTypedDataV4',
+        uiRequestComponent: 'SignTypedData',
+      },
+      true
+    );
   };
 
   const handleCoboArugsConfirm = async (account: Account) => {

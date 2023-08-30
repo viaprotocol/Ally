@@ -315,14 +315,17 @@ const SignTypedData = ({ params }: { params: SignTypedDataProps }) => {
             version: 'V4',
           }
         );
-        resolveApproval({
-          uiRequestComponent: WaitingSignComponent[params.account.type],
-          type: params.account.type,
-          address: params.account.address,
-          data: params.data,
-          isGnosis: true,
-          account: params.account,
-        });
+        resolveApproval(
+          {
+            uiRequestComponent: WaitingSignComponent[params.account.type],
+            type: params.account.type,
+            address: params.account.address,
+            data: params.data,
+            isGnosis: true,
+            account: params.account,
+          },
+          true
+        );
       } else {
         try {
           let result = await wallet.signTypedData(
