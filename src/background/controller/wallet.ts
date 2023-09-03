@@ -150,7 +150,7 @@ export class WalletController extends BaseController {
       {
         data,
         session: {
-          name: 'Rabby',
+          name: 'Companion',
           origin: INTERNAL_REQUEST_ORIGIN,
           icon: './images/icon-128.png',
         },
@@ -163,7 +163,7 @@ export class WalletController extends BaseController {
     return provider<T>({
       data,
       session: {
-        name: 'Rabby',
+        name: 'Companion',
         origin: INTERNAL_REQUEST_ORIGIN,
         icon: './images/icon-128.png',
       },
