@@ -54,7 +54,7 @@ const Unlock = () => {
       </div>
       <Form
         autoComplete="off"
-        className="bg-gray-bg flex-1"
+        className="bg-[#101010] flex-1"
         form={form}
         onFinish={handleSubmit}
       >
