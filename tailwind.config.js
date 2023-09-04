@@ -32,6 +32,7 @@ module.exports = {
       lg: { min: '600px' },
     },
     backgroundImage: {
+      refreshGradient: 'linear-gradient(180deg, #A8A29E 0%, #78716C 100%)',
       buttonGradient: 'linear-gradient(180deg, #363636 0%, #292929 100%)',
     },
     colors: {
@@ -40,6 +41,7 @@ module.exports = {
       },
       label: {
         bg: '#191919',
+        text: '#E7E6E4',
       },
       transparent: 'transparent',
       current: 'currentColor',
@@ -76,6 +78,9 @@ module.exports = {
         light: '#707880',
         common: '#666666',
       },
+    },
+    boxShadow: {
+      default: '0px 1px 0px 0px rgba(0, 0, 0, 0.48)',
     },
     fontSize: {
       12: [
