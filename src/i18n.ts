@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next';
 export const fetchLocale = async (locale) => {
   const res = await fetch(`/locales/${locale}/messages.json`);
   const data = await res.json();
+  console.log('data', locale, data);
   return data;
   // return Object.keys(data).reduce((res, key) => {
   //   return {
@@ -27,7 +28,7 @@ i18n
 
 export const I18N_NS = 'translations';
 
-export const addResourceBundle = async (locale: string) => {
+export const addResourceBundle = async (locale = 'en') => {
   if (i18n.hasResourceBundle(locale, I18N_NS)) {
     return;
   }

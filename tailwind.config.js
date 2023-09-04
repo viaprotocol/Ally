@@ -71,7 +71,7 @@ module.exports = {
         divider: '#E5E9EF',
         comment: '#B4BDCC',
         content: '#707280',
-        subTitle: '#4B4D59',
+        subTitle: '#7A7A7A',
         title: '#13141A',
         light: '#707880',
         common: '#666666',
