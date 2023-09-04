@@ -43,6 +43,10 @@ module.exports = {
       },
       transparent: 'transparent',
       current: 'currentColor',
+      main: {
+        light: '#666666',
+        DEFAULT: '#1E1E1E',
+      },
       blue: {
         from: '#8A78FD',
         to: '#796BFD',

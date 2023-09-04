@@ -46,7 +46,6 @@ async function initAds() {
   );
 
   if (injectableContainer) {
-    console.log('injectableContainer is already presented');
     return;
   }
 
