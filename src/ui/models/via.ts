@@ -1,5 +1,6 @@
 import { RootModel } from '.';
 import { createModel } from '@rematch/core';
+import { levels } from 'loglevel';
 
 interface ViaScoreState {
   scoreTotal: number;
@@ -11,22 +12,41 @@ interface ViaScoreState {
   };
 }
 
+interface ViaScoreLevel {}
+
+interface ViaScoreTotal {
+  score: ViaScoreState;
+  levels: ViaScoreLevel[];
+}
+
 export const viaScore = createModel<RootModel>()({
   name: 'viaScore',
   state: {
-    scoreTotal: 0,
-    ads: {
-      adsWatchedCount: 0,
-      adsWatchedSum: 0,
-      adsWatchedCount24h: 0,
-      adsWatchedSum24h: 0,
+    score: {
+      scoreTotal: 0,
+      ads: {
+        adsWatchedCount: 0,
+        adsWatchedSum: 0,
+        adsWatchedCount24h: 0,
+        adsWatchedSum24h: 0,
+      },
     },
-  } as ViaScoreState,
+    levels: [],
+  } as ViaScoreTotal,
   reducers: {
     setViaScore(state, payload: ViaScoreState) {
       return {
         ...state,
-        ...payload,
+        score: {
+          ...state.score,
+          ...payload,
+        },
+      };
+    },
+    setLevels(state, payload) {
+      return {
+        ...state,
+        levels: payload,
       };
     },
   },
@@ -38,10 +58,15 @@ export const viaScore = createModel<RootModel>()({
   effects: (dispatch) => ({
     async init() {
       this.getViaScore();
+      this.getLevels();
     },
     async getViaScore(_?, store?) {
       const score = await store.app.wallet.getViaScore();
       dispatch.viaScore.setViaScore(score);
+    },
+    async getLevels(_?, store?) {
+      const levels = await store.app.wallet.getLevels();
+      dispatch.viaScore.setLevels(levels);
     },
   }),
 });

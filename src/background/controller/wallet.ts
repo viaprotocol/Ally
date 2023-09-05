@@ -154,6 +154,14 @@ export class WalletController extends BaseController {
     return routerApi.getViaScore(account.address);
   };
 
+  getViaLevels = async () => {
+    const account = await preferenceService.getCurrentAccount();
+
+    if (!account) throw new Error(t('background.error.noCurrentAccount'));
+
+    return routerApi.getViaLevels(account.address);
+  };
+
   requestETHRpc = (data: { method: string; params: any }, chainId: string) => {
     return providerController.ethRpc(
       {

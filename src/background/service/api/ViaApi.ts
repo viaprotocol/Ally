@@ -20,6 +20,26 @@ class RouterApi {
   public getViaScore(address: string) {
     return this.api.get<ViaScorePayload>(`via-score/${address}`);
   }
+
+  public getViaLevels(address: string) {
+    return this.api.get('via-score/levels/', {
+      data: {
+        address,
+      },
+    });
+  }
+
+  public completeQuest(questSlug: string) {
+    return this.api.post(`via-score/quest/${questSlug}`);
+  }
+
+  public getMintCalldata(address: string) {
+    return this.api.get(`via-score/mints/${address}/calldata`);
+  }
+
+  public getAds(address: string) {
+    return this.api.get(`via-score/${address}/ads/`);
+  }
 }
 
 const routerApiService = new ApiService(
