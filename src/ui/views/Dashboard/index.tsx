@@ -581,7 +581,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <button className="p-[12px] flex gap-[12px] justify-between items-center border border-[#333] rounded-md bg-[#1F1F1F] shadow-default hover:bg-[#292929] transition-all">
+            <button className="p-[12px] flex gap-[12px] justify-between items-center border border-[#333] rounded-md bg-[#1F1F1F] shadow-default hover:bg-[#292929] transition-all w-full">
               <div className="flex gap-[12px] items-center justify-center">
                 <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F] flex items-center justify-center">
                   <MoneyCashIcon />
