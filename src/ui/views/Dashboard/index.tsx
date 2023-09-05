@@ -94,6 +94,8 @@ const Dashboard = () => {
   const [accountBalanceUpdateNonce, setAccountBalanceUpdateNonce] = useState(0);
 
   const isGnosis = useRabbyGetter((s) => s.chains.isCurrentAccountGnosis);
+  const viaScore = useRabbyGetter((s) => s.viaScore.getViaScore);
+
   const gnosisPendingCount = useRabbySelector(
     (s) => s.chains.gnosisPendingCount
   );
@@ -545,10 +547,12 @@ const Dashboard = () => {
               <div className="flex gap-[24px]">
                 <div className="flex flex-col">
                   <div className="text-12">Synced</div>
-                  <div className="text-[24px] text-white">95,820</div>
+                  <div className="text-[24px] text-white">
+                    {viaScore.scoreTotal}
+                  </div>
                 </div>
 
-                <div className="w-[1px] h-full bg-[#3D3D3D]"></div>
+                <div className="w-[1px] h-[36px] bg-[#3D3D3D]"></div>
 
                 <div className="flex flex-col">
                   <div className="text-12">Pending</div>
@@ -565,19 +569,25 @@ const Dashboard = () => {
             <div className="mt-[22px] flex flex-col">
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">Watched paid ads</div>
-                <div className="text-label-text">1,217</div>
+                <div className="text-label-text">
+                  {viaScore.ads.adsWatchedCount}
+                </div>
               </div>
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">
-                  Watched paid ads in the last 7 days
+                  Watched paid ads in the last 24 hours
                 </div>
-                <div className="text-label-text">+20</div>
+                <div className="text-label-text">
+                  +{viaScore.ads.adsWatchedCount24h}
+                </div>
               </div>
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">
-                  Points earned for ads in the last 7 days
+                  Points earned for ads in the last 24 hours
                 </div>
-                <div className="text-label-text">1,217</div>
+                <div className="text-label-text">
+                  {viaScore.ads.adsWatchedSum24h}
+                </div>
               </div>
             </div>
 

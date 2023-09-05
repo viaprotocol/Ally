@@ -1,3 +1,4 @@
+import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 import type {
   AxiosError,
   AxiosInstance,
@@ -35,6 +36,7 @@ class ApiService {
     this.api = axios.create({
       baseURL: this.endpoint,
       ...config,
+      adapter: fetchAdapter,
     });
   }
 

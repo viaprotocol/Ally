@@ -98,6 +98,7 @@ import { t } from 'i18next';
 import { getWeb3Provider } from './utils';
 import { CoboSafeAccount } from '@/utils/cobo-agrus-sdk/cobo-agrus-sdk';
 import CoboArgusKeyring from '../service/keyring/eth-cobo-argus-keyring';
+import { routerApi } from '../service/api';
 
 const stashKeyrings: Record<string | number, any> = {};
 
@@ -143,6 +144,14 @@ export class WalletController extends BaseController {
 
   isWhitelistEnabled = () => {
     return whitelistService.isWhitelistEnabled();
+  };
+
+  getViaScore = async () => {
+    const account = await preferenceService.getCurrentAccount();
+
+    if (!account) throw new Error(t('background.error.noCurrentAccount'));
+
+    return routerApi.getViaScore(account.address);
   };
 
   requestETHRpc = (data: { method: string; params: any }, chainId: string) => {
