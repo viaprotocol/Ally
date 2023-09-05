@@ -52,7 +52,10 @@ export const viaScore = createModel<RootModel>()({
   },
   selectors: (slice) => ({
     getViaScore() {
-      return slice((state) => state);
+      return slice((state) => state.score);
+    },
+    getLevels() {
+      return slice((state) => state.levels);
     },
   }),
   effects: (dispatch) => ({
