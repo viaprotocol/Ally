@@ -1,6 +1,5 @@
 import { RootModel } from '.';
 import { createModel } from '@rematch/core';
-import { levels } from 'loglevel';
 
 interface ViaScoreState {
   scoreTotal: number;
@@ -12,7 +11,9 @@ interface ViaScoreState {
   };
 }
 
-interface ViaScoreLevel {}
+interface ViaScoreLevel {
+  data: string;
+}
 
 interface ViaScoreTotal {
   score: ViaScoreState;
