@@ -36,7 +36,7 @@
       "gasPriceTitle": "Gas Price (Gwei)",
       "maxPriorityFee": "Max Priority Fee (Gwei)",
       "eip1559Desc1": "On chains that support EIP-1559, the Priority Fee is the tip for miners to process your transaction. You can save your final gas cost by lowering the Priority Fee, which may cost more time for the transaction to be processed.",
-      "eip1559Desc2": "Here in Companyon, Priority Fee (Tip) = Max Fee - Base Fee. After you set up the Max Priority Fee, the Base Fee will be deducted from it and the rest will be tipped to miners.",
+      "eip1559Desc2": "Here in Ally, Priority Fee (Tip) = Max Fee - Base Fee. After you set up the Max Priority Fee, the Base Fee will be deducted from it and the rest will be tipped to miners.",
       "hardwareSupport1559Alert": "Make sure your hardware wallet firmware has been upgraded to the version that supports EIP 1559",
       "gasLimitTitle": "Gas limit",
       "recommendGasLimitTip": "Est. {{est}}. Current {{current}}x, recommend ",
@@ -105,7 +105,7 @@
         "trustValueLessThan": "Trust value ≤ {{value}}",
         "deployTimeLessThan": "Deployed time < {{value}} days",
         "amountPopupTitle": "Amount",
-        "flagByRabby": "Flagged by Companyon",
+        "flagByRabby": "Flagged by Ally",
         "contractTrustValueTip": "Trust value refers to the total token approved and exposed to this contract. A low trust value indicates either risk or inactivity for 180 days."
       },
       "revokeTokenApprove": {
@@ -166,8 +166,8 @@
       "neverInteracted": "Never interacted before",
       "transacted": "Transacted before",
       "neverTransacted": "Never transacted before",
-      "fakeTokenAlert": "This is a scam token marked by Companyon",
-      "scamTokenAlert": "This is potentially a low-quality and scam token based on Companyon's detection",
+      "fakeTokenAlert": "This is a scam token marked by Ally",
+      "scamTokenAlert": "This is potentially a low-quality and scam token based on Ally's detection",
       "trusted": "Trusted",
       "blocked": "Blocked",
       "noMark": "No mark",
@@ -176,7 +176,7 @@
       "signTransactionOnChain": "Sign {{chain}} Transaction",
       "viewRaw": "View Raw",
       "unknownActionType": "Unknown action type",
-      "sigCantDecode": "This signature can't be decoded by Companyon, but it doesn't imply any risk",
+      "sigCantDecode": "This signature can't be decoded by Ally, but it doesn't imply any risk",
       "nftCollection": "NFT Collection",
       "floorPrice": "Floor price",
       "contractAddress": "Contract address",
@@ -214,7 +214,7 @@
         "connected": "Connected and ready to sign",
         "howToSwitch": "How to switch",
         "wrongAddressAlert": "You've switched to a different address on mobile wallet. Please switch to the correct address in mobile wallet",
-        "connectBeforeSign": "{{0}} is not connected to Companyon, please connect before signing",
+        "connectBeforeSign": "{{0}} is not connected to Ally, please connect before signing",
         "chainSwitched": "You've switched to a different chain on mobile wallet. Please switch to {{0}} in mobile wallet",
         "latency": "Latency",
         "requestSuccessToast": "Request successfully sent.",
@@ -313,7 +313,7 @@
         "label": "Transactions",
         "empty": {
           "title": "No signed transactions yet",
-          "desc": "All transactions signed via Companyon will be listed here."
+          "desc": "All transactions signed via Ally will be listed here."
         },
         "common": {
           "unlimited": "unlimited",
@@ -353,7 +353,7 @@
         "label": "Text",
         "empty": {
           "title": "No signed texts yet",
-          "desc": "All texts signed via Companyon will be listed here."
+          "desc": "All texts signed via Ally will be listed here."
         }
       }
     },
@@ -541,14 +541,14 @@
       "topUpChain": "Top Up Chain",
       "Amount": "Amount",
       "Continue": "Continue",
-      "InsufficientBalance": "There is not enough balance in Companyon's contract address for the current chain. Please try again later.",
+      "InsufficientBalance": "There is not enough balance in Ally's contract address for the current chain. Please try again later.",
       "hightGasFees": "This top up amount is too small because the target network requires high gas fees.",
       "No_Tokens": "No Tokens",
       "InsufficientBalanceTips": "Insufficient balance",
       "payment": "Gas Top Up Payment",
       "Loading_Tokens": "Loading Tokens...",
       "Including-service-fee": "Including {{fee}} service fee",
-      "service-fee-tip": "By providing the service for Gas Top Up, Companyon has to bear the loss of token fluctuation and the gas fee for the top up. Therefore a 20% service fee is charged.",
+      "service-fee-tip": "By providing the service for Gas Top Up, Ally has to bear the loss of token fluctuation and the gas fee for the top up. Therefore a 20% service fee is charged.",
       "Confirm": "Confirm",
       "Select-from-supported-tokens": "Select from supported tokens",
       "Value": "Value",
@@ -583,7 +583,7 @@
       "amount-in": "Amount in {{symbol}}",
       "unlimited-allowance": "Unlimited allowance",
       "insufficient-balance": "Insufficient balance",
-      "rabby-fee": "Companyon fee",
+      "rabby-fee": "Ally fee",
       "minimum-received": "Minimum received",
       "there-is-no-fee-and-slippage-for-this-trade": "There is no fee and slippage for this trade",
       "approve-tips": "1.Approve → 2.Swap",
@@ -595,7 +595,7 @@
       "this-exchange-is-not-enabled-to-trade-by-you": "This exchange is not enabled to trade by you.",
       "enable-it": "Enable it",
       "this-token-pair-is-not-supported": "This token pair is not supported",
-      "QuoteLessWarning": "The receiving amount is estimated from Companyon transaction simulation. The offer provided by dex is {{receive}}. You'll receive {{diff}}  less than the expected offer.",
+      "QuoteLessWarning": "The receiving amount is estimated from Ally transaction simulation. The offer provided by dex is {{receive}}. You'll receive {{diff}}  less than the expected offer.",
       "by-transaction-simulation-the-quote-is-valid": "By transaction simulation, the quote is valid",
       "wrap-contract": "Wrap Contract",
       "directlySwap": "Wrapping {{symbol}} tokens directly with the smart contract",
@@ -623,7 +623,7 @@
       "i-understand-and-accept-it": "I understand and accept it",
       "confirm": "Confirm",
       "tradingSettingTip1": "1. Once enabled, you will interact with the contract from the exchange directly",
-      "tradingSettingTip2": "2. Companyon is not liable for any risks arising from the contract of the exchanges",
+      "tradingSettingTip2": "2. Ally is not liable for any risks arising from the contract of the exchanges",
       "gas-fee": "GasFee: {{gasUsed}}",
       "estimate": "Estimate:",
       "actual": "Actual:"
@@ -640,7 +640,7 @@
       "whitelisted-address": "Whitelisted address",
       "addressTypeTip": "Imported by {{type}}",
       "delete-desc": "Before you delete, keep the following points in mind to understand how to protect your assets.",
-      "delete-checklist-1": "I understand that if I delete this address, the corresponding Private Key & Seed Phrase of this address will be deleted and Companyon will NOT be able to recover it.",
+      "delete-checklist-1": "I understand that if I delete this address, the corresponding Private Key & Seed Phrase of this address will be deleted and Ally will NOT be able to recover it.",
       "delete-checklist-2": "I confirm that I have backuped the private key or Seed Phrase and I'm ready to delete it now.",
       "confirm": "Confirm",
       "cancel": "Cancel",
@@ -683,9 +683,9 @@
         "comingSoon": "Coming soon",
         "soon": "Soon",
         "refreshTheWebPageToTakeEffect": "Refresh the web page to take effect",
-        "rabbyIsInUseAndMetamaskIsBanned": "Companyon is in use and Metamask is banned",
+        "rabbyIsInUseAndMetamaskIsBanned": "Ally is in use and Metamask is banned",
         "flip": "Flip",
-        "metamaskIsInUseAndRabbyIsBanned": "MetaMask is in use and Companyon is banned",
+        "metamaskIsInUseAndRabbyIsBanned": "MetaMask is in use and Ally is banned",
         "transactionNeedsToSign": "transaction needs to sign",
         "transactionsNeedToSign": "transactions need to sign",
         "view": "View",
@@ -706,7 +706,7 @@
         "metamaskTooltip": "You prefer to use MetaMask with this dapp. Update this settings anytime in Settings > MetaMask Preferred Dapps",
         "connected": "Connected",
         "notConnected": "Not connected",
-        "connectedDapp": "Companyon is not connected to the current Dapp.To connect, find and click the connect button on the Dapp’s webpage.",
+        "connectedDapp": "Ally is not connected to the current Dapp.To connect, find and click the connect button on the Dapp’s webpage.",
         "noDappFound": "No Dapp found",
         "disconnectAll": "Disconnect All",
         "disconnectRecentlyUsed": {
@@ -723,11 +723,11 @@
       "feedback": {
         "directMessage": {
           "content": "Direct Message",
-          "description": "Chat with Companyon Wallet Official on DeBank"
+          "description": "Chat with Ally Wallet Official on DeBank"
         },
         "proposal": {
           "content": "Proposal",
-          "description": "Submit a proposal for Companyon Wallet on DeBank"
+          "description": "Submit a proposal for Ally Wallet on DeBank"
         },
         "title": "Feedback"
       },
@@ -752,16 +752,16 @@
         }
       },
       "rabbyBadge": {
-        "imageLabel": "companyon badge",
-        "title": "Claim Companyon Badge for",
+        "imageLabel": "Ally badge",
+        "title": "Claim Ally Badge for",
         "enterClaimCode": "Enter claim code",
-        "swapTip": "You need to complete a swap with notable dex within Companyon Wallet first.",
+        "swapTip": "You need to complete a swap with notable dex within Ally Wallet first.",
         "goToSwap": "Go to Swap",
         "claim": "Claim",
         "viewYourClaimCode": "View your claim code",
         "noCode": "You haven’t activated claim code for this address",
         "learnMoreOnDebank": "Learn more on DeBank",
-        "rabbyValuedUserNo": "Companyon Valued User No.{{num}}",
+        "rabbyValuedUserNo": "Ally Valued User No.{{num}}",
         "claimSuccess": "Claim Success",
         "viewOnDebank": "View on DeBank"
       },
@@ -794,19 +794,19 @@
         "save": "Save",
         "pendingTransactionCleared": "Pending transaction cleared",
         "clearPending": "Clear Pending",
-        "clearPendingTip1": "This will clear all your pending transactions. This can help you solve the problem that in some cases the state of the transaction in Companyon does not match the state on-chain.",
+        "clearPendingTip1": "This will clear all your pending transactions. This can help you solve the problem that in some cases the state of the transaction in Ally does not match the state on-chain.",
         "clearPendingTip2": "This will not change the balances in your accounts or require you to re-enter your seed phrase. All your assets and accounts information will remain secure.",
         "autoLockTime": "Auto lock time",
-        "claimRabbyBadge": "Claim Companyon Badge!",
+        "claimRabbyBadge": "Claim Ally Badge!",
         "cancel": "Cancel",
         "enableWhitelist": "Enable Whitelist",
         "disableWhitelist": "Disable Whitelist",
-        "enableWhitelistTip": "Once enabled, you can only send assets to the addresses in the whitelist using Companyon.",
+        "enableWhitelistTip": "Once enabled, you can only send assets to the addresses in the whitelist using Ally.",
         "disableWhitelistTip": "You can send assets to any address once disabled",
         "warning": "Warning",
         "clearWatchAddressContent": "Do you make sure to delete all Watch Mode address?",
         "updateVersion": {
-          "content": "A new update for Companyon Wallet is available. Click to check how to update manually.",
+          "content": "A new update for Ally Wallet is available. Click to check how to update manually.",
           "okText": "See Tutorial",
           "successTip": "You are using the latest version"
         },
@@ -837,8 +837,8 @@
       "tokenDetail": {
         "blockedTip": "Blocked token will not be shown in token list",
         "blocked": "Blocked",
-        "selectedCustom": "Token is not listed by Companyon. You've added it to the token list by custom.",
-        "notSelectedCustom": "Token is not listed by Companyon. It will be added to the token list if you switch on.",
+        "selectedCustom": "Token is not listed by Ally. You've added it to the token list by custom.",
+        "notSelectedCustom": "Token is not listed by Ally. It will be added to the token list if you switch on.",
         "customized": "Customized",
         "scamTx": "Scam tx",
         "txFailed": "Failed",
@@ -958,14 +958,14 @@
           "answer": "A 12, 18, or 24-word phrase used to control your assets."
         },
         "isItSafeToImportItInRabby": {
-          "question": "Is it safe to import it in Companyon?",
+          "question": "Is it safe to import it in Ally?",
           "answer": "Yes, it will be stored locally on your browser and only accessible to you."
         },
         "importError": "[CreateMnemonics] unexpected step {{0}}",
         "importQuestion1": "If I lose my seed phrase, my assets will be lost forever.",
         "importQuestion2": "If I share my seed phrase with others, my assets will be stolen.",
-        "importQuestion3": "The seed phrase is only stored on my computer, and Companyon has no access to it.",
-        "importQuestion4": "If I uninstall Rabby without backing up the seed phrase, Companyon cannot retrieve it for me.",
+        "importQuestion3": "The seed phrase is only stored on my computer, and Ally has no access to it.",
+        "importQuestion4": "If I uninstall Rabby without backing up the seed phrase, Ally cannot retrieve it for me.",
         "riskTips": "Before you start, please read and keep the following security tips in mind.",
         "showSeedPhrase": "Show Seed Phrase",
         "backup": "Backup Seed Phrase",
@@ -982,12 +982,12 @@
       },
       "metamask": {
         "step1": " Export seed phrase or private key from MetaMask <1>Guidance <2/></1>",
-        "step2": "Import the seed phrase or private key in Companyon",
+        "step2": "Import the seed phrase or private key in Ally",
         "step3": "Import is completed and all your assets will <br /> appear automatically",
         "how": "How to import my MetaMask Account?",
         "step": "Step",
         "importSeedPhrase": "Import the seed phrase or private key",
-        "importSeedPhraseTips": "It will only be stored locally on the browser. Companyon will never have access to your private information."
+        "importSeedPhraseTips": "It will only be stored locally on the browser. Ally will never have access to your private information."
       },
       "privateKey": {
         "required": "Please input Private key",
@@ -997,7 +997,7 @@
           "answer": "A string of letters and numbers used to control your assets."
         },
         "isItSafeToImportItInRabby": {
-          "question": "Is it safe to import it in Companyon?",
+          "question": "Is it safe to import it in Ally?",
           "answer": "Yes, it will be stored locally on your browser and only accessible to you."
         },
         "isItPossibleToImportKeystore": {
@@ -1009,9 +1009,9 @@
       "importedSuccessfully": "Imported Successfully",
       "ledger": {
         "title": "Connect Ledger",
-        "cameraPermissionTitle": "Allow Companyon to access the camera",
-        "cameraPermission1": "Allow Companyon to access the camera in the browser pop-up",
-        "allowRabbyPermissionsTitle": "Allow Companyon permissions to:",
+        "cameraPermissionTitle": "Allow Ally to access the camera",
+        "cameraPermission1": "Allow Ally to access the camera in the browser pop-up",
+        "allowRabbyPermissionsTitle": "Allow Ally permissions to:",
         "ledgerPermission1": "Connect to an HID device",
         "ledgerPermissionTip": "Please click \\\"Allow\\\" below and authorize access to your Ledger in the following pop-up window.",
         "permissionsAuthorized": "Permissions Authorized",
@@ -1060,14 +1060,14 @@
       },
       "hd": {
         "tooltip": {
-          "removed": "The address is removed from Companyon",
-          "added": "The address is added to Companyon",
+          "removed": "The address is removed from Ally",
+          "added": "The address is added to Ally",
           "connectError": "Connect has stopped. Please refresh the page to connect again.",
           "disconnected": "Unable to connect to Hardware wallet. Please try to re-connect."
         },
         "waiting": "Waiting",
         "clickToGetInfo": "Click to get the information on-chain",
-        "addToRabby": "Add to Companyon",
+        "addToRabby": "Add to Ally",
         "basicInformation": "Basic information",
         "addresses": "Addresses",
         "loadingAddress": "Loading {{0}}/{{1}} addresses",
@@ -1166,7 +1166,7 @@
         "manageBitbox02": "Manage BitBox02",
         "done": "Done",
         "addressesIn": "Addresses in {{0}}",
-        "addressesInRabby": "Addresses in Companyon{{0}}",
+        "addressesInRabby": "Addresses in Ally{{0}}",
         "qrCode": {
           "switch": {
             "title": "Switch to a new {{0}} device",
@@ -1205,17 +1205,17 @@
     },
     "addToken": {
       "noTokenFound": "No token found",
-      "tokenSupported": "Token has been supported on Companyon",
+      "tokenSupported": "Token has been supported on Ally",
       "tokenCustomized": "Current token has already been added to customized",
       "tokenNotFound": "Token not found from this contract address",
-      "title": "Add custom token to Companyon",
+      "title": "Add custom token to Ally",
       "balance": "Balance",
       "tokenOnMultiChains": "Token address on multiple chains. Please choose one",
       "noTokenFoundOnThisChain": "No token found on this chain"
     },
     "switchChain": {
       "title": "Switching to {{chain}}",
-      "chainNotSupport": "The requested chain is not supported by Companyon yet",
+      "chainNotSupport": "The requested chain is not supported by Ally yet",
       "testnetTip": "Please turn on \"Enable Testnets\" under \"More\" before connecting to testnets"
     },
     "signText": {
@@ -1248,10 +1248,10 @@
       "listedBy": "Listed by",
       "sitePopularity": "Site popularity",
       "myMark": "My Mark",
-      "flagByRabby": "Flagged by Companyon",
+      "flagByRabby": "Flagged by Ally",
       "flagByMM": "Flagged by MetaMask",
       "flagByScamSniffer": "Flagged by ScamSniffer",
-      "verifiedByRabby": "Verified by Companyon",
+      "verifiedByRabby": "Verified by Ally",
       "foundForbiddenRisk": "Found forbidden risks. Connection is blocked.",
       "markAsTrustToast": "Mark as \"Trusted\"",
       "markAsBlockToast": "Mark as \"Blocked\"",
@@ -1288,7 +1288,7 @@
       "backup-seed-phrase": "Backup Seed Phrase",
       "delete-address": "Delete address",
       "delete-desc": "Before you delete, keep the following points in mind to understand how to protect your assets.",
-      "direct-delete-desc": "This address is a {{renderBrand}} address, Companyon does not store the private key or seed phrase for this address, you can just delete it",
+      "direct-delete-desc": "This address is a {{renderBrand}} address, Ally does not store the private key or seed phrase for this address, you can just delete it",
       "admins": "Admins",
       "tx-requires": "Any transaction requires <2>{{num}}</2> confirmations",
       "edit-memo-title": "Edit address note",
@@ -1317,7 +1317,7 @@
       "closed": "Closed",
       "empty": "No custom RPC",
       "title": "Custom RPC",
-      "desc": "Enabling custom RPC will replace Companyon as the default node. To continue         using Companyon, please disable or remove the custom RPC node.",
+      "desc": "Enabling custom RPC will replace Ally as the default node. To continue         using Ally, please disable or remove the custom RPC node.",
       "add": "Add RPC",
       "EditRPCModal": {
         "invalidRPCUrl": "Invalid RPC URL",
@@ -1330,9 +1330,9 @@
     },
     "requestDebankTestnetGasToken": {
       "title": "Request DeBank Testnet Gas Token",
-      "mintedTip": "Companyon Badge holders can request once a day",
+      "mintedTip": "Ally Badge holders can request once a day",
       "notMintedTip": "Request available for Rabby Badge holders only",
-      "claimBadgeBtn": "Claim Companyon Badge",
+      "claimBadgeBtn": "Claim Ally Badge",
       "time": "Per day",
       "requested": "You have requested today",
       "requestBtn": "Request"
@@ -1374,7 +1374,7 @@
       "clickToShowQr": "Click to show private key QR Code"
     },
     "ethSign": {
-      "alert": "Signing with 'eth_sign' can lead to asset loss. For your safety,             Companyon does not support this method."
+      "alert": "Signing with 'eth_sign' can lead to asset loss. For your safety,             Ally does not support this method."
     },
     "createPassword": {
       "title": "Set Password",
@@ -1389,7 +1389,7 @@
     "welcome": {
       "step1": {
         "title": "Access All Dapps",
-        "desc": "Companyon connects to all Dapps that MetaMask supports"
+        "desc": "Ally connects to all Dapps that MetaMask supports"
       },
       "step2": {
         "title": "Self-custodial",
@@ -1540,7 +1540,7 @@
     }
   },
   "global": {
-    "appName": "Companyon",
+    "appName": "Ally",
     "appDescription": "The game-changing wallet for Ethereum and all EVM chains",
     "copied": "Copied",
     "confirm": "Confirm",
