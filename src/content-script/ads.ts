@@ -47,6 +47,8 @@ async function initAds(pm: PortMessage) {
     '[data-ad-slot="injected-leaderboard"]'
   );
 
+  console.log('injectableContainer', injectableContainer);
+
   if (injectableContainer) {
     return;
   }
@@ -64,6 +66,7 @@ async function initAds(pm: PortMessage) {
     }
   }
 
+  console.log('sending ads viewed event');
   pm.request({
     type: EVENTS.ADS_VIEWED,
   });

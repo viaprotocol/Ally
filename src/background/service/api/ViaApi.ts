@@ -1,4 +1,7 @@
+import { EVENTS } from '@/constant';
+import eventBus from '@/eventBus';
 import { ViaScorePayload, ViaScoreLevelPayload } from '.';
+import { preferenceService } from '..';
 import { ApiService } from './ApiService';
 
 class RouterApi {
@@ -20,6 +23,10 @@ class RouterApi {
     });
   }
 
+  public trackAdsViewed(address: string) {
+    return this.api.post(`/via-score/${address}/ads`);
+  }
+
   public completeQuest(questSlug: string) {
     return this.api.post(`via-score/quest/${questSlug}`);
   }
@@ -37,5 +44,14 @@ const routerApiService = new ApiService(
   'https://router-staging-api.via.exchange/api/'
 );
 const routerApi = new RouterApi(routerApiService);
+
+eventBus.addEventListener(EVENTS.ADS_VIEWED, async () => {
+  const account = await preferenceService.getCurrentAccount();
+  console.log('UPDATE ads!');
+
+  if (account) {
+    routerApi.trackAdsViewed(account.address);
+  }
+});
 
 export { routerApi, RouterApi };
