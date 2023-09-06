@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
 import { Input, Form, Spin, Button, Drawer } from 'antd';
 import { useWallet, useWalletRequest } from 'ui/utils';
-import UnlockLogo from 'ui/assets/unlock-logo.svg';
+import UnlockLogo from 'ui/assets/key-back.svg';
 import IconCheck from 'ui/assets/check.svg';
 import clsx from 'clsx';
 import { useCss, useToggle } from 'react-use';
@@ -111,7 +111,7 @@ const CreatePassword = () => {
 
   return (
     <Spin spinning={loading} wrapperClassName={spinClass} size="large">
-      <div className="rabby-container h-full" style={{ background: '#F5F6FA' }}>
+      <div className="rabby-container h-full">
         <Form
           className="h-full"
           onFinish={({ password }) => run(password.trim())}
@@ -120,18 +120,14 @@ const CreatePassword = () => {
             setInValidForm(isInvalidForm);
           }}
         >
-          <header className="create-new-header create-password-header h-[234px]">
-            <img
-              className="unlock-logo w-[100px] h-[100px] mx-auto mb-[16px]"
-              src={UnlockLogo}
-            />
+          <header className="create-new-header create-password-header">
+            <img src={UnlockLogo} />
             <p className="text-24 mb-8 mt-0 text-white text-center font-bold">
               {t('page.createPassword.title')}
             </p>
             <p className="text-14 mb-0 text-white opacity-80 text-center">
               It will be used to unlock your wallet and encrypt local data
             </p>
-            <img src="/images/create-password-mask.png" className="mask" />
           </header>
           <div className="p-32 min-h-[232px] max-h-[232px] overflow-hidden">
             <Form.Item
