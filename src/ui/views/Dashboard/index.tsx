@@ -620,9 +620,7 @@ const Dashboard = () => {
               <MainLockIcon />
             </div>
             <div className="text-gray-subTitle">
-              <span className="text-[#CCC] font-semibold">
-                Open swap Companion
-              </span>{' '}
+              <span className="text-[#CCC] font-semibold">Open swap Ally</span>{' '}
               (soon)
             </div>
             <div className="text-[#3D3D3D]">⌥ S</div>
