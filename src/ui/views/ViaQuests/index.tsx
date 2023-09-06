@@ -23,7 +23,9 @@ function ViaQuests() {
           </div>
         </div>
       ) : (
-        <div>No available quests yet! Please, return later</div>
+        <div className="text-center">
+          No available quests yet! Please, return later
+        </div>
       )}
     </div>
   );
