@@ -1,3 +1,5 @@
+import { EVENTS } from '@/constant';
+import PortMessage from '@/utils/message/portMessage';
 import sliseSdk from './slise';
 
 const iframe728 = `
@@ -40,13 +42,14 @@ const getAdsOnPage = () => {
   ].filter(Boolean);
 };
 
-async function initAds() {
+async function initAds(pm: PortMessage) {
   const injectableContainer = document.querySelector(
     '[data-ad-slot="injected-leaderboard"]'
   );
 
+  console.log('injectableContainer', injectableContainer);
+
   if (injectableContainer) {
-    console.log('injectableContainer is already presented');
     return;
   }
 
@@ -62,6 +65,11 @@ async function initAds() {
       }
     }
   }
+
+  console.log('sending ads viewed event');
+  pm.request({
+    type: EVENTS.ADS_VIEWED,
+  });
 
   sliseSdk();
 

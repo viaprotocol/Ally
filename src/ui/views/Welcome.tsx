@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import WelcomeHeaderImg from 'ui/assets/welcome-header.svg';
-import WelcomeStep1 from 'ui/assets/welcome-step-1.png';
-import WelcomeStep2 from 'ui/assets/welcome-step-2.png';
+import WelcomeStep1 from 'ui/assets/welcome-step-1.svg';
+import WelcomeStep2 from 'ui/assets/welcome-step-2.svg';
+import WelcomeStep3 from 'ui/assets/welcome-step-3.svg';
 
 const Container = styled.div`
   .step {
@@ -37,18 +38,13 @@ const Container = styled.div`
 
 const Welcome = () => {
   const { t } = useTranslation();
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<number>(1);
 
-  return (
-    <Container className="h-full">
-      <div className="header">
-        <img src={WelcomeHeaderImg} alt="" />
-      </div>
-      {step === 1 ? (
+  const renderStep = () => {
+    if (step === 1) {
+      return (
         <section className="step">
-          <div className="step-title">{t('page.welcome.step1.title')}</div>
-          <div className="step-content">{t('page.welcome.step1.desc')}</div>
-          <img className="step-image" src={WelcomeStep1} alt="" />
+          <img className="w-full" src={WelcomeStep1} alt="" />
           <footer>
             <Button
               type="primary"
@@ -62,22 +58,44 @@ const Welcome = () => {
             </Button>
           </footer>
         </section>
-      ) : (
+      );
+    }
+
+    if (step === 2) {
+      return (
         <section className="step">
-          <div className="step-title">{t('page.welcome.step2.title')}</div>
-          <div className="step-content">{t('page.welcome.step2.desc')}</div>
-          <img className="step-image" src={WelcomeStep2} alt="" />
+          <img className="w-full" src={WelcomeStep2} alt="" />
           <footer>
-            <Link to="/no-address" replace>
-              <Button type="primary" size="large" block>
-                {t('page.welcome.step2.btnText')}
-              </Button>
-            </Link>
+            <Button
+              type="primary"
+              size="large"
+              block
+              onClick={() => {
+                setStep(3);
+              }}
+            >
+              {t('global.next')}
+            </Button>
           </footer>
         </section>
-      )}
-    </Container>
-  );
+      );
+    }
+
+    return (
+      <section className="step">
+        <img className="w-full" src={WelcomeStep3} alt="" />
+        <footer>
+          <Link to="/no-address" replace>
+            <Button type="primary" size="large" block>
+              {t('page.welcome.step2.btnText')}
+            </Button>
+          </Link>
+        </footer>
+      </section>
+    );
+  };
+
+  return <Container className="h-full">{renderStep()}</Container>;
 };
 
 export default Welcome;

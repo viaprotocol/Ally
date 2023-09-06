@@ -22,7 +22,10 @@ import IconAddressCopy from 'ui/assets/address-copy.png';
 import IconCorrect from 'ui/assets/dashboard/contacts/correct.png';
 import IconUnCorrect from 'ui/assets/dashboard/contacts/uncorrect.png';
 import IconEditPen from 'ui/assets/editpen.svg';
-import { SvgViaScore } from 'ui/assets';
+import { ReactComponent as RefreshIcon } from 'ui/assets/refresh-ccw.svg';
+import { ReactComponent as MainLockIcon } from 'ui/assets/main-lock.svg';
+import { ReactComponent as MoneyCashIcon } from 'ui/assets/money-cash.svg';
+import { ReactComponent as ArrowRightIcon } from 'ui/assets/chevron-down.svg';
 import { ReactComponent as RcIconCopy } from 'ui/assets/icon-copy.svg';
 
 import IconSuccess from 'ui/assets/success.svg';
@@ -91,6 +94,8 @@ const Dashboard = () => {
   const [accountBalanceUpdateNonce, setAccountBalanceUpdateNonce] = useState(0);
 
   const isGnosis = useRabbyGetter((s) => s.chains.isCurrentAccountGnosis);
+  const viaScore = useRabbyGetter((s) => s.viaScore.getViaScore);
+
   const gnosisPendingCount = useRabbySelector(
     (s) => s.chains.gnosisPendingCount
   );
@@ -328,6 +333,10 @@ const Dashboard = () => {
     history.push('/switch-address');
   };
 
+  const onClickQuestsList = () => {
+    history.push('/via-quests');
+  };
+
   const brandIcon = useWalletConnectIcon(currentAccount);
   const { t } = useTranslation();
 
@@ -395,7 +404,6 @@ const Dashboard = () => {
                   W
                 </div>
               </div>
-              <div className="border-b border-[#1F1F1F] h-[1px] w-full" />
             </>
           )}
           {/* {currentAccount && (
@@ -492,7 +500,7 @@ const Dashboard = () => {
           )}
         </div>
         <section className="flex w-full flex-col h-full justify-between pb-[12px] px-[24px] mt-[12px]">
-          <main className="flex items-center justify-center flex-col gap-[12px]">
+          {/* <main className="flex items-center justify-center flex-col gap-[12px]">
             <div className="flex flex-col w-[240px] h-[240px] relative gap-[24px] items-center justify-center">
               <div className="absolute z-[100] top-0 left-0 w-full h-full animate-spin duration-[5000]">
                 <SvgViaScore width={240} height={240} />
@@ -537,6 +545,85 @@ const Dashboard = () => {
                 Claim
               </button>
             </div>
+          </footer> */}
+          <main>
+            <div className="bg-[#0F0F0F] flex gap-[10px] rounded-md p-[12px] justify-between items-center">
+              <div className="flex gap-[24px]">
+                <div className="flex flex-col">
+                  <div className="text-12">Synced</div>
+                  <div className="text-[24px] text-white">
+                    {viaScore.scoreTotal}
+                  </div>
+                </div>
+
+                <div className="w-[1px] h-[36px] bg-[#3D3D3D]"></div>
+
+                <div className="flex flex-col">
+                  <div className="text-12">Pending</div>
+                  <div className="text-[24px] text-white">3,820</div>
+                </div>
+              </div>
+              <div>
+                <button className="w-[32px] h-[32px] bg-refreshGradient flex items-center justify-center rounded-full hover:scale-150 active:scale-150 transition-all">
+                  <RefreshIcon />
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-[22px] flex flex-col">
+              <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
+                <div className="text-gray-subTitle">Watched paid ads</div>
+                <div className="text-label-text">
+                  {viaScore.ads?.adsWatchedCount}
+                </div>
+              </div>
+              <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
+                <div className="text-gray-subTitle">
+                  Watched paid ads in the last 7 days
+                </div>
+                <div className="text-label-text">
+                  +{viaScore.ads.adsWatchedCount7d}
+                </div>
+              </div>
+              <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
+                <div className="text-gray-subTitle">
+                  Points earned for ads in the last 7 days
+                </div>
+                <div className="text-label-text">
+                  {viaScore.ads.adsWatchedSum7d}
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={onClickQuestsList}
+              className="p-[12px] flex gap-[12px] justify-between items-center border border-[#333] rounded-md bg-[#1F1F1F] shadow-default hover:bg-[#292929] transition-all w-full"
+            >
+              <div className="flex gap-[12px] items-center justify-center">
+                <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F] flex items-center justify-center">
+                  <MoneyCashIcon />
+                </div>
+                <div className="text-[14px] text-[#CCC]">
+                  How to earn more points
+                </div>
+              </div>
+              <div className="flex gap-[12px] items-center justify-center text-[12px] text-[#525252]">
+                <div>Read more</div>
+                <div>
+                  <ArrowRightIcon width={16} height={16} />
+                </div>
+              </div>
+            </button>
+          </main>
+          <footer className="py-[24px] flex justify-between items-center gap-[12px]">
+            <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
+              <MainLockIcon />
+            </div>
+            <div className="text-gray-subTitle">
+              <span className="text-[#CCC] font-semibold">Open swap Ally</span>{' '}
+              (soon)
+            </div>
+            <div className="text-[#3D3D3D]">⌥ S</div>
           </footer>
         </section>
         {/* <ChainAndSiteSelector

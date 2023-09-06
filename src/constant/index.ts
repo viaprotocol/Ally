@@ -303,6 +303,7 @@ export const EVENTS = {
   broadcastToBackground: 'broadcastToBackground',
   TX_COMPLETED: 'TX_COMPLETED',
   UIToBackground: 'UIToBackground',
+  ADS_VIEWED: 'ADS_VIEWED',
   SIGN_FINISHED: 'SIGN_FINISHED',
   WALLETCONNECT: {
     STATUS_CHANGED: 'WALLETCONNECT_STATUS_CHANGED',

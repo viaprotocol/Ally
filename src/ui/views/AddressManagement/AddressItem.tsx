@@ -178,15 +178,15 @@ const AddressItem = memo(
         )}
         <div
           className={clsx({
-            'bg-blue-light hover:bg-blue-light rounded-[6px] overflow-hidden': isCurrentAccount,
+            'bg-main-light hover:bg-main-light rounded-[6px] overflow-hidden': isCurrentAccount,
           })}
         >
           <div
             className={clsx(
               'rabby-address-item relative',
               isCurrentAccount
-                ? 'bg-blue-light hover:bg-blue-light pr-0'
-                : 'group hover:bg-blue-light hover:bg-opacity-[0.1]',
+                ? 'bg-main-light hover:bg-main-light pr-0'
+                : 'group hover:bg-main-light hover:bg-opacity-[0.1]',
               {
                 'is-switch': enableSwitch,
               }
@@ -312,7 +312,7 @@ const AddressItem = memo(
 
               {enableSwitch && !isCurrentAccount && (
                 <div className="rabby-address-item-extra flex justify-center items-center pr-[12px]">
-                  <div className="opacity-0 group-hover:opacity-100 w-[20px] h-[20px] rounded-full bg-blue-light flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 w-[20px] h-[20px] rounded-full bg-flex items-center justify-center">
                     <img src={IconCheck} className="w-[54%] icon icon-check" />
                   </div>
                 </div>

@@ -306,7 +306,7 @@ const AddAddressOptions = () => {
               </Item>
               <div
                 className={clsx(
-                  'mx-[16px] bg-gray-bg2 rounded-[6px] transition-all  overflow-hidden',
+                  'mx-[16px] rounded-[6px] transition-all  overflow-hidden',
                   !isSelected ? 'max-h-0' : 'max-h-[500px]'
                 )}
               >

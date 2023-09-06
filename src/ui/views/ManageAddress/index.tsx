@@ -225,7 +225,7 @@ const ManageAddress = () => {
   }
 
   return (
-    <div className="page-address-management px-0 pb-0 bg-[#F0F2F5] overflow-hidden">
+    <div className="page-address-management px-0 pb-0 overflow-hidden">
       <div className="h-full flex flex-col">
         <div className="px-20">
           <PageHeader className="pt-[24px]">
@@ -235,7 +235,7 @@ const ManageAddress = () => {
 
         <div className="flex-1 flex flex-col overflow-y-auto">
           <div className="px-20 mb-8">
-            <div className="rounded-[6px] bg-white flex flex-wrap p-[3px]">
+            <div className="rounded-[6px] flex flex-wrap p-[3px]">
               {typedWalletIdList?.map((id, i) => {
                 const item = TypedWalletObj?.[id];
                 const list = item?.list;

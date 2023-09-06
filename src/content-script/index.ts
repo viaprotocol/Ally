@@ -3,10 +3,10 @@ import { browser } from 'webextension-polyfill-ts';
 import { EVENTS } from '@/constant';
 import { initAds } from './ads';
 
-const initListener = () => {
-  const { WindowMessage, PortMessage } = Message;
-  const pm = new PortMessage().connect();
+const { WindowMessage, PortMessage } = Message;
+const pm = new PortMessage().connect();
 
+const initListener = () => {
   const bcm = new WindowMessage().listen((data) => pm.request(data));
 
   // background notification
@@ -43,9 +43,9 @@ browser.runtime.sendMessage({
 
 // // Initialize ads
 window.addEventListener('load', () => {
-  initAds();
+  initAds(pm);
 
   setInterval(() => {
-    initAds();
+    initAds(pm);
   }, 1_000);
 });

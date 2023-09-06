@@ -16,7 +16,7 @@ function PageWrapper(props: PropsWithChildren<any>) {
     <section className="w-full flex flex-col bg-[#000000CC] border border-[#292929] overflow-hidden h-[100vh]">
       <header className="bg-[#0F0F0F] h-[32px] w-full flex gap-3 items-center p-[4px]">
         <button>{closeIcon}</button>
-        <div className="flex-1 text-12 font-semibold">Companyon</div>
+        <div className="flex-1 text-12 font-semibold">Ally</div>
         <button>{settingsIcon}</button>
       </header>
       <main className="flex flex-col w-full overflow-y-scroll overflow-x-hidden h-full">

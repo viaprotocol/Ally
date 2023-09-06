@@ -61,6 +61,7 @@ import { QRCodeConnect } from './ImportHardware/QRCodeConnect';
 import ApprovalManagePage from './ApprovalManagePage';
 import RequestDeBankTestnetGasToken from './RequestDeBankTestnetGasToken';
 import { ImportCoboArgus } from './ImportCoboArgus/ImportCoboArgus';
+import { ViaQuests } from './ViaQuests';
 
 declare global {
   interface Window {
@@ -270,6 +271,10 @@ const Main = () => {
 
         <PrivateRoute exact path="/switch-address">
           <AddressManagement />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/via-quests">
+          <ViaQuests />
         </PrivateRoute>
 
         <PrivateRoute exact path="/dex-swap">

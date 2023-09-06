@@ -32,6 +32,7 @@ module.exports = {
       lg: { min: '600px' },
     },
     backgroundImage: {
+      refreshGradient: 'linear-gradient(180deg, #A8A29E 0%, #78716C 100%)',
       buttonGradient: 'linear-gradient(180deg, #363636 0%, #292929 100%)',
     },
     colors: {
@@ -40,9 +41,14 @@ module.exports = {
       },
       label: {
         bg: '#191919',
+        text: '#E7E6E4',
       },
       transparent: 'transparent',
       current: 'currentColor',
+      main: {
+        light: '#666666',
+        DEFAULT: '#1E1E1E',
+      },
       blue: {
         from: '#8A78FD',
         to: '#796BFD',
@@ -67,11 +73,14 @@ module.exports = {
         divider: '#E5E9EF',
         comment: '#B4BDCC',
         content: '#707280',
-        subTitle: '#4B4D59',
+        subTitle: '#7A7A7A',
         title: '#13141A',
         light: '#707880',
         common: '#666666',
       },
+    },
+    boxShadow: {
+      default: '0px 1px 0px 0px rgba(0, 0, 0, 0.48)',
     },
     fontSize: {
       12: [
