@@ -1,7 +1,7 @@
 import { RootModel } from '.';
 import { createModel } from '@rematch/core';
 
-interface ViaScoreState {
+export interface ViaScoreState {
   scoreTotal: number;
   ads: {
     adsWatchedCount: number;
@@ -11,13 +11,22 @@ interface ViaScoreState {
   };
 }
 
-interface ViaScoreLevel {
-  data: string;
+export interface ViaScoreLevel {
+  slug: string;
+  name: string;
+  description?: string;
+  points: number;
+  completed_at?: string;
+  available_at?: string;
 }
 
-interface ViaScoreTotal {
+export interface ViaScoreTotal {
   score: ViaScoreState;
-  levels: ViaScoreLevel[];
+  levels: {
+    available: ViaScoreLevel[];
+    completed: ViaScoreLevel[];
+    unavailable: ViaScoreLevel[];
+  } | null;
 }
 
 export const viaScore = createModel<RootModel>()({
@@ -32,7 +41,7 @@ export const viaScore = createModel<RootModel>()({
         adsWatchedSum24h: 0,
       },
     },
-    levels: [],
+    levels: null,
   } as ViaScoreTotal,
   reducers: {
     setViaScore(state, payload: ViaScoreState) {
@@ -65,12 +74,22 @@ export const viaScore = createModel<RootModel>()({
       this.getLevels();
     },
     async getViaScore(_?, store?) {
-      const score = await store.app.wallet.getViaScore();
-      dispatch.viaScore.setViaScore(score);
+      try {
+        const score = await store.app.wallet.getViaScore();
+        console.log('score', score);
+        dispatch.viaScore.setViaScore(score);
+      } catch (e) {
+        console.log('getViaScore error', e);
+      }
     },
     async getLevels(_?, store?) {
-      const levels = await store.app.wallet.getLevels();
-      dispatch.viaScore.setLevels(levels);
+      try {
+        const levels = await store.app.wallet.getViaLevels();
+        console.log('levels', levels);
+        dispatch.viaScore.setLevels(levels);
+      } catch (e) {
+        console.log('getLevels error', e);
+      }
     },
   }),
 });

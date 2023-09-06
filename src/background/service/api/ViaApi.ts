@@ -1,14 +1,5 @@
+import { ViaScorePayload, ViaScoreLevelPayload } from '.';
 import { ApiService } from './ApiService';
-
-interface ViaScorePayload {
-  scoreTotal: number;
-  ads: {
-    adsWatchedCount: number;
-    adsWatchedSum: number;
-    adsWatchedCount24h: number;
-    adsWatchedSum24h: number;
-  };
-}
 
 class RouterApi {
   private api: ApiService;
@@ -22,7 +13,7 @@ class RouterApi {
   }
 
   public getViaLevels(address: string) {
-    return this.api.get('via-score/levels/', {
+    return this.api.get<ViaScoreLevelPayload>('via-score/levels/', {
       data: {
         address,
       },

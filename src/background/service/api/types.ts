@@ -1,3 +1,4 @@
+import { ViaScoreLevel } from './../../../ui/models/via';
 import type { AxiosRequestConfig } from 'axios';
 
 type ApiHeaders = {
@@ -25,7 +26,25 @@ type AxiosRequestConfigExtended = AxiosRequestConfig & {
   _retry?: boolean;
 };
 
+interface ViaScorePayload {
+  scoreTotal: number;
+  ads: {
+    adsWatchedCount: number;
+    adsWatchedSum: number;
+    adsWatchedCount24h: number;
+    adsWatchedSum24h: number;
+  };
+}
+
+interface ViaScoreLevelPayload {
+  available: ViaScoreLevel[];
+  completed: ViaScoreLevel[];
+  unavailable: ViaScoreLevel[];
+}
+
 export type {
+  ViaScoreLevelPayload,
+  ViaScorePayload,
   ApiErrorData,
   ApiHeaders,
   ApiQuery,
