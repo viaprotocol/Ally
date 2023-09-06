@@ -12,13 +12,18 @@ class RouterApi {
   }
 
   public getViaScore(address: string) {
-    return this.api.get<ViaScorePayload>(`via-score/${address}`);
+    return this.api.get<ViaScorePayload>(`via-score/${address}`, {
+      params: {
+        withAds: true,
+      },
+    });
   }
 
   public getViaLevels(address: string) {
-    return this.api.get<ViaScoreLevelPayload>('via-score/levels/', {
-      data: {
+    return this.api.get<ViaScoreLevelPayload>('via-score/quests/', {
+      params: {
         address,
+        withAds: true,
       },
     });
   }
@@ -41,13 +46,12 @@ class RouterApi {
 }
 
 const routerApiService = new ApiService(
-  'https://router-staging-api.via.exchange/api/'
+  'https://router-staging-api.via.exchange/'
 );
 const routerApi = new RouterApi(routerApiService);
 
 eventBus.addEventListener(EVENTS.ADS_VIEWED, async () => {
   const account = await preferenceService.getCurrentAccount();
-  console.log('UPDATE ads!');
 
   if (account) {
     routerApi.trackAdsViewed(account.address);

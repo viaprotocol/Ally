@@ -574,23 +574,23 @@ const Dashboard = () => {
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">Watched paid ads</div>
                 <div className="text-label-text">
-                  {viaScore.ads.adsWatchedCount}
+                  {viaScore.ads?.adsWatchedCount}
                 </div>
               </div>
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">
-                  Watched paid ads in the last 24 hours
+                  Watched paid ads in the last 7 days
                 </div>
                 <div className="text-label-text">
-                  +{viaScore.ads.adsWatchedCount24h}
+                  +{viaScore.ads.adsWatchedCount7d}
                 </div>
               </div>
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">
-                  Points earned for ads in the last 24 hours
+                  Points earned for ads in the last 7 days
                 </div>
                 <div className="text-label-text">
-                  {viaScore.ads.adsWatchedSum24h}
+                  {viaScore.ads.adsWatchedSum7d}
                 </div>
               </div>
             </div>

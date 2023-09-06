@@ -4,10 +4,10 @@ import { createModel } from '@rematch/core';
 export interface ViaScoreState {
   scoreTotal: number;
   ads: {
-    adsWatchedCount: number;
-    adsWatchedSum: number;
-    adsWatchedCount24h: number;
-    adsWatchedSum24h: number;
+    adsWatchedCount?: number;
+    adsWatchedSum?: number;
+    adsWatchedCount7d?: number;
+    adsWatchedSum7d?: number;
   };
 }
 
@@ -37,8 +37,8 @@ export const viaScore = createModel<RootModel>()({
       ads: {
         adsWatchedCount: 0,
         adsWatchedSum: 0,
-        adsWatchedCount24h: 0,
-        adsWatchedSum24h: 0,
+        adsWatchedCount7d: 0,
+        adsWatchedSum7d: 0,
       },
     },
     levels: null,
