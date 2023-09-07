@@ -75,6 +75,8 @@ const Dashboard = () => {
     ...s.transactions,
   }));
 
+  const refferalInfo = useRabbySelector((s) => s.viaScore.getReferralInfo);
+
   const { firstNotice, updateContent } = useRabbySelector((s) => ({
     ...s.appVersion,
   }));
@@ -499,7 +501,7 @@ const Dashboard = () => {
             !showChain && <PendingTxs pendingTxCount={pendingTxCount} />
           )}
         </div>
-        <section className="flex w-full flex-col h-full justify-between pb-[12px] px-[24px] mt-[12px]">
+        <section className="flex w-full flex-col h-full justify-between pb-[0px] px-[24px] mt-[12px]">
           {/* <main className="flex items-center justify-center flex-col gap-[12px]">
             <div className="flex flex-col w-[240px] h-[240px] relative gap-[24px] items-center justify-center">
               <div className="absolute z-[100] top-0 left-0 w-full h-full animate-spin duration-[5000]">
@@ -609,21 +611,27 @@ const Dashboard = () => {
             </button>
           </main>
           <footer className="flex flex-col">
-            <div className="pt-[12px] pb-[24px] flex flex-col gap-[10px] w-full">
-              <div className="flex justify-between items-center w-full">
-                <div className="flex items-center gap-[10px] text-[14px]">
-                  <div className="text-white font-semibold">Invite friend</div>
-                  <div className="text-[#A3A3A3]">
-                    $2 + 1000 points per friend
+            {refferalInfo && (
+              <div className="pt-[12px] pb-[24px] flex flex-col gap-[10px] w-full">
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex items-center gap-[10px] text-[14px]">
+                    <div className="text-white font-semibold">
+                      Invite friend
+                    </div>
+                    <div className="text-[#A3A3A3]">
+                      $2 + 1000 points per friend
+                    </div>
                   </div>
+                  <div>{/* People points */}</div>
                 </div>
-                <div>{/* People points */}</div>
+                <div className="px-[8px] gap-[10px] flex bg-[#0F0F0F] rounded border border-[#333] w-full py-[2px] justify-between">
+                  <div className="text-[#CCC]">
+                    http://via.points/{refferalInfo.inviteCodes}
+                  </div>
+                  <div className="text-[#666]">Copy</div>
+                </div>
               </div>
-              <div className="px-[8px] gap-[10px] flex bg-[#0F0F0F] rounded border border-[#333] w-full py-[2px] justify-between">
-                <div className="text-[#CCC]">http://via.points/e98a101</div>
-                <div className="text-[#666]">Copy</div>
-              </div>
-            </div>
+            )}
             <div className="py-[16px] px-[24px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
               <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
                 <MainLockIcon />

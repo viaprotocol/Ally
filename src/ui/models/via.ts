@@ -89,6 +89,7 @@ export const viaScore = createModel<RootModel>()({
     async init() {
       this.getViaScore();
       this.getLevels();
+      this.getInviteCode();
     },
     async getViaScore(_?, store?) {
       try {
