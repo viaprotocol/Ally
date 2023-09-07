@@ -10,7 +10,10 @@ const initListener = () => {
   const bcm = new WindowMessage().listen((data) => pm.request(data));
 
   // background notification
-  pm.on('message', (data) => bcm.send('message', data));
+  pm.on('message', (data) => {
+    console.log('data', data);
+    bcm.send('message', data);
+  });
 
   pm.request({
     type: EVENTS.UIToBackground,

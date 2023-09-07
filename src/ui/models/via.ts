@@ -13,7 +13,7 @@ export interface ViaScoreState {
 
 export interface ViaScoreReferralInfo {
   userAddress: string;
-  inviteCodes: string;
+  inviteCode: string;
 }
 
 export interface ViaScoreLevel {

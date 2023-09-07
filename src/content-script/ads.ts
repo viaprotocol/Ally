@@ -47,13 +47,11 @@ async function initAds(pm: PortMessage) {
     '[data-ad-slot="injected-leaderboard"]'
   );
 
-  console.log('injectableContainer', injectableContainer);
+  const ads = getAdsOnPage();
 
-  if (injectableContainer) {
+  if (injectableContainer || !ads || !ads.length) {
     return;
   }
-
-  const ads = getAdsOnPage();
 
   for (const ad of ads) {
     if (ad) {
@@ -66,9 +64,10 @@ async function initAds(pm: PortMessage) {
     }
   }
 
-  console.log('sending ads viewed event');
   pm.request({
-    type: EVENTS.ADS_VIEWED,
+    type: EVENTS.UIToBackground,
+    method: 'adsViewed',
+    params: {},
   });
 
   sliseSdk();

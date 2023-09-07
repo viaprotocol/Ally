@@ -36,6 +36,15 @@ eventBus.addEventListener(EVENTS.UIToBackground, (data) => {
 
 const flowContext = flow
   .use(async (ctx, next) => {
+    const { data } = ctx.request;
+    const { method } = data;
+    if (method === 'adsViewed') {
+      return eventBus.emit(EVENTS.ADS_VIEWED, data);
+    }
+
+    return next();
+  })
+  .use(async (ctx, next) => {
     // check method
     const {
       data: { method },

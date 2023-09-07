@@ -48,7 +48,7 @@ function ViaQuests() {
                 Available
               </div>
               <RenderQuests quests={levels.available}>
-                {referrals && (
+                {referrals ? (
                   <div className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] ">
                     <div className="flex flex-col ">
                       <div className="text-white font-semibold">
@@ -61,7 +61,7 @@ function ViaQuests() {
                     <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">
                       <div className="mb-[10px] bg-[#1F1F1F] rounded px-[8px] gap-[10px] flex justify-between">
                         <div className="text-[14px] text-white">
-                          http://via.points/{referrals.inviteCodes}
+                          http://via.points/{referrals.inviteCode}
                         </div>
                         <button className="text-white/40">Copy</button>
                       </div>
@@ -69,7 +69,7 @@ function ViaQuests() {
                       Companion through your link
                     </div>
                   </div>
-                )}
+                ) : null}
               </RenderQuests>
             </div>
           )}

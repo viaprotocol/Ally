@@ -75,7 +75,7 @@ const Dashboard = () => {
     ...s.transactions,
   }));
 
-  const refferalInfo = useRabbySelector((s) => s.viaScore.getReferralInfo);
+  const refferalInfo = useRabbyGetter((s) => s.viaScore.getReferralInfo);
 
   const { firstNotice, updateContent } = useRabbySelector((s) => ({
     ...s.appVersion,
@@ -626,7 +626,7 @@ const Dashboard = () => {
                 </div>
                 <div className="px-[8px] gap-[10px] flex bg-[#0F0F0F] rounded border border-[#333] w-full py-[2px] justify-between">
                   <div className="text-[#CCC]">
-                    http://via.points/{refferalInfo.inviteCodes}
+                    http://via.points/{refferalInfo.inviteCode}
                   </div>
                   <div className="text-[#666]">Copy</div>
                 </div>

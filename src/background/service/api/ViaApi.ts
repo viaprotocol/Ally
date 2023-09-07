@@ -1,5 +1,6 @@
 import { EVENTS } from '@/constant';
 import eventBus from '@/eventBus';
+import { ethErrors } from 'eth-rpc-errors';
 import {
   ViaScorePayload,
   ViaScoreLevelPayload,
