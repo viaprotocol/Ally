@@ -36,7 +36,7 @@ import {
   useRabbyGetter,
   useRabbySelector,
 } from 'ui/store';
-import { isSameAddress, useWallet } from 'ui/utils';
+import { formatAmount, isSameAddress, useWallet } from 'ui/utils';
 import {
   BalanceInfo,
   BalanceView,
@@ -548,26 +548,19 @@ const Dashboard = () => {
           </footer> */}
           <main>
             <div className="bg-[#0F0F0F] flex gap-[10px] rounded-md p-[12px] justify-between items-center">
-              <div className="flex gap-[24px]">
-                <div className="flex flex-col">
-                  <div className="text-12">Synced</div>
+              <div className="flex gap-[24px] w-full items-center justify-center">
+                <div className="flex flex-col text-center">
+                  <div className="text-12">Points balance</div>
                   <div className="text-[24px] text-white">
-                    {viaScore.scoreTotal}
+                    {formatAmount(viaScore.scoreTotal)}
                   </div>
                 </div>
-
-                <div className="w-[1px] h-[36px] bg-[#3D3D3D]"></div>
-
-                <div className="flex flex-col">
-                  <div className="text-12">Pending</div>
-                  <div className="text-[24px] text-white">3,820</div>
-                </div>
               </div>
-              <div>
+              {/* <div>
                 <button className="w-[32px] h-[32px] bg-refreshGradient flex items-center justify-center rounded-full hover:scale-150 active:scale-150 transition-all">
                   <RefreshIcon />
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="mt-[22px] flex flex-col">
@@ -590,7 +583,7 @@ const Dashboard = () => {
                   Points earned for ads in the last 7 days
                 </div>
                 <div className="text-label-text">
-                  {viaScore.ads.adsWatchedSum7d}
+                  {viaScore.ads.adsWatchedPoints7d}
                 </div>
               </div>
             </div>
@@ -615,15 +608,34 @@ const Dashboard = () => {
               </div>
             </button>
           </main>
-          <footer className="py-[24px] flex justify-between items-center gap-[12px]">
-            <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
-              <MainLockIcon />
+          <footer className="flex flex-col">
+            <div className="pt-[12px] pb-[24px] flex flex-col gap-[10px] w-full">
+              <div className="flex justify-between items-center w-full">
+                <div className="flex items-center gap-[10px] text-[14px]">
+                  <div className="text-white font-semibold">Invite friend</div>
+                  <div className="text-[#A3A3A3]">
+                    $2 + 1000 points per friend
+                  </div>
+                </div>
+                <div>{/* People points */}</div>
+              </div>
+              <div className="px-[8px] gap-[10px] flex bg-[#0F0F0F] rounded border border-[#333] w-full py-[2px] justify-between">
+                <div className="text-[#CCC]">http://via.points/e98a101</div>
+                <div className="text-[#666]">Copy</div>
+              </div>
             </div>
-            <div className="text-gray-subTitle">
-              <span className="text-[#CCC] font-semibold">Open swap Ally</span>{' '}
-              (soon)
+            <div className="py-[16px] px-[24px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
+              <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
+                <MainLockIcon />
+              </div>
+              <div className="text-gray-subTitle">
+                <span className="text-[#CCC] font-semibold">
+                  Open swap Ally
+                </span>{' '}
+                (soon)
+              </div>
+              <div className="text-[#3D3D3D]">⌥ S</div>
             </div>
-            <div className="text-[#3D3D3D]">⌥ S</div>
           </footer>
         </section>
         {/* <ChainAndSiteSelector

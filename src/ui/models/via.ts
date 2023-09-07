@@ -7,7 +7,7 @@ export interface ViaScoreState {
     adsWatchedCount?: number;
     adsWatchedSum?: number;
     adsWatchedCount7d?: number;
-    adsWatchedSum7d?: number;
+    adsWatchedPoints7d?: number;
   };
 }
 
@@ -44,7 +44,7 @@ export const viaScore = createModel<RootModel>()({
         adsWatchedCount: 0,
         adsWatchedSum: 0,
         adsWatchedCount7d: 0,
-        adsWatchedSum7d: 0,
+        adsWatchedPoints7d: 0,
       },
     },
     levels: null,
