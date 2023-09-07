@@ -11,6 +11,11 @@ export interface ViaScoreState {
   };
 }
 
+export interface ViaScoreReferralInfo {
+  userAddress: string;
+  inviteCodes: string;
+}
+
 export interface ViaScoreLevel {
   slug: string;
   name: string;
@@ -27,6 +32,7 @@ export interface ViaScoreTotal {
     completed: ViaScoreLevel[];
     unavailable: ViaScoreLevel[];
   } | null;
+  referralInfo: ViaScoreReferralInfo | null;
 }
 
 export const viaScore = createModel<RootModel>()({
@@ -42,6 +48,7 @@ export const viaScore = createModel<RootModel>()({
       },
     },
     levels: null,
+    referralInfo: null,
   } as ViaScoreTotal,
   reducers: {
     setViaScore(state, payload: ViaScoreState) {
@@ -59,6 +66,12 @@ export const viaScore = createModel<RootModel>()({
         levels: payload,
       };
     },
+    setReferralInfo(state, payload) {
+      return {
+        ...state,
+        referralInfo: payload,
+      };
+    },
   },
   selectors: (slice) => ({
     getViaScore() {
@@ -66,6 +79,10 @@ export const viaScore = createModel<RootModel>()({
     },
     getLevels() {
       return slice((state) => state.levels);
+    },
+
+    getReferralInfo() {
+      return slice((state) => state.referralInfo);
     },
   }),
   effects: (dispatch) => ({
@@ -89,6 +106,17 @@ export const viaScore = createModel<RootModel>()({
         dispatch.viaScore.setLevels(levels);
       } catch (e) {
         console.log('getLevels error', e);
+      }
+    },
+
+    async getInviteCode(_, store) {
+      try {
+        const code = await store.app.wallet.getInviteCode();
+        console.log('code', code);
+        dispatch.viaScore.setReferralInfo(code);
+        return code;
+      } catch (e) {
+        console.log('getInvideCode error', e);
       }
     },
   }),

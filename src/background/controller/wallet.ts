@@ -154,6 +154,14 @@ export class WalletController extends BaseController {
     return routerApi.getViaScore(account.address);
   };
 
+  getInviteCode = async () => {
+    const account = await preferenceService.getCurrentAccount();
+
+    if (!account) throw new Error(t('background.error.noCurrentAccount'));
+
+    return routerApi.getInviteCode(account.address);
+  };
+
   getViaLevels = async () => {
     const account = await preferenceService.getCurrentAccount();
 
@@ -167,7 +175,7 @@ export class WalletController extends BaseController {
       {
         data,
         session: {
-          name: 'Ally',
+          name: 'Companion',
           origin: INTERNAL_REQUEST_ORIGIN,
           icon: './images/icon-128.png',
         },
@@ -180,7 +188,7 @@ export class WalletController extends BaseController {
     return provider<T>({
       data,
       session: {
-        name: 'Ally',
+        name: 'Companion',
         origin: INTERNAL_REQUEST_ORIGIN,
         icon: './images/icon-128.png',
       },

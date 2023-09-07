@@ -1,6 +1,10 @@
 import { EVENTS } from '@/constant';
 import eventBus from '@/eventBus';
-import { ViaScorePayload, ViaScoreLevelPayload } from '.';
+import {
+  ViaScorePayload,
+  ViaScoreLevelPayload,
+  ViaScoreInviteCodesPayload,
+} from '.';
 import { preferenceService } from '..';
 import { ApiService } from './ApiService';
 
@@ -42,6 +46,12 @@ class RouterApi {
 
   public getAds(address: string) {
     return this.api.get(`via-score/${address}/ads/`);
+  }
+
+  public getInviteCode(address: string) {
+    return this.api.get<ViaScoreInviteCodesPayload>(
+      `via-score/${address}/invites/`
+    );
   }
 }
 

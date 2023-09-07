@@ -33,7 +33,7 @@ function RenderQuests({
 
 function ViaQuests() {
   const levels = useRabbyGetter((s) => s.viaScore.getLevels);
-  console.log('levels', levels);
+  const referrals = useRabbyGetter((s) => s.viaScore.getReferralInfo);
   return (
     <div className="page-address-management px-0 overflow-hidden">
       <PageHeader className="pt-[24px] mx-[20px]">
@@ -48,26 +48,28 @@ function ViaQuests() {
                 Available
               </div>
               <RenderQuests quests={levels.available}>
-                <div className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] ">
-                  <div className="flex flex-col ">
-                    <div className="text-white font-semibold">
-                      Invite friends
-                    </div>
-                    <div className="text-[#7A7A7A]">
-                      +100 points for each new user
-                    </div>
-                  </div>
-                  <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">
-                    <div className="mb-[10px] bg-[#1F1F1F] rounded px-[8px] gap-[10px] flex justify-between">
-                      <div className="text-[14px] text-white">
-                        http://via.points/e98a101
+                {referrals && (
+                  <div className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] ">
+                    <div className="flex flex-col ">
+                      <div className="text-white font-semibold">
+                        Invite friends
                       </div>
-                      <button className="text-white/40">Copy</button>
+                      <div className="text-[#7A7A7A]">
+                        +100 points for each new user
+                      </div>
                     </div>
-                    Get points for each person who installs and activates
-                    Companion through your link
+                    <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">
+                      <div className="mb-[10px] bg-[#1F1F1F] rounded px-[8px] gap-[10px] flex justify-between">
+                        <div className="text-[14px] text-white">
+                          http://via.points/{referrals.inviteCodes}
+                        </div>
+                        <button className="text-white/40">Copy</button>
+                      </div>
+                      Get points for each person who installs and activates
+                      Companion through your link
+                    </div>
                   </div>
-                </div>
+                )}
               </RenderQuests>
             </div>
           )}

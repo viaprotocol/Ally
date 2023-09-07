@@ -42,7 +42,13 @@ interface ViaScoreLevelPayload {
   unavailable: ViaScoreLevel[];
 }
 
+interface ViaScoreInviteCodesPayload {
+  userAddress: string;
+  inviteCodes: string;
+}
+
 export type {
+  ViaScoreInviteCodesPayload,
   ViaScoreLevelPayload,
   ViaScorePayload,
   ApiErrorData,
