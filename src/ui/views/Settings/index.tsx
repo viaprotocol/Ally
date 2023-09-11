@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useWallet } from 'ui/utils';
-import { PageHeader, Field } from 'ui/component';
+import { PageHeader, Field, Checkbox } from 'ui/component';
 import IconAddressManagement from 'ui/assets/address-management.svg';
 import IconChainManagement from 'ui/assets/chain-management.svg';
 import IconConnectSitesManagement from 'ui/assets/connect-sites-management.svg';
@@ -16,6 +16,7 @@ const Settings = () => {
   const wallet = useWallet();
   const history = useHistory();
   const { t } = useTranslation();
+  const [isAdsVisible, setAdsVisible] = useState(true);
   const renderData = [
     {
       leftIcon: IconAddressManagement,
@@ -68,6 +69,21 @@ const Settings = () => {
           {data.content}
         </Field>
       ))}
+      <Field
+        rightIcon={
+          <div className="flex justify-between items-center gap-[12px] ">
+            <div className="text-[#666]">+10 Points/ad</div>
+            <Checkbox
+              checked={isAdsVisible}
+              onChange={() => {
+                setAdsVisible(!isAdsVisible);
+              }}
+            />
+          </div>
+        }
+      >
+        Show ads
+      </Field>
       <div className="text-12 text-gray-comment text-center absolute bottom-[50px] w-full left-0">
         {process.env.version}
       </div>

@@ -27,6 +27,7 @@ import { ReactComponent as RefreshIcon } from 'ui/assets/refresh-ccw.svg';
 import { ReactComponent as MainLockIcon } from 'ui/assets/main-lock.svg';
 import { ReactComponent as MoneyCashIcon } from 'ui/assets/money-cash.svg';
 import { ReactComponent as ArrowRightIcon } from 'ui/assets/chevron-down.svg';
+import { ReactComponent as IconSettings } from 'ui/assets/icon-settings-c.svg';
 import { ReactComponent as RcIconCopy } from 'ui/assets/icon-copy.svg';
 
 import IconSuccess from 'ui/assets/success.svg';
@@ -358,6 +359,10 @@ const Dashboard = () => {
     history.push('/switch-address');
   };
 
+  const onClickSettings = () => {
+    history.push('/settings');
+  };
+
   const onClickQuestsList = () => {
     history.push('/via-quests');
   };
@@ -380,11 +385,11 @@ const Dashboard = () => {
         >
           {currentAccount && (
             <>
-              <div
-                className="flex p-[12px] gap-[10px] m-auto w-full items-center mb-[12px]"
-                onClick={switchAddress}
-              >
-                <div className="flex items-center justify-center flex-col">
+              <div className="flex p-[12px] gap-[10px] m-auto w-full items-center mb-[12px]">
+                <div
+                  className="flex items-center justify-center flex-col"
+                  onClick={switchAddress}
+                >
                   <img
                     className={clsx(
                       'icon w-[32px] h-[32px]',
@@ -402,7 +407,7 @@ const Dashboard = () => {
                     address={currentAccount.address}
                   />
                 </div>
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1 flex flex-col" onClick={switchAddress}>
                   <div className="flex gap-[8px]">
                     <div
                       className="text-white font-semibold"
@@ -425,8 +430,11 @@ const Dashboard = () => {
                     />
                   </div>
                 </div>
-                <div className="flex items-center justify-center text-12 text-[#3D3D3D]">
-                  W
+                <div
+                  className="flex items-center justify-center text-12 text-[#3D3D3D] hover:text-white cursor-pointer"
+                  onClick={onClickSettings}
+                >
+                  <IconSettings />
                 </div>
               </div>
             </>
