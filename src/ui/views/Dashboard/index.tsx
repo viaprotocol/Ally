@@ -5,6 +5,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { matomoRequestEvent } from '@/utils/matomo-request';
+import { copyTextToClipboard } from '@/ui/utils/clipboard';
 import {
   KEYRING_CLASS,
   KEYRING_ICONS,
@@ -15,7 +16,7 @@ import {
   EVENTS,
 } from 'consts';
 import QRCode from 'qrcode.react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useInterval } from 'react-use';
 import IconAddressCopy from 'ui/assets/address-copy.png';
@@ -167,6 +168,28 @@ const Dashboard = () => {
       },
     }
   );
+
+  const refferalLink = useMemo(() => {
+    if (!refferalInfo) {
+      return null;
+    }
+
+    return `http://via.points/${refferalInfo.inviteCode}`;
+  }, [refferalInfo]);
+
+  const onCopyRefferalLink = React.useCallback(() => {
+    if (!refferalLink) {
+      return;
+    }
+
+    copyTextToClipboard(refferalLink).then(() => {
+      message.success({
+        icon: <img src={IconSuccess} className="icon icon-success" />,
+        content: t('global.copied'),
+        duration: 0.5,
+      });
+    });
+  }, [refferalLink]);
 
   useEffect(() => {
     if (currentAccount) {
@@ -611,8 +634,11 @@ const Dashboard = () => {
             </button>
           </main>
           <footer className="flex flex-col">
-            {refferalInfo && (
-              <div className="pt-[12px] pb-[24px] flex flex-col gap-[10px] w-full">
+            {refferalLink && (
+              <div
+                onClick={onCopyRefferalLink}
+                className="cursor-pointer pt-[12px] pb-[24px] flex flex-col gap-[10px] w-full"
+              >
                 <div className="flex justify-between items-center w-full">
                   <div className="flex items-center gap-[10px] text-[14px]">
                     <div className="text-white font-semibold">
@@ -625,9 +651,7 @@ const Dashboard = () => {
                   <div>{/* People points */}</div>
                 </div>
                 <div className="px-[8px] gap-[10px] flex bg-[#0F0F0F] rounded border border-[#333] w-full py-[2px] justify-between">
-                  <div className="text-[#CCC]">
-                    http://via.points/{refferalInfo.inviteCode}
-                  </div>
+                  <div className="text-[#CCC]">{refferalLink}</div>
                   <div className="text-[#666]">Copy</div>
                 </div>
               </div>
