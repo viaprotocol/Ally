@@ -379,10 +379,7 @@ const Dashboard = () => {
         })}
       >
         <div
-          className={clsx(
-            'main px-[12px] flex flex-col',
-            showChain && 'show-chain-bg'
-          )}
+          className={clsx('main flex flex-col', showChain && 'show-chain-bg')}
         >
           {currentAccount && (
             <>
@@ -533,7 +530,7 @@ const Dashboard = () => {
             !showChain && <PendingTxs pendingTxCount={pendingTxCount} />
           )}
         </div>
-        <section className="flex w-full flex-col h-full justify-between pb-[0px] px-[24px] mt-[12px]">
+        <section className="flex w-full flex-col h-full justify-between pb-[0px] px-[12px]">
           {/* <main className="flex items-center justify-center flex-col gap-[12px]">
             <div className="flex flex-col w-[240px] h-[240px] relative gap-[24px] items-center justify-center">
               <div className="absolute z-[100] top-0 left-0 w-full h-full animate-spin duration-[5000]">
@@ -597,7 +594,7 @@ const Dashboard = () => {
               </div> */}
             </div>
 
-            <div className="mt-[22px] flex flex-col">
+            <div className="mx-[10px] flex flex-col px-[12px]">
               <div className="flex justify-between items-center text-[14px] gap-[12px] py-[10px]">
                 <div className="text-gray-subTitle">Watched paid ads</div>
                 <div className="text-label-text">
@@ -665,7 +662,7 @@ const Dashboard = () => {
                 </div>
               </div>
             )}
-            <div className="py-[16px] px-[24px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
+            <div className="py-[16px] px-[12px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
               <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
                 <MainLockIcon />
               </div>

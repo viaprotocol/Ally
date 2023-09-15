@@ -3,6 +3,7 @@ import { PageHeader } from '@/ui/component';
 import { ViaScoreLevel } from '@/ui/models/via';
 import { useRabbyGetter } from '@/ui/store';
 import React, { PropsWithChildren } from 'react';
+import { useViaRefferalLink } from '@/ui/utils/via';
 
 import './style.less';
 
@@ -34,6 +35,7 @@ function RenderQuests({
 }
 
 function ViaQuests() {
+  const { refferalLink, onCopyRefferalLink } = useViaRefferalLink();
   const levels = useRabbyGetter((s) => s.viaScore.getLevels);
   const referrals = useRabbyGetter((s) => s.viaScore.getReferralInfo);
   return (
@@ -61,9 +63,12 @@ function ViaQuests() {
                       </div>
                     </div>
                     <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">
-                      <div className="mb-[10px] bg-[#1F1F1F] rounded px-[8px] gap-[10px] flex justify-between">
+                      <div
+                        onClick={onCopyRefferalLink}
+                        className="mb-[10px] bg-[#1F1F1F] rounded px-[8px] gap-[10px] flex justify-between"
+                      >
                         <div className="text-[14px] text-white">
-                          {VIA_SCORE_URL}/{referrals.inviteCode}
+                          {refferalLink}
                         </div>
                         <button className="text-white/40">Copy</button>
                       </div>
