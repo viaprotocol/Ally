@@ -4,11 +4,12 @@ import { ViaScoreLevel } from '@/ui/models/via';
 import { useRabbyGetter } from '@/ui/store';
 import React, { PropsWithChildren } from 'react';
 
+import './style.less';
+
 function RenderQuests({
   quests,
   children,
 }: PropsWithChildren<{ quests: ViaScoreLevel[] }>) {
-  console.log('quests', quests);
   return (
     <div className="flex flex-col gap-[12px]">
       {children}
@@ -36,7 +37,7 @@ function ViaQuests() {
   const levels = useRabbyGetter((s) => s.viaScore.getLevels);
   const referrals = useRabbyGetter((s) => s.viaScore.getReferralInfo);
   return (
-    <div className="page-address-management px-0 overflow-hidden">
+    <div className="page-via-quests px-0 overflow-hidden">
       <PageHeader className="pt-[24px] mx-[20px]">
         <div className="text-[20px] font-medium">How to earn more points</div>
       </PageHeader>

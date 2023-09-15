@@ -14,7 +14,7 @@ import { KEYRING_CLASS } from '@/constant';
 import { useTranslation } from 'react-i18next';
 
 const Toptip = styled.div`
-  background: rgba(134, 151, 255, 0.1);
+  background: #191919;
   border-radius: 4px;
   padding: 9px 17px;
 
@@ -171,7 +171,7 @@ const ImportMnemonics = () => {
             <Toptip className="mb-[28px]">
               {t('page.newAddress.seedPhrase.importTips')}
             </Toptip>
-            <FormItemWrapper className="relative bg-[#292929]">
+            <FormItemWrapper className="relative">
               <Form.Item
                 name="mnemonics"
                 className={clsx(
