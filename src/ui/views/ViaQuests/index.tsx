@@ -1,3 +1,4 @@
+import { VIA_SCORE_URL } from '@/constant/via';
 import { PageHeader } from '@/ui/component';
 import { ViaScoreLevel } from '@/ui/models/via';
 import { useRabbyGetter } from '@/ui/store';
@@ -61,7 +62,7 @@ function ViaQuests() {
                     <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">
                       <div className="mb-[10px] bg-[#1F1F1F] rounded px-[8px] gap-[10px] flex justify-between">
                         <div className="text-[14px] text-white">
-                          http://via.points/{referrals.inviteCode}
+                          {VIA_SCORE_URL}/{referrals.inviteCode}
                         </div>
                         <button className="text-white/40">Copy</button>
                       </div>
