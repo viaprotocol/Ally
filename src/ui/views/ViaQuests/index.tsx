@@ -1,4 +1,3 @@
-import { VIA_SCORE_URL } from '@/constant/via';
 import { PageHeader } from '@/ui/component';
 import { ViaScoreLevel } from '@/ui/models/via';
 import { useRabbyGetter } from '@/ui/store';
@@ -7,10 +6,34 @@ import { useViaRefferalLink } from '@/ui/utils/via';
 
 import './style.less';
 
+import QuestIcon1 from 'ui/assets/quest/quest1.svg';
+import QuestIcon2 from 'ui/assets/quest/quest2.svg';
+import QuestIcon3 from 'ui/assets/quest/quest3.svg';
+import QuestIcon4 from 'ui/assets/quest/quest4.svg';
+import QuestIcon5 from 'ui/assets/quest/quest5.svg';
+import QuestIcon6 from 'ui/assets/quest/quest6.svg';
+import QuestIcon7 from 'ui/assets/quest/quest7.svg';
+import QuestIcon8 from 'ui/assets/quest/quest8.svg';
+import QuestIcon9 from 'ui/assets/quest/quest9.svg';
+
+const QUESTS_LIST = [
+  QuestIcon1,
+  QuestIcon2,
+  QuestIcon3,
+  QuestIcon4,
+  QuestIcon5,
+  QuestIcon6,
+  QuestIcon7,
+  QuestIcon8,
+  QuestIcon9,
+];
+
 function RenderQuests({
   quests,
   children,
 }: PropsWithChildren<{ quests: ViaScoreLevel[] }>) {
+  const randomQuestIndex = Math.floor(Math.random() * QUESTS_LIST.length);
+
   return (
     <div className="flex flex-col gap-[12px]">
       {children}
@@ -19,9 +42,17 @@ function RenderQuests({
           key={level.slug}
           className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] "
         >
-          <div className="flex flex-col ">
-            <div className="text-white font-semibold">{level.name}</div>
-            <div className="text-[#7A7A7A]">+{level.points} points</div>
+          <div className="flex justify-between gap-[12px]">
+            <div className="flex flex-col ">
+              <div className="text-white font-semibold">{level.name}</div>
+              <div className="text-[#7A7A7A]">+{level.points} points</div>
+            </div>
+            <div>
+              <img
+                src={QUESTS_LIST[randomQuestIndex]}
+                className="w-[32px] h-[32px]"
+              />
+            </div>
           </div>
           {level.description && (
             <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px] ">

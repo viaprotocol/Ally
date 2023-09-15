@@ -63,6 +63,7 @@ import { useGnosisPendingTxs } from '@/ui/hooks/useGnosisPendingTxs';
 import { CommonSignal } from '@/ui/component/ConnectStatus/CommonSignal';
 import PageWrapper from '@/ui/component/PageWrapper';
 import { VIA_SCORE_URL } from '@/constant/via';
+import { useViaRefferalLink } from '@/ui/utils/via';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -171,27 +172,7 @@ const Dashboard = () => {
     }
   );
 
-  const refferalLink = useMemo(() => {
-    if (!refferalInfo) {
-      return null;
-    }
-
-    return `${VIA_SCORE_URL}/${refferalInfo.inviteCode}`;
-  }, [refferalInfo]);
-
-  const onCopyRefferalLink = React.useCallback(() => {
-    if (!refferalLink) {
-      return;
-    }
-
-    copyTextToClipboard(refferalLink).then(() => {
-      message.success({
-        icon: <img src={IconSuccess} className="icon icon-success" />,
-        content: t('global.copied'),
-        duration: 0.5,
-      });
-    });
-  }, [refferalLink]);
+  const { refferalLink, onCopyRefferalLink } = useViaRefferalLink();
 
   useEffect(() => {
     if (currentAccount) {
@@ -662,7 +643,7 @@ const Dashboard = () => {
                 </div>
               </div>
             )}
-            <div className="py-[16px] px-[12px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
+            <div className="py-[16px] px-[24px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
               <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
                 <MainLockIcon />
               </div>

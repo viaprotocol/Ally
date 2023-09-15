@@ -72,7 +72,7 @@ const Settings = () => {
       <Field
         rightIcon={
           <div className="flex justify-between items-center gap-[12px] ">
-            <div className="text-[#666]">+10 Points/ad</div>
+            <div className="text-[#666]">+100 Points/ad</div>
             <Checkbox
               checked={isAdsVisible}
               onChange={() => {

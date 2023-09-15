@@ -5,6 +5,7 @@ import { copyTextToClipboard } from './clipboard';
 
 import IconSuccess from 'ui/assets/success.svg';
 import { message } from 'antd';
+import { t } from '@/utils';
 
 function useViaRefferalLink() {
   const refferalInfo = useRabbyGetter((s) => s.viaScore.getReferralInfo);
