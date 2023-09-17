@@ -41,7 +41,7 @@ export const SeedPhraseBar: React.FC<Props> = ({ address }) => {
     <div
       onClick={goToHDManager}
       className={clsx(
-        'p-[6px] bg-gray-bg rounded-[4px]',
+        'p-[6px] bg-[#0F0F0F] rounded-[4px]',
         'text-gray-subTitle text-[12px] font-normal',
         'flex items-center justify-between',
         'connect-status',
