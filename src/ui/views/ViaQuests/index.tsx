@@ -70,13 +70,13 @@ function ViaQuests() {
   const levels = useRabbyGetter((s) => s.viaScore.getLevels);
   const referrals = useRabbyGetter((s) => s.viaScore.getReferralInfo);
   return (
-    <div className="page-via-quests px-0 overflow-hidden">
+    <div className="page-via-quests px-0 flex flex-col h-full">
       <PageHeader className="pt-[24px] mx-[20px]">
         <div className="text-[20px] font-medium">How to earn more points</div>
       </PageHeader>
 
       {levels ? (
-        <div className="flex flex-col px-[12px] gap-[12px] overflow-scroll h-full">
+        <div className="flex flex-col px-[12px] pb-[12px] gap-[12px] overflow-scroll h-full">
           {!!levels.available?.length && (
             <div>
               <div className="font-semibold text-white pb-[12px] pl-[12px]">

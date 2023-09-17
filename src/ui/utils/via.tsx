@@ -23,6 +23,8 @@ function useViaRefferalLink() {
       return;
     }
 
+    console.log('refferalLink', refferalLink);
+
     copyTextToClipboard(refferalLink).then(() => {
       message.success({
         icon: <img src={IconSuccess} className="icon icon-success" />,

@@ -94,7 +94,6 @@ export const viaScore = createModel<RootModel>()({
     async getViaScore(_?, store?) {
       try {
         const score = await store.app.wallet.getViaScore();
-        console.log('score', score);
         dispatch.viaScore.setViaScore(score);
       } catch (e) {
         console.log('getViaScore error', e);
@@ -103,7 +102,6 @@ export const viaScore = createModel<RootModel>()({
     async getLevels(_?, store?) {
       try {
         const levels = await store.app.wallet.getViaLevels();
-        console.log('levels', levels);
         dispatch.viaScore.setLevels(levels);
       } catch (e) {
         console.log('getLevels error', e);
@@ -113,7 +111,6 @@ export const viaScore = createModel<RootModel>()({
     async getInviteCode(_, store) {
       try {
         const code = await store.app.wallet.getInviteCode();
-        console.log('code', code);
         dispatch.viaScore.setReferralInfo(code);
         return code;
       } catch (e) {

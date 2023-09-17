@@ -120,16 +120,17 @@ const CreatePassword = () => {
             setInValidForm(isInvalidForm);
           }}
         >
-          <header className="create-new-header create-password-header">
+          <header className="create-new-header pb-0 create-password-header">
             <img src={UnlockLogo} />
             <p className="text-24 mb-8 mt-0 text-white text-center font-bold">
               {t('page.createPassword.title')}
             </p>
             <p className="text-14 mb-0 text-white opacity-80 text-center">
-              It will be used to unlock your wallet and encrypt local data
+              It will be used to unlock your wallet <br /> and encrypt local
+              data
             </p>
           </header>
-          <div className="p-32 min-h-[232px] max-h-[232px] overflow-hidden">
+          <div className="p-32 pb-0 overflow-hidden">
             <Form.Item
               className="mb-0 overflow-hidden"
               name="password"

@@ -76,6 +76,33 @@ export const formatNumber = (
   return n.toFormat(decimal, format);
 };
 
+export const formatPoints = (
+  num: string | number,
+  decimal = 0,
+  opt = {} as BigNumber.Format
+) => {
+  const n = new BigNumber(num);
+  const format = {
+    prefix: '',
+    decimalSeparator: '.',
+    groupSeparator: ',',
+    groupSize: 3,
+    secondaryGroupSize: 0,
+    fractionGroupSeparator: ' ',
+    fractionGroupSize: 0,
+    suffix: '',
+    ...opt,
+  };
+  // hide the after-point part if number is more than 1000000
+  if (n.isGreaterThan(1000000)) {
+    if (n.gte(1e9)) {
+      return `${n.div(1e9).toFormat(decimal, format)}B`;
+    }
+    return n.decimalPlaces(0).toFormat(format);
+  }
+  return n.toFormat(decimal, format);
+};
+
 export const formatPrice = (price: string | number) => {
   if (price >= 1) {
     return formatNumber(price);

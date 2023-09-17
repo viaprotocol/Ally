@@ -38,7 +38,7 @@ import {
   useRabbyGetter,
   useRabbySelector,
 } from 'ui/store';
-import { formatAmount, isSameAddress, useWallet } from 'ui/utils';
+import { formatAmount, formatPoints, isSameAddress, useWallet } from 'ui/utils';
 import {
   BalanceInfo,
   BalanceView,
@@ -564,7 +564,7 @@ const Dashboard = () => {
                 <div className="flex flex-col text-center">
                   <div className="text-12">Points balance</div>
                   <div className="text-[24px] text-white">
-                    {formatAmount(viaScore.scoreTotal)}
+                    {formatPoints(viaScore.scoreTotal)}
                   </div>
                 </div>
               </div>
