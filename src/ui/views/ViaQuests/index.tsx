@@ -1,8 +1,10 @@
 import { PageHeader } from '@/ui/component';
 import { ViaScoreLevel } from '@/ui/models/via';
 import { useRabbyGetter } from '@/ui/store';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
 import { useViaRefferalLink } from '@/ui/utils/via';
+
+import IconSuccess from 'ui/assets/success.svg';
 
 import './style.less';
 
@@ -15,6 +17,10 @@ import QuestIcon6 from 'ui/assets/quest/quest6.svg';
 import QuestIcon7 from 'ui/assets/quest/quest7.svg';
 import QuestIcon8 from 'ui/assets/quest/quest8.svg';
 import QuestIcon9 from 'ui/assets/quest/quest9.svg';
+import { VIA_SCORE_URL } from '@/constant/via';
+import { copyTextToClipboard } from '@/ui/utils/clipboard';
+import { message } from 'antd';
+import { t } from '@/utils';
 
 const QUESTS_LIST = [
   QuestIcon1,
@@ -32,41 +38,67 @@ function RenderQuests({
   quests,
   children,
 }: PropsWithChildren<{ quests: ViaScoreLevel[] }>) {
-  const randomQuestIndex = Math.floor(Math.random() * QUESTS_LIST.length);
-
   return (
     <div className="flex flex-col gap-[12px]">
       {children}
-      {quests.map((level) => (
-        <div
-          key={level.slug}
-          className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] "
-        >
-          <div className="flex justify-between gap-[12px]">
-            <div className="flex flex-col ">
-              <div className="text-white font-semibold">{level.name}</div>
-              <div className="text-[#7A7A7A]">+{level.points} points</div>
+      {quests.map((level) => {
+        const randomQuestIndex = Math.floor(Math.random() * QUESTS_LIST.length);
+        return (
+          <div
+            key={level.slug}
+            className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] "
+          >
+            <div className="flex justify-between gap-[12px]">
+              <div className="flex flex-col ">
+                <div className="text-white font-semibold">{level.name}</div>
+                <div className="text-[#7A7A7A]">+{level.points} points</div>
+              </div>
+              <div>
+                <img
+                  src={QUESTS_LIST[randomQuestIndex]}
+                  className="w-[32px] h-[32px]"
+                />
+              </div>
             </div>
-            <div>
-              <img
-                src={QUESTS_LIST[randomQuestIndex]}
-                className="w-[32px] h-[32px]"
-              />
-            </div>
+            {level.description && (
+              <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px] ">
+                {level.description}
+              </div>
+            )}
           </div>
-          {level.description && (
-            <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px] ">
-              {level.description}
-            </div>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
 function ViaQuests() {
-  const { refferalLink, onCopyRefferalLink } = useViaRefferalLink();
+  const refferalInfo = useRabbyGetter((s) => s.viaScore.getReferralInfo);
+
+  const refferalLink = useMemo(() => {
+    if (!refferalInfo) {
+      return null;
+    }
+
+    return `${VIA_SCORE_URL}/${refferalInfo.inviteCode}`;
+  }, [refferalInfo]);
+
+  const onCopyRefferalLink = React.useCallback(() => {
+    if (!refferalLink) {
+      return;
+    }
+
+    console.log('refferalLink', refferalLink);
+
+    copyTextToClipboard(refferalLink).then(() => {
+      message.success({
+        icon: <img src={IconSuccess} className="icon icon-success" />,
+        content: t('global.copied'),
+        duration: 0.5,
+      });
+    });
+  }, [refferalLink]);
+
   const levels = useRabbyGetter((s) => s.viaScore.getLevels);
   const referrals = useRabbyGetter((s) => s.viaScore.getReferralInfo);
   return (
@@ -85,12 +117,20 @@ function ViaQuests() {
               <RenderQuests quests={levels.available}>
                 {referrals ? (
                   <div className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] ">
-                    <div className="flex flex-col ">
-                      <div className="text-white font-semibold">
-                        Invite friends
+                    <div className="flex justify-between gap-[12px]">
+                      <div className="flex flex-col ">
+                        <div className="text-white font-semibold">
+                          Invite friends
+                        </div>
+                        <div className="text-[#7A7A7A]">
+                          +100 points for each new user
+                        </div>
                       </div>
-                      <div className="text-[#7A7A7A]">
-                        +100 points for each new user
+                      <div>
+                        <img
+                          src={QUESTS_LIST[0]}
+                          className="w-[32px] h-[32px]"
+                        />
                       </div>
                     </div>
                     <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">

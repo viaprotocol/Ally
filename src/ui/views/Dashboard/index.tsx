@@ -172,7 +172,29 @@ const Dashboard = () => {
     }
   );
 
-  const { refferalLink, onCopyRefferalLink } = useViaRefferalLink();
+  const refferalLink = useMemo(() => {
+    if (!refferalInfo) {
+      return null;
+    }
+
+    return `${VIA_SCORE_URL}/${refferalInfo.inviteCode}`;
+  }, [refferalInfo]);
+
+  const onCopyRefferalLink = React.useCallback(() => {
+    if (!refferalLink) {
+      return;
+    }
+
+    console.log('refferalLink', refferalLink);
+
+    copyTextToClipboard(refferalLink).then(() => {
+      message.success({
+        icon: <img src={IconSuccess} className="icon icon-success" />,
+        content: t('global.copied'),
+        duration: 0.5,
+      });
+    });
+  }, [refferalLink]);
 
   useEffect(() => {
     if (currentAccount) {
