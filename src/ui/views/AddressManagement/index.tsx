@@ -287,7 +287,7 @@ const AddressManagement = () => {
         <div className="absolute top-24 right-[42px]">
           <IconAddAddress
             viewBox="0 0 20 20"
-            className={clsx('text-gray-title w-[20px] h-[20px] cursor-pointer')}
+            className={clsx('w-[20px] h-[20px] cursor-pointer')}
             onClick={gotoAddAddress}
           />
         </div>
@@ -301,14 +301,12 @@ const AddressManagement = () => {
               <div className="w-[20px] h-[20px] flex items-center justify-center">
                 <IconLoading
                   viewBox="0 0 20 20"
-                  className="text-gray-title w-[16px] h-[16px] cursor-pointer"
+                  className="w-[16px] h-[16px] cursor-pointer"
                 />
               </div>
             ) : (
               <IconRefresh
-                className={clsx(
-                  'text-gray-title w-[20px] h-[20px] cursor-pointer'
-                )}
+                className={clsx('w-[20px] h-[20px] cursor-pointer')}
                 onClick={() => {
                   if (isUpdateAllBalanceLoading) {
                     return;
