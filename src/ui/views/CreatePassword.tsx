@@ -192,7 +192,7 @@ const CreatePassword = () => {
             <div
               className={clsx(
                 'w-[15px] h-[15px] mr-[6px] flex items-center justify-center  rounded-full overflow-hidden',
-                agreeTerm ? 'bg-blue-light' : 'bg-gray-comment'
+                agreeTerm ? 'bg-[#FE7B23]' : 'bg-gray-comment'
               )}
             >
               <img src={IconCheck} className="w-[10px]" />
@@ -201,7 +201,7 @@ const CreatePassword = () => {
               <Trans t={t} i18nKey="page.createPassword.agree">
                 have read and agree to the{' '}
                 <span
-                  className="text-blue-light cursor-pointer"
+                  className="text-[#FE7B23] cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleVisible();
