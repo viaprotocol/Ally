@@ -1,6 +1,7 @@
 import { PageHeader } from '@/ui/component';
 import { ViaScoreLevel } from '@/ui/models/via';
 import { useRabbyGetter } from '@/ui/store';
+import cx from 'classnames';
 import React, { PropsWithChildren, useMemo } from 'react';
 import { useViaRefferalLink } from '@/ui/utils/via';
 
@@ -37,7 +38,8 @@ const QUESTS_LIST = [
 function RenderQuests({
   quests,
   children,
-}: PropsWithChildren<{ quests: ViaScoreLevel[] }>) {
+  isAvailable = true,
+}: PropsWithChildren<{ quests: ViaScoreLevel[]; isAvailable?: boolean }>) {
   return (
     <div className="flex flex-col gap-[12px]">
       {children}
@@ -46,7 +48,10 @@ function RenderQuests({
         return (
           <div
             key={level.slug}
-            className="p-[12px] bg-[#1F1F1F] rounded-[6px] flex flex-col gap-[12px] border border-[#333] "
+            className={cx(
+              'p-[12px] rounded-[6px] flex flex-col gap-[12px] border border-[#333]',
+              isAvailable ? 'bg-[#1F1F1F] ' : 'bg-white/0'
+            )}
           >
             <div className="flex justify-between gap-[12px]">
               <div className="flex flex-col ">
@@ -61,8 +66,23 @@ function RenderQuests({
               </div>
             </div>
             {level.description && (
-              <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px] ">
-                {level.description}
+              <div className="p-[12px] text-white/60 text-[14px] bg-white/5 rounded-[4px]">
+                <div
+                  dangerouslySetInnerHTML={{ __html: level.description }}
+                  className="injected-html-quest"
+                />
+
+                {level.task_url && (
+                  <div className="mt-[10px] w-full flex text-center">
+                    <a
+                      href={level.task_url}
+                      target="_blank"
+                      className="w-full p-[12px] text-white font-semibold rounded-[6px] bg-[#333] hover:opacity/80"
+                    >
+                      Open
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -87,8 +107,6 @@ function ViaQuests() {
     if (!refferalLink) {
       return;
     }
-
-    console.log('refferalLink', refferalLink);
 
     copyTextToClipboard(refferalLink).then(() => {
       message.success({
@@ -166,7 +184,7 @@ function ViaQuests() {
               <div className="font-semibold text-white pb-[12px] pl-[12px]">
                 Unavailable
               </div>
-              <RenderQuests quests={levels.unavailable} />
+              <RenderQuests isAvailable={false} quests={levels.unavailable} />
             </div>
           )}
         </div>

@@ -19,6 +19,7 @@ export interface ViaScoreReferralInfo {
 export interface ViaScoreLevel {
   slug: string;
   name: string;
+  task_url?: string;
   description?: string;
   points: number;
   completed_at?: string;
