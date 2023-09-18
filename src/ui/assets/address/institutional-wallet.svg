@@ -1,16 +1,15 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_37575_10661)">
-<path d="M3 21H21" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5 21V7L13 3V21" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M19 21V11L13 7" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9 9V9.00938" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9 12V12.0094" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9 15V15.0094" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9 18V18.0094" stroke="#4B4D59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
+<rect opacity="0.08" width="24" height="24" rx="12" fill="url(#paint0_linear_658_21781)"/>
+<circle cx="8.5" cy="8.5" r="2.5" stroke="#79726C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11 8.5H17.5" stroke="#79726C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 8.5V7" stroke="#79726C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="2.5" cy="2.5" r="2.5" transform="matrix(-1 0 0 1 17.5 13)" stroke="#79726C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.5 15.5H6" stroke="#79726C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.5 15.5V14" stroke="#79726C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <defs>
-<clipPath id="clip0_37575_10661">
-<rect width="24" height="24" fill="white"/>
-</clipPath>
+<linearGradient id="paint0_linear_658_21781" x1="12" y1="0" x2="12" y2="24" gradientUnits="userSpaceOnUse">
+<stop stop-color="#79726C"/>
+<stop offset="1" stop-color="#79726C" stop-opacity="0.48"/>
+</linearGradient>
 </defs>
 </svg>

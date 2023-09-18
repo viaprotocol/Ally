@@ -20,8 +20,8 @@ const Checkbox = ({
   checked,
   onChange,
   defaultChecked = false,
-  background = '#52C8A8',
-  unCheckBackground = '#3A3A3A',
+  background = '#FE7B23',
+  unCheckBackground = '#79726C',
 
   width = '16px',
   height = '16px',

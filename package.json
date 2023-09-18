@@ -1,6 +1,6 @@
 {
   "name": "Ally",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A browser plugin for DeFi users",
   "scripts": {
     "clean": "mkdir -p dist && rm -rf dist/*",

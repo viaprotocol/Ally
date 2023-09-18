@@ -23,11 +23,11 @@ const Footer = styled.div`
     .rabby-checkbox__wrapper {
       .rabby-checkbox {
         border: 1px solid #707280;
-        background-color: #fff !important;
+        background-color: #79726c !important;
       }
       &.checked {
         .rabby-checkbox {
-          background-color: #8697ff !important;
+          background-color: #fe7b23 !important;
           border: none;
         }
       }

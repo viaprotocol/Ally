@@ -96,27 +96,40 @@
       transition: all 0.3s ease-in-out;
       margin: 0;
       &.ant-tabs-tab-active {
-        background: #fff;
+        background: #fe7b23;
       }
     }
   }
 }
 
 .AccountList {
+  .ant-table {
+    background-color: #191919;
+    color: #d4d3d1;
+  }
+
   .ant-table-cell {
     height: 55px;
     padding: 0 16px;
+
+    // &:hover {
+    //   background-color: #292929 !important;
+    // }
   }
   tr > td {
     border-bottom: 1px solid @color-bg;
+  }
+  .ant-table-tbody > tr.ant-table-row:hover > td {
+    background-color: #292929 !important;
   }
   .ant-table-thead {
     font-size: 12px;
     line-height: 14px;
 
     .ant-table-cell {
+      color: #d4d3d1;
       padding: 8px 16px;
-      background: #fafbfd;
+      background: #191919;
       border-bottom: none;
       height: auto;
     }
@@ -159,7 +172,6 @@
   }
 
   .cell-index {
-    color: @color-comment;
     font-weight: 400;
     padding-right: 3px;
   }
