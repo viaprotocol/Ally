@@ -162,6 +162,14 @@ export class WalletController extends BaseController {
     return routerApi.getInviteCode(account.address);
   };
 
+  setInstalledExtensionInstalled = async () => {
+    const account = await preferenceService.getCurrentAccount();
+
+    if (!account) throw new Error(t('background.error.noCurrentAccount'));
+
+    return routerApi.setInstalledExtensionInstalled(account.address);
+  };
+
   getViaLevels = async () => {
     const account = await preferenceService.getCurrentAccount();
 

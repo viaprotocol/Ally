@@ -88,9 +88,17 @@ export const viaScore = createModel<RootModel>()({
   }),
   effects: (dispatch) => ({
     async init() {
+      await this.setViaInstaledExtension();
       this.getViaScore();
       this.getLevels();
       this.getInviteCode();
+    },
+    async setViaInstaledExtension(_?, store?) {
+      try {
+        await store.app.wallet.setInstalledExtensionInstalled();
+      } catch (e) {
+        console.log('setInstalledExtensionInstalled error', e);
+      }
     },
     async getViaScore(_?, store?) {
       try {

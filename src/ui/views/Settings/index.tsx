@@ -28,11 +28,11 @@ const Settings = () => {
     //   content: t('ChainManagement'),
     //   onClick: () => history.push('/settings/chain'),
     // },
-    {
-      leftIcon: IconConnectSitesManagement,
-      content: t('Connected websites'),
-      onClick: () => history.push('/settings/sites'),
-    },
+    // {
+    //   leftIcon: IconConnectSitesManagement,
+    //   content: t('Connected websites'),
+    //   onClick: () => history.push('/settings/sites'),
+    // },
     // {
     //   leftIcon: IconAdvanceOption,
     //   content: t('Advanced Options'),

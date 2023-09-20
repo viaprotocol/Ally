@@ -168,7 +168,7 @@ const ImportSuccess = ({ isPopup = false }: { isPopup?: boolean }) => {
           >
             {sortBy(accounts, (item) => item?.index).map((account, index) => (
               <AddressItem
-                className="mb-12 rounded bg-white py-12 pl-16 h-[92px] flex"
+                className="mb-12 rounded bg-[#191919] py-12 pl-16 h-[92px] flex"
                 key={account.address}
                 account={account}
                 showAssets

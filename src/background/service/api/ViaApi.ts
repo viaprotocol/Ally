@@ -54,9 +54,16 @@ class RouterApi {
       `via-score/${address}/invites/`
     );
   }
+
+  public setInstalledExtensionInstalled(address: string) {
+    const questSlug = 'extension_install';
+    return this.api.post(
+      `via-score/quests/${questSlug}/complete?address=${address}`
+    );
+  }
 }
 
-const routerApiService = new ApiService('https://router-api.via.exchange/');
+const routerApiService = new ApiService('https://api.myally.xyz/');
 const routerApi = new RouterApi(routerApiService);
 
 eventBus.addEventListener(EVENTS.ADS_VIEWED, async () => {
