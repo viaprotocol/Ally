@@ -10,6 +10,8 @@ import axios from 'axios';
 import { ApiError } from './ApiError';
 import type { ApiHeaders, ApiQuery, ErrorResponse } from './types';
 
+const API_KEY = '08affe26-ec6d-4618-ae07-885f1b4ba13b';
+
 class ApiService {
   /**
    * Api Instance
@@ -26,6 +28,7 @@ class ApiService {
    */
   private headersDict: Partial<ApiHeaders> = {
     'Content-Type': 'application/json',
+    'x-api-key': API_KEY,
   };
 
   private queryDict: Partial<ApiQuery> = {};
