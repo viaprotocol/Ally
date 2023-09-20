@@ -73,7 +73,7 @@ export const ImportCoboArgus = () => {
   }, [selectedChain, safeAddress, inputAddress]);
 
   return (
-    <section className="bg-gray-bg relative">
+    <section className="relative">
       <Header>
         {step === 'select-chain' &&
           t('page.newAddress.coboSafe.whichChainIsYourCoboAddressOn')}
