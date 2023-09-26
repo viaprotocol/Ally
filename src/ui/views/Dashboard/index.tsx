@@ -371,6 +371,10 @@ const Dashboard = () => {
     history.push('/via-quests');
   };
 
+  const onClickSwap = () => {
+    history.push('/dex-swap');
+  };
+
   const brandIcon = useWalletConnectIcon(currentAccount);
   const { t } = useTranslation();
 
@@ -665,18 +669,23 @@ const Dashboard = () => {
                 </div>
               </div>
             )}
-            <div className="py-[16px] px-[24px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]">
+            <button
+              className="py-[16px] px-[24px] mx-[-24px] flex justify-between items-center gap-[12px] bg-[#0F0F0F]"
+              onClick={onClickSwap}
+            >
+              {/*
               <div className="w-[32px] h-[32px] rounded-[20px] bg-[#1F1F1F]">
                 <MainLockIcon />
               </div>
+               */}
+              <div>&nbsp;</div>
               <div className="text-gray-subTitle">
                 <span className="text-[#CCC] font-semibold">
                   Open swap Ally
                 </span>{' '}
-                (soon)
               </div>
               <div className="text-[#3D3D3D]">⌥ S</div>
-            </div>
+            </button>
           </footer>
         </section>
         {/* <ChainAndSiteSelector
