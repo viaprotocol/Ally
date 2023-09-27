@@ -112,6 +112,7 @@ export const SelectChainItem = forwardRef(
               )}
             </div>
           </div>
+          {/*
           <img
             className={clsx(
               'select-chain-item-star',
@@ -126,6 +127,7 @@ export const SelectChainItem = forwardRef(
           {value === data.enum ? (
             <img className="select-chain-item-checked" src={IconCheck}></img>
           ) : null}
+          */}
         </div>
       </Tooltip>
     );
