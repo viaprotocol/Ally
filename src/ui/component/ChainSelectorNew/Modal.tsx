@@ -7,7 +7,6 @@ import { Chain } from 'background/service/openapi';
 import { CHAINS_ENUM } from 'consts';
 import IconSearch from 'ui/assets/search.svg';
 
-import Empty from '../Empty';
 import {
   SelectChainList,
   SelectChainListProps,
@@ -208,12 +207,7 @@ const ChainSelectorModal = ({
           showRPCStatus={showRPCStatus}
         ></SelectChainList>
         {matteredList.length === 0 && unmatteredList.length === 0 ? (
-          <div className="select-chain-list pt-[70px] pb-[120px]">
-            <Empty>
-              {/* No chains */}
-              {t('component.ChainSelectorModal.noChains')}
-            </Empty>
-          </div>
+          <div className="py-16 text-center">Nothing found</div>
         ) : null}
       </div>
     </>
