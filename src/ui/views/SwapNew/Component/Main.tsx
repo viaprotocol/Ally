@@ -21,9 +21,9 @@ import { useRbiSource } from '@/ui/utils/ga-event';
 import { useCss } from 'react-use';
 import { DEX, SWAP_SUPPORT_CHAINS } from '@/constant';
 import { getTokenSymbol } from '@/ui/utils/token';
-import ChainSelectorInForm from '@/ui/component/ChainSelector/InForm';
+import ChainSelectorInForm from '@/ui/component/ChainSelectorNew/InForm';
 import { findChainByServerID } from '@/utils/chain';
-import type { SelectChainItemProps } from '@/ui/component/ChainSelector/components/SelectChainItem';
+import type { SelectChainItemProps } from '@/ui/component/ChainSelectorNew/components/SelectChainItem';
 import i18n from '@/i18n';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -462,7 +462,6 @@ export const Main = () => {
       <div
         className={clsx(
           'fixed w-full bottom-0 mt-auto flex flex-col items-center justify-center p-20 gap-12',
-          'bg-white border border-gray-divider',
           activeProvider && activeProvider.shouldApproveToken && 'pt-16'
         )}
       >

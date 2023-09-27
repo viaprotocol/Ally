@@ -409,7 +409,7 @@ const ApprovalManage = () => {
           <span>{subTitle}</span>
         </div>
 
-        <div className="token-approval-list bg-transparent">
+        <div className="token-approval-list">
           <div className="token-approval-body  min-h-[450px]">
             {loading && <Loading />}
 

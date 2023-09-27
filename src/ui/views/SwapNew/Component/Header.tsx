@@ -35,7 +35,7 @@ export const Header = () => {
           </div>
         }
       >
-        From Chain
+        <div className="text-white">Select Chain</div>
       </PageHeader>
       <TradingSettings
         visible={visible}
