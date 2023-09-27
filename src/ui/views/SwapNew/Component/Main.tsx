@@ -279,7 +279,7 @@ export const Main = () => {
           ? ''
           : activeProvider?.shouldApproveToken
           ? 'pb-[130px]'
-          : 'pb-[110px]'
+          : 'pb-24'
       )}
     >
       <div className="rounded-[6px] p-12 pt-0 pb-10">
@@ -460,7 +460,7 @@ export const Main = () => {
 
       <div
         className={clsx(
-          'fixed w-full bottom-0 mt-auto flex flex-col items-center justify-center p-20 gap-12',
+          'flex flex-col items-center justify-center p-20 gap-12',
           activeProvider && activeProvider.shouldApproveToken && 'pt-16'
         )}
       >
