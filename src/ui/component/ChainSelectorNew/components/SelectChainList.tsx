@@ -45,10 +45,12 @@ export const SelectChainList = (props: SelectChainListProps) => {
   } = props;
 
   const items = useMemo(() => {
-    return data.map((item, index) => ({
-      ...item,
-      index,
-    }));
+    return data
+      .map((item, index) => ({
+        ...item,
+        index,
+      }))
+      .filter((item) => (supportChains || []).includes(item.enum));
   }, [data]);
 
   const handleDragEnd = (event: DragEndEvent) => {
