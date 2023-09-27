@@ -173,6 +173,7 @@ const ChainSelectorModal = ({
           />
         )}
         <Input
+          className="select-chain-input border-none px-12 py-0"
           prefix={<img src={IconSearch} />}
           // Search chain
           placeholder={t('component.ChainSelectorModal.searchPlaceholder')}

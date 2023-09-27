@@ -282,8 +282,7 @@ export const Main = () => {
           : 'pb-[110px]'
       )}
     >
-      <div className={clsx('rounded-[6px] p-12 pt-0 pb-10 mx-20')}>
-        <div className={clsx(tipsClassName)}>{t('page.swap.chain')}</div>
+      <div className="rounded-[6px] p-12 pt-0 pb-10">
         <ChainSelectorInForm
           value={chain}
           onChange={switchChain}

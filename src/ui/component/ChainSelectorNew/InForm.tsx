@@ -117,11 +117,6 @@ export default function ChainSelectorInForm({
 
   return (
     <>
-      <ChainRender
-        chain={value}
-        onClick={handleClickSelector}
-        readonly={readonly}
-      />
       {!readonly && (
         <ChainSelectorModal
           value={value}
@@ -133,6 +128,11 @@ export default function ChainSelectorInForm({
           title={title}
         />
       )}
+      <ChainRender
+        chain={value}
+        onClick={handleClickSelector}
+        readonly={readonly}
+      />
     </>
   );
 }
