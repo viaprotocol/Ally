@@ -23,13 +23,13 @@ export const Header = () => {
         rightSlot={
           <div className="flex items-center gap-20 absolute bottom-0 right-0">
             <IconSwapHistory
-              className="cursor-pointer"
+              className="cursor-pointer text-[#747474]"
               onClick={useCallback(() => {
                 setHistoryVisible(true);
               }, [])}
             />
             <IconSwapSettings
-              className="cursor-pointer"
+              className="cursor-pointer text-[#747474]"
               onClick={useCallback(() => {
                 setVisible(true);
               }, [])}
