@@ -18,7 +18,7 @@
     font-size: 20px;
     line-height: 23px;
     text-align: center;
-    color: #161819;
+    color: #fff;
     margin-bottom: 20px;
   }
   .input-wrapper {
@@ -40,7 +40,7 @@
       }
       &:hover,
       &.active {
-        border-color: #8697ff;
+        border-color: #666;
       }
     }
   }
@@ -63,13 +63,12 @@
         margin-left: 4px;
       }
       &.active {
-        color: #8697ff;
+        color: #666;
       }
     }
   }
   .token-list {
     position: relative;
-    background-color: #fff;
     flex: 1;
     overflow-y: auto;
     margin: 0;
@@ -115,7 +114,6 @@
       position: sticky;
       top: 0;
       z-index: 1;
-      background-color: #fff;
       cursor: initial;
       font-size: 12px;
       line-height: 14px;
@@ -146,7 +144,7 @@
       border: 1px solid transparent;
       &:hover {
         border-radius: 6px;
-        border-color: #8697ff;
+        border-color: #666;
         background: rgba(134, 151, 255, 0.1);
       }
     }
@@ -184,7 +182,8 @@
       align-items: center;
 
       border-radius: 4px;
-      background: #f5f6fa;
+      border: 1px solid #333;
+      background: #1f1f1f;
     }
 
     img.filter-item__chain-logo {
@@ -195,5 +194,11 @@
     .filter-item__chain-close {
       cursor: pointer;
     }
+  }
+  .ant-drawer-content {
+    background: #151515;
+  }
+  .ant-skeleton {
+    filter: invert();
   }
 }
