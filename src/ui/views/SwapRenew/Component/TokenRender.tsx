@@ -8,18 +8,18 @@ import { useTranslation } from 'react-i18next';
 const TokenRenderWrapper = styled.div`
   width: 150px;
   height: 46px;
-  background: #f5f6fa;
+  background: #1c1c1c;
   border-radius: 4px;
   display: flex;
   align-items: center;
   padding: 12px;
   font-weight: 500;
   font-size: 18px;
-  color: #13141a;
+  color: #ccc;
   border: 1px solid transparent;
   cursor: pointer;
   &:hover {
-    background: rgba(134, 151, 255, 0.2);
+    background: #292929;
   }
   .token {
     display: flex;

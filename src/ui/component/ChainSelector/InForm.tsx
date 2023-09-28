@@ -14,7 +14,7 @@ import { SWAP_SUPPORT_CHAINS } from '@/constant';
 
 const ChainWrapper = styled.div`
   height: 40px;
-  background: #f5f6fa;
+  background: #1d1d1d;
   border-radius: 6px;
   padding: 12px 10px;
   width: 100%;
@@ -24,7 +24,7 @@ const ChainWrapper = styled.div`
   border: 1px solid transparent;
   cursor: pointer;
   &:hover {
-    background: rgba(134, 151, 255, 0.2);
+    background: #292929;
   }
   & > {
     .down {
@@ -33,7 +33,7 @@ const ChainWrapper = styled.div`
       height: 20px;
     }
     .name {
-      color: #13141a;
+      color: #ccc;
     }
   }
 `;
@@ -61,7 +61,7 @@ export const ChainRender = ({
     <ChainWrapper
       className={clsx(
         {
-          'cursor-default hover:bg-[#f5f6fa]': readonly,
+          'cursor-default hover:bg-[#292929]': readonly,
         },
         className
       )}
