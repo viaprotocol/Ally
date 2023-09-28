@@ -48,6 +48,7 @@ import AddressBackupMnemonics from './AddressBackup/Mnemonics';
 import AddressBackupPrivateKey from './AddressBackup/PrivateKey';
 import Swap from './Swap';
 import SwapNew from './SwapNew';
+import SwapRenew from './SwapRenew';
 import { getUiType, useWallet } from '../utils';
 import GasTopUp from './GasTopUp';
 import ApprovalManage from './ApprovalManage';
@@ -283,6 +284,9 @@ const Main = () => {
         </PrivateRoute>
         <PrivateRoute exact path="/dex-swap-new">
           <SwapNew />
+        </PrivateRoute>
+        <PrivateRoute exact path="/dex-swap-renew">
+          <SwapRenew />
         </PrivateRoute>
 
         <PrivateRoute exact path="/custom-rpc">
