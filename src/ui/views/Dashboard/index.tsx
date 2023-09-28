@@ -372,7 +372,7 @@ const Dashboard = () => {
   };
 
   const onClickSwap = () => {
-    history.push('/dex-swap-new');
+    history.push('/dex-swap-renew');
   };
 
   const brandIcon = useWalletConnectIcon(currentAccount);

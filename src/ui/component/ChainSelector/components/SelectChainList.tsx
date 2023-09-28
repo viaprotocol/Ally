@@ -79,7 +79,7 @@ export const SelectChainList = (props: SelectChainListProps) => {
   }
   if (sortable) {
     return (
-      <div className={clsx('select-chain-list', className)}>
+      <div className={clsx('select-chain-list bg-transparent', className)}>
         <DndContext
           onDragEnd={handleDragEnd}
           measuring={{
@@ -115,7 +115,7 @@ export const SelectChainList = (props: SelectChainListProps) => {
     );
   }
   return (
-    <div className={clsx('select-chain-list', className)}>
+    <div className={clsx('select-chain-list bg-transparent', className)}>
       {items.map((item) => {
         return (
           <SortableSelectChainItem
