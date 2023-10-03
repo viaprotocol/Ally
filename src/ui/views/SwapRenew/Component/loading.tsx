@@ -23,7 +23,7 @@ export const QuoteLoading = ({
     <div
       className={clsx(
         'flex-1 p-12 h-[48px] flex item-center rounded-[6px]',
-        isCex ? '' : 'border-solid border border-gray-divider'
+        isCex ? '' : 'border-solid border border-[#333] bg-[#1f1f1f]'
       )}
     >
       <QuoteLogo isLoading={true} logo={logo} />

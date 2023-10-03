@@ -19,7 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { getTokenSymbol } from '@/ui/utils/token';
 
 const CexListWrapper = styled.div`
-  border: 1px solid #e5e9ef;
+  background: #1f1f1f;
+  border: 1px solid #333;
   border-radius: 6px;
   &:empty {
     display: none;
@@ -32,7 +33,7 @@ const CexListWrapper = styled.div`
       position: absolute;
       width: 328px;
       height: 0;
-      border-bottom: 1px solid #e5e9ef;
+      border-bottom: 1px solid #333;
       left: 16px;
       bottom: 0;
     }
@@ -225,11 +226,11 @@ export const Quotes = ({
         <QuoteListLoading fetchedList={fetchedList} isCex />
       </CexListWrapper>
       <div className="pt-[40px]" />
-      <div className="flex items-center justify-center fixed left-0 bottom-0 h-32 text-13 w-full  bg-gray-bg2  text-gray-light ">
+      <div className="flex items-center justify-center fixed left-0 bottom-0 h-32 text-13 w-full  bg-[#141414] text-white ">
         {t('page.swap.tradingSettingTips', { viewCount, tradeCount })}
         <span
           onClick={openSettings}
-          className="cursor-pointer pl-4 text-blue-light underline underline-blue-light"
+          className="cursor-pointer pl-4 text-white underline underline-blue-light"
         >
           {t('page.swap.edit')}
         </span>
