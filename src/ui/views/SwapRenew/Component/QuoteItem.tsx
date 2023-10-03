@@ -102,7 +102,8 @@ const ItemWrapper = styled.div`
   &:not(.cex).inSufficient,
   &:not(.cex).disabled {
     height: 60px;
-    border: 1px solid #e5e9ef;
+    border: 1px solid #333;
+    background: #1f1f1f;
     border-radius: 6px;
     box-shadow: none;
   }
@@ -111,7 +112,7 @@ const ItemWrapper = styled.div`
     font-weight: 500;
     font-size: 13px;
     line-height: 15px;
-    color: #13141a;
+    color: #777;
     height: 48px;
     background-color: transparent;
     border: none;
@@ -134,7 +135,7 @@ const ItemWrapper = styled.div`
       font-weight: 500;
       color: #707280;
       .toToken {
-        color: #13141a;
+        color: #fff;
       }
     }
   }

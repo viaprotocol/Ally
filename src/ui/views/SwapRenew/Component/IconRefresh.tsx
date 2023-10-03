@@ -11,7 +11,7 @@ export const IconRefresh = memo((props: React.SVGProps<SVGSVGElement>) => {
       viewBox="-6 -6 36 36"
       className={clsx(
         'arrow-loading cursor-pointer',
-        className || 'text-blue-light'
+        className || 'text-gray-content'
       )}
       width="36"
       height="36"
