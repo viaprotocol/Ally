@@ -28,6 +28,8 @@ if (!process.env.DEBUG) {
 }
 
 const service = new OpenApiService({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   adapter: fetchAdapter,
   store,
 });
