@@ -54,6 +54,8 @@ const ItemWrapper = styled.div`
     opacity: 0;
     width: 100%;
     height: 0;
+    background: #000;
+    color: #fff;
     padding-left: 16px;
     display: flex;
     align-items: center;

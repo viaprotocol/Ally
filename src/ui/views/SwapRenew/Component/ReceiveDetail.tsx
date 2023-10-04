@@ -61,11 +61,11 @@ export const WarningOrChecked = ({
 const ReceiveWrapper = styled.div`
   position: relative;
   margin-top: 24px;
-  border: 1px solid #e5e9ef;
+  border: 1px solid #333;
   border-radius: 4px;
   padding: 12px;
 
-  color: #4b4d59;
+  color: #ccc;
   font-size: 13px;
   .receive-token {
     font-size: 15px;
@@ -115,8 +115,9 @@ const ReceiveWrapper = styled.div`
 
   .footer {
     position: relative;
-    border-top: 0.5px solid #e5e9ef;
+    border-top: 0.5px solid #333;
     padding-top: 8px;
+    color: #7a7a7a;
   }
   .quote-provider {
     position: absolute;
@@ -130,14 +131,17 @@ const ReceiveWrapper = styled.div`
     font-size: 13px;
     cursor: pointer;
 
-    color: #13141a;
+    color: #6e6e6e;
 
-    background: #e4e8ff;
+    background: linear-gradient(180deg, #363636 0%, #292929 100%),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.04) 100%
     border-radius: 4px;
-    border: 1px solid transparent;
+    border: 1px solid #464646;
     &:hover {
-      background: #d4daff;
-      border: 1px solid rgba(134, 151, 255, 0.5);
+      filter: brightness(1.2);
     }
   }
 `;
