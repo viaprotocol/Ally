@@ -180,7 +180,7 @@ const ManuallySetGasLimitAlert = styled.div`
 `;
 
 const ErrorsWrapper = styled.div`
-  border-top: 1px solid #ededed;
+  border-top: 1px solid #333333;
   padding-top: 14px;
   margin-top: 14px;
   .item {
@@ -188,7 +188,7 @@ const ErrorsWrapper = styled.div`
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    color: #333333;
+    color: #ccc;
     margin-bottom: 10px;
     align-items: flex-start;
     .icon-alert {
@@ -631,7 +631,7 @@ const GasSelector = ({
               ) : (
                 <div className="gas-selector-card-content-item">
                   <div className="gas-selector-card-amount translate-y-1">
-                    <span className="text-blue-light font-medium text-15">
+                    <span className="text-white font-medium text-15">
                       {formatTokenAmount(
                         new BigNumber(gas.gasCostAmount).toString(10)
                       )}{' '}
@@ -930,7 +930,7 @@ const GasPriceDesc = styled.ul`
   margin-top: 12px;
   margin-bottom: 0;
   font-size: 13px;
-  color: #4b4d59;
+  color: #666666;
   li {
     position: relative;
     margin-bottom: 8px;
@@ -944,7 +944,7 @@ const GasPriceDesc = styled.ul`
       width: 4px;
       height: 4px;
       border-radius: 100%;
-      background-color: #4b4d59;
+      background-color: #666666;
       left: 0;
       top: 8px;
     }

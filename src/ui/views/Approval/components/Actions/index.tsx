@@ -70,10 +70,11 @@ export const SignTitle = styled.div`
 export const ActionWrapper = styled.div`
   background-color: #1c1c1c;
   border-radius: 8px;
+  border: 1px solid #333;
   .action-header {
     display: flex;
     justify-content: space-between;
-    background: #8697ff;
+    background: #333333;
     padding: 14px;
     align-items: center;
     color: #fff;
