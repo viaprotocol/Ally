@@ -112,18 +112,12 @@ const CardBody = styled.div<{
             cursor: pointer;
 
             &:hover {
-              border: 1px solid #8697ff;
+              background: #292929;
             }
 
             &.active {
-              background: rgba(134, 151, 255, 0.1);
-              border: 1px solid #8697ff;
-            }
-          }
-
-          .cardTitle {
-            &.active {
-              color: #8697ff !important;
+              background: #333333;
+              border: 1px solid #333333;
             }
           }
         `}
@@ -131,22 +125,22 @@ const CardBody = styled.div<{
   .card {
     width: 76px;
     height: 52px;
-    background: #f5f6fa;
+    background: #1f1f1f;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    border: 1px solid transparent;
+    border: 1px solid #333;
 
     .gas-level,
     .cardTitle {
       text-align: center;
       font-size: 12px;
       line-height: 14px;
-      color: ${LessPalette['@color-comment']};
+      color: #ccc;
       margin: 8px auto 0;
     }
     .cardTitle {
-      color: ${LessPalette['@color-title']} !important;
+      color: #ccc;
       font-weight: 500;
       font-size: 13px !important;
       margin: 4px auto 0;
@@ -158,15 +152,15 @@ const CardBody = styled.div<{
       text-align: center !important;
       font-size: 13px !important;
       font-weight: 500;
-      color: ${LessPalette['@color-title']};
+      color: #666;
       padding-top: 0;
       &.active {
-        color: #8697ff !important;
+        color: #ccc !important;
       }
     }
     .ant-input:focus,
     .ant-input-focused {
-      color: #000000;
+      color: #fff;
     }
   }
 `;
