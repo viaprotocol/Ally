@@ -19,24 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { getTokenSymbol } from '@/ui/utils/token';
 
 const CexListWrapper = styled.div`
-  background: #1f1f1f;
-  border: 1px solid #333;
-  border-radius: 6px;
   &:empty {
     display: none;
-  }
-
-  & > div:not(:last-child) {
-    position: relative;
-    &:not(:last-child):before {
-      content: '';
-      position: absolute;
-      width: 328px;
-      height: 0;
-      border-bottom: 1px solid #333;
-      left: 16px;
-      bottom: 0;
-    }
   }
 `;
 
@@ -143,7 +127,7 @@ export const Quotes = ({
     const dex = sortedList.find((e) => e.isDex) as TDexQuoteData | undefined;
 
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col">
         {dex ? (
           <DexQuoteItem
             inSufficient={inSufficient}
@@ -180,7 +164,7 @@ export const Quotes = ({
   }
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col">
         {sortedList.map((params, idx) => {
           const { name, data, isDex } = params;
           if (!isDex) return null;
@@ -204,7 +188,7 @@ export const Quotes = ({
         <QuoteListLoading fetchedList={fetchedList} />
       </div>
       {!noCex && (
-        <div className="text-gray-light text-12 mt-20 mb-8">
+        <div className="text-white text-12 mt-20 mb-8">
           {t('page.swap.rates-from-cex')}
         </div>
       )}

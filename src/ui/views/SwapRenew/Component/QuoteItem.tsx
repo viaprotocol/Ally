@@ -40,13 +40,10 @@ const ItemWrapper = styled.div`
   padding: 0 12px;
   display: flex;
   align-items: center;
-  color: #13141a;
-
-  border-radius: 6px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  color: #fff;
   border-radius: 6px;
   border: 1px solid transparent;
-  background: white;
+  background: transparent;
   cursor: pointer;
 
   .disabled-trade {
@@ -58,15 +55,11 @@ const ItemWrapper = styled.div`
     width: 100%;
     height: 0;
     padding-left: 16px;
-    background: #000000;
-    border-radius: 6px;
     display: flex;
     align-items: center;
     font-size: 12px;
     gap: 8px;
     font-weight: 400;
-    font-size: 12px;
-    color: #ffffff;
     pointer-events: none;
     &.active {
       pointer-events: auto;
@@ -78,13 +71,8 @@ const ItemWrapper = styled.div`
   }
 
   &:hover:not(.disabled, .inSufficient) {
-    background: linear-gradient(
-        0deg,
-        rgba(134, 151, 255, 0.1),
-        rgba(134, 151, 255, 0.1)
-      ),
-      #ffffff;
-    border: 1px solid #8697ff;
+    background: #292929;
+    border: 1px solid #333;
   }
   &.active {
     outline: 2px solid #8697ff;
@@ -96,14 +84,15 @@ const ItemWrapper = styled.div`
     background-color: transparent;
     border-radius: 6px;
     cursor: not-allowed;
+    opacity: 0.6;
   }
   &.error {
   }
   &:not(.cex).inSufficient,
   &:not(.cex).disabled {
     height: 60px;
-    border: 1px solid #333;
-    background: #1f1f1f;
+    border: transparent;
+    background: transparent;
     border-radius: 6px;
     box-shadow: none;
   }
@@ -112,7 +101,7 @@ const ItemWrapper = styled.div`
     font-weight: 500;
     font-size: 13px;
     line-height: 15px;
-    color: #777;
+    color: #fff;
     height: 48px;
     background-color: transparent;
     border: none;
@@ -124,7 +113,7 @@ const ItemWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #707280;
+    color: #ссс;
     .receiveNum {
       font-size: 15px;
       max-width: 130px;
@@ -133,7 +122,7 @@ const ItemWrapper = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       font-weight: 500;
-      color: #707280;
+      color: #fff;
       .toToken {
         color: #fff;
       }
@@ -301,7 +290,7 @@ export const DexQuoteItem = (
 
     if (!quote?.toTokenAmount) {
       right = (
-        <div className="text-gray-content text-[13px] font-normal">
+        <div className="text-gray-content text-[13px] font-normal text-right">
           {t('page.swap.unable-to-fetch-the-price')}
         </div>
       );
@@ -313,7 +302,7 @@ export const DexQuoteItem = (
       if (!preExecResult && !inSufficient) {
         center = <div className="text-15 text-gray-title font-medium">-</div>;
         right = (
-          <div className="text-gray-content text-[13px] font-normal">
+          <div className="text-gray-content text-[13px] font-normal text-right">
             {t('page.swap.fail-to-simulate-transaction')}
           </div>
         );
@@ -325,7 +314,7 @@ export const DexQuoteItem = (
       disable = true;
       center = <div className="text-15 text-gray-title font-medium">-</div>;
       right = (
-        <div className="text-gray-content text-[13px] font-normal">
+        <div className="text-gray-content text-[13px] font-normal text-right">
           {t('page.swap.security-verification-failed')}
         </div>
       );
@@ -604,7 +593,7 @@ export const CexQuoteItem = (props: {
 
     if (!data?.receive_token?.amount) {
       right = (
-        <div className="text-gray-content text-[13px] font-normal">
+        <div className="text-gray-content text-[13px] font-normal text-right">
           {t('page.swap.this-token-pair-is-not-supported')}
         </div>
       );
