@@ -68,7 +68,7 @@ export const SignTitle = styled.div`
 `;
 
 export const ActionWrapper = styled.div`
-  background-color: #fff;
+  background-color: #1c1c1c;
   border-radius: 8px;
   .action-header {
     display: flex;
