@@ -130,16 +130,10 @@ const ReceiveWrapper = styled.div`
     justify-content: center;
     font-size: 13px;
     cursor: pointer;
-
-    color: #6e6e6e;
-
-    background: linear-gradient(180deg, #363636 0%, #292929 100%),
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.08) 0%,
-        rgba(255, 255, 255, 0.04) 100%
+    background: linear-gradient(180deg, #363636 0%, #292929 100%);
     border-radius: 4px;
     border: 1px solid #464646;
+    color: #ccc;
     &:hover {
       filter: brightness(1.2);
     }
