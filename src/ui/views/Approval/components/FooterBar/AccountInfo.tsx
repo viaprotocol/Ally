@@ -49,7 +49,7 @@ export const AccountInfo: React.FC<Props> = ({
   return (
     <div
       className={clsx(
-        'bg-[#F6F8FF] rounded-[8px]',
+        'bg-[#292929] rounded-[8px]',
         'py-[12px] px-[12px] mb-[12px]',
         'space-y-10'
       )}
@@ -70,12 +70,12 @@ export const AccountInfo: React.FC<Props> = ({
           <AddressViewer
             showArrow={false}
             address={account.address}
-            className={clsx('text-13 text-black mt-[2px]')}
+            className={clsx('text-13 text-[#cccccc] mt-[2px]')}
           />
         </div>
         {isTestnet ? null : (
           <div
-            className="text-13 font-medium text-black mt-[4px]"
+            className="text-13 font-medium text-[#cccccc] mt-[4px]"
             title={displayBalance}
           >
             ${displayBalance}

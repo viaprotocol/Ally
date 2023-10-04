@@ -27,8 +27,8 @@ export const ActionsContainer: React.FC<Pick<Props, 'onCancel'>> = ({
       <Button
         type="ghost"
         className={clsx(
-          'w-[102px] h-[48px] border-blue-light text-blue-light',
-          'hover:bg-[#8697FF1A] active:bg-[#0000001A]',
+          'w-[102px] h-[48px] border-[#464646] text-[#ccc]',
+          'hover:bg-[#292929] active:bg-[#333333]',
           'rounded-[8px]',
           'before:content-none',
           'z-10'
