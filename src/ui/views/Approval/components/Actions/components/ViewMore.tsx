@@ -50,7 +50,7 @@ const PopupContainer = styled.div`
 
       &:nth-child(1) {
         max-width: 140px;
-        border-right: 1px solid #ededed;
+        border-right: 1px solid #333333;
         flex-shrink: 0;
       }
     }
