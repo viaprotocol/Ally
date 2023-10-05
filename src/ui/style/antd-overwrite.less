@@ -383,26 +383,28 @@ textarea {
 .ant-slider {
   margin: 0;
   .ant-slider-rail {
-    background-color: #e5e9ef;
+    background-color: #666;
   }
   .ant-slider-track {
-    background-color: #b4bdcc;
+    background-color: #888;
   }
   .ant-slider-handle {
-    border-color: #b4bdcc;
+    border-color: #888;
+    background: #aaa;
     transition: box-shadow 0.3s;
   }
   &:hover {
     .ant-slider-handle,
     .ant-slider-handle:not(.ant-tooltip-open) {
-      border-color: #b4bdcc;
+      border-color: #aaa;
+      background: #ccc;
       box-shadow: 0px 2px 6px rgba(28, 31, 53, 0.2);
     }
     .ant-slider-rail {
-      background-color: #e5e9ef;
+      background-color: #888;
     }
     .ant-slider-track {
-      background-color: #b4bdcc;
+      background-color: #aaa;
     }
   }
 }
