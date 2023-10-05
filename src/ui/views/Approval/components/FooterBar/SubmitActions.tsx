@@ -43,19 +43,14 @@ export const SubmitActions: React.FC<Props> = ({
           )}
         >
           <button
-            className={clsx(
-              'text-button bg-button enabled:hover:bg-button-hover enabled:active:bg-button-active',
-              'w-[184px] h-full',
-              'font-medium'
-            )}
+            className="w-[184px] h-full main-button"
             onClick={handleClickConfirm}
           >
             {t('global.confirmButton')}
           </button>
           <button
             className={clsx(
-              'text-button bg-button enabled:hover:bg-button-hover enabled:active:bg-button-active',
-              'w-[60px] h-full',
+              'w-[60px] h-full main-button',
               'flex justify-center items-center'
             )}
             onClick={handleClickCancel}
@@ -73,8 +68,7 @@ export const SubmitActions: React.FC<Props> = ({
               disabled={disabledProcess}
               type="primary"
               className={clsx(
-                'w-[246px] h-[48px] rounded-[8px] text-button',
-                'bg-button enabled:hover:bg-button-hover enabled:active:bg-button-active disabled:opacity-40 disabled:cursor-not-allowed',
+                'w-[246px] h-[48px] rounded-[8px] main-button',
                 'before:content-none'
               )}
               onClick={handleClickSign}

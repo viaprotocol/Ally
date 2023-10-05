@@ -209,7 +209,10 @@ function ModalConfirmAddToContacts({
             type="primary"
             size="large"
             htmlType="submit"
-            className={clsx(cancelText ? 'w-[172px]' : 'w-[200px]')}
+            className={clsx(
+              'main-button',
+              cancelText ? 'w-[172px]' : 'w-[200px]'
+            )}
             disabled={false}
           >
             {confirmText}

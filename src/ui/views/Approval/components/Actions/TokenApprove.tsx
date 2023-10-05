@@ -136,7 +136,7 @@ const ApproveAmountModal = ({
       <div className="flex justify-center mt-32 popup-footer">
         <Button
           type="primary"
-          className="w-[200px]"
+          className="w-[200px] main-button"
           size="large"
           htmlType="submit"
           disabled={!canSubmit}
