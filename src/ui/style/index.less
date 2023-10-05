@@ -342,3 +342,9 @@ button:focus {
     }
   }
 }
+
+@layer utilities {
+  .main-button {
+    @apply text-mainButton font-semibold bg-mainButton hover:bg-mainButtonHover active:bg-mainButtonActive disabled:bg-mainButtonDisabled !important;
+  }
+}

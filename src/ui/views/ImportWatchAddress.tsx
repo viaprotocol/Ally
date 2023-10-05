@@ -110,8 +110,8 @@ const ImportWatchAddress = () => {
       bridge: DEFAULT_BRIDGE,
       clientMeta: {
         description: t('global.appDescription'),
-        url: 'https://rabby.io',
-        icons: ['https://rabby.io/assets/images/logo-128.png'],
+        url: 'https://myally.xyz',
+        icons: ['https://myally.xyz/vite.svg'],
         name: t('global.appName'),
       },
     });

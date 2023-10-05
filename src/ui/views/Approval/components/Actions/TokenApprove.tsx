@@ -230,7 +230,7 @@ const TokenApprove = ({
                     </span>
                   </div>
                   <span
-                    className="text-blue-light text-12 font-medium cursor-pointer ml-4"
+                    className="text-white text-12 font-medium cursor-pointer ml-4"
                     onClick={() => setEditApproveModalVisible(true)}
                   >
                     {t('global.editButton')}

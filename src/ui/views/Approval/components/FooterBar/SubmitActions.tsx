@@ -32,12 +32,11 @@ export const SubmitActions: React.FC<Props> = ({
       {isSign ? (
         <div
           className={clsx(
-            'bg-blue-light text-white',
             'rounded-[8px] h-[48px]',
             'flex items-center',
             'relative',
             'before:absolute before:right-[60px]',
-            'before:bg-[#FFFFFF1A]',
+            'before:bg-[#333333]',
             'before:h-[32px] before:w-1',
             'hover:before:hidden',
             'overflow-hidden'
@@ -45,7 +44,7 @@ export const SubmitActions: React.FC<Props> = ({
         >
           <button
             className={clsx(
-              'hover:bg-[#00000033]',
+              'text-button bg-button enabled:hover:bg-button-hover enabled:active:bg-button-active',
               'w-[184px] h-full',
               'font-medium'
             )}
@@ -55,7 +54,7 @@ export const SubmitActions: React.FC<Props> = ({
           </button>
           <button
             className={clsx(
-              'hover:bg-[#00000033]',
+              'text-button bg-button enabled:hover:bg-button-hover enabled:active:bg-button-active',
               'w-[60px] h-full',
               'flex justify-center items-center'
             )}
@@ -74,8 +73,8 @@ export const SubmitActions: React.FC<Props> = ({
               disabled={disabledProcess}
               type="primary"
               className={clsx(
-                'w-[246px] h-[48px] rounded-[8px]',
-                'disabled:opacity-40 disabled:bg-blue-light',
+                'w-[246px] h-[48px] rounded-[8px] text-button',
+                'bg-button enabled:hover:bg-button-hover enabled:active:bg-button-active disabled:opacity-40 disabled:cursor-not-allowed',
                 'before:content-none'
               )}
               onClick={handleClickSign}

@@ -484,7 +484,7 @@ export const Main = () => {
           type="primary"
           block
           size="large"
-          className="h-[48px] text-white text-[16px] font-medium"
+          className="h-[48px] text-[16px] main-button"
           onClick={() => {
             if (!activeProvider || expired || slippageChanged) {
               setVisible(true);
