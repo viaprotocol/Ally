@@ -17,7 +17,7 @@ const Footer = styled.div`
     font-weight: 500;
     font-size: 13px;
     line-height: 15px;
-    color: #13141a;
+    color: #cccccc;
     position: relative;
     border: 1px solid transparent;
     .rabby-checkbox__wrapper {
@@ -39,7 +39,7 @@ const Footer = styled.div`
       left: 18px;
       width: 328px;
       height: 1px;
-      background-color: #e5e9ef;
+      background-color: #333333;
     }
     &:hover {
       background: #333333;

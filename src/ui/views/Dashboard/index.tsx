@@ -681,7 +681,7 @@ const Dashboard = () => {
               <div>&nbsp;</div>
               <div className="text-gray-subTitle">
                 <span className="text-[#CCC] font-semibold">
-                  Open swap Ally
+                  Open Ally Swap
                 </span>{' '}
               </div>
               <div className="text-[#3D3D3D]">⌥ S</div>

@@ -24,7 +24,7 @@
   .input-wrapper {
     width: 100%;
     padding: 0 16px;
-    margin: 0 auto @token-selector-px;
+    margin: 0 auto 10px;
     .ant-input-affix-wrapper::before {
       height: 16px;
     }
@@ -72,6 +72,7 @@
     flex: 1;
     overflow-y: auto;
     margin: 0;
+    margin-top: 10px;
     li {
       display: flex;
       cursor: pointer;
@@ -117,10 +118,11 @@
       cursor: initial;
       font-size: 12px;
       line-height: 14px;
-      color: #707880;
+      color: #ccc;
       height: 35px;
       align-items: center;
       margin-bottom: 8px;
+      background: #1f1f1f;
       &::after {
         .part-border(360px);
         bottom: 0;
