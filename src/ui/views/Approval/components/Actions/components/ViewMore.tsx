@@ -33,7 +33,7 @@ const PopupContainer = styled.div`
   .title {
     font-size: 16px;
     line-height: 19px;
-    color: #333333;
+    color: #cccccc;
     display: flex;
     margin-bottom: 14px;
     .value-address {

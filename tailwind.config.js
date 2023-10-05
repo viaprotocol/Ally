@@ -70,7 +70,7 @@ module.exports = {
       gray: {
         bg2: '#F5F6FA',
         bg: '#F5F6FA',
-        divider: '#E5E9EF',
+        divider: '#333333',
         comment: '#B4BDCC',
         content: '#ccc',
         subTitle: '#7A7A7A',

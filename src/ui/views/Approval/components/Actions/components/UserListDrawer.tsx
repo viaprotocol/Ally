@@ -6,7 +6,7 @@ import { Popup, Checkbox } from 'ui/component';
 import { Chain } from 'background/service/openapi';
 
 const Footer = styled.div`
-  background: #f5f6fa;
+  background: #292929;
   border-radius: 6px;
   .item {
     display: flex;
@@ -42,8 +42,7 @@ const Footer = styled.div`
       background-color: #e5e9ef;
     }
     &:hover {
-      background: rgba(134, 151, 255, 0.1);
-      border: 1px solid #8697ff;
+      background: #333333;
       border-radius: 6px;
     }
     &:nth-last-child(1) {
