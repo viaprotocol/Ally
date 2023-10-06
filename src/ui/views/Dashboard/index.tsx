@@ -375,6 +375,21 @@ const Dashboard = () => {
     history.push('/dex-swap');
   };
 
+  // ctrl+s => open swap
+  const onKeyDown = (e) => {
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      onClickSwap();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
+
   const brandIcon = useWalletConnectIcon(currentAccount);
   const { t } = useTranslation();
 
