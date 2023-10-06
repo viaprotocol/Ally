@@ -8,7 +8,7 @@
   flex-shrink: 0;
   -webkit-user-select: none;
   background: rgba(134, 151, 255, 0.12);
-  border: 1px solid #e5e9ef;
+  border: 1px solid #333333;
   border-radius: 6px;
   padding: 8px 4px 8px 8px;
   font-weight: 500;
@@ -51,16 +51,16 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: transparent;
+    background-color: #151515;
     .ant-input-affix-wrapper {
-      border: 1px solid #e5e9ef;
+      border: none;
       border-radius: 6px;
       height: 36px;
     }
 
     .ant-input-affix-wrapper:focus,
     .ant-input-affix-wrapper-focused {
-      border-color: #b0bdff;
+      border-color: #ccc;
     }
   }
   .ant-drawer-header {
@@ -87,6 +87,7 @@
   }
   .ant-drawer-body {
     padding-top: 0 !important;
+    background: #151515;
     &::-webkit-scrollbar {
       display: none !important;
     }
@@ -115,7 +116,7 @@
   }
   .all-chais {
     width: 100%;
-    background: #ffffff;
+    background: #333;
     display: flex;
     justify-content: center;
     margin-top: 16px;
@@ -141,7 +142,7 @@
   min-width: 116px;
   display: inline-flex;
   height: 40px;
-  background: #9ba9fd;
+  background: #666;
   border-radius: 6px 6px 0px 0px;
   padding: 8px 6px 8px 12px;
   font-size: 12px;
@@ -165,28 +166,16 @@
 .select-chain {
   &-list {
     border-radius: 6px;
-    & + & {
-      margin-top: 24px;
-    }
   }
   &-item {
     display: flex;
     align-items: center;
     padding: 14px 16px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
     position: relative;
     border: 1px solid transparent;
     height: 56px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 16px;
-      right: 16px;
-      border-bottom: 1px solid @color-border;
-    }
 
     .chain-icon-comp {
       img {
@@ -203,13 +192,13 @@
       margin-left: 12px;
     }
     &-name {
-      font-weight: 500;
-      font-size: 15px;
-      line-height: 18px;
-      color: @color-title;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #ccc;
     }
     &-balance {
-      color: #707280;
+      color: #666;
       font-size: 12px;
       display: flex;
       align-items: center;
@@ -223,9 +212,8 @@
       margin-left: 16px;
     }
     &:hover {
-      // background: rgba(134, 151, 255, 0.1);
-      background-color: #dce0f9;
-      border: 1px solid #8697ff;
+      background-color: #1F1F1F;
+      border: 1px solid #333;
       &::after {
         display: none;
       }
