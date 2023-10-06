@@ -154,7 +154,7 @@ function EnableTrading({ onConfirm }: { onConfirm: () => void }) {
           type="primary"
           block
           disabled={!checked}
-          className="h-[40px] w-[188px] text-13 font-medium mx-auto"
+          className="main-button h-[40px] w-[188px] text-13 font-medium mx-auto"
           onClick={onConfirm}
         >
           {t('page.swap.confirm')}

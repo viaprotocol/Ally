@@ -95,7 +95,10 @@ const StrayFooterNav = memo(
             htmlType="submit"
             onClick={onNextClick}
             size="large"
-            className={cx('lg:h-[52px]', hasBack ? 'flex-1' : 'w-[200px]')}
+            className={cx(
+              'lg:h-[52px] main-button',
+              hasBack ? 'flex-1' : 'w-[200px]'
+            )}
             type="primary"
             loading={nextLoading}
           >
