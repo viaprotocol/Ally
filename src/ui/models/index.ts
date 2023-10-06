@@ -18,7 +18,7 @@ import { swap } from './swap';
 import { customRPC } from './customRPC';
 import { securityEngine } from './securityEngine';
 import { sign } from './sign';
-import { viaScore, viaSwap } from './via';
+import { viaScore } from './via';
 
 export interface RootModel extends Models<RootModel> {
   app: typeof app;
@@ -40,7 +40,6 @@ export interface RootModel extends Models<RootModel> {
   securityEngine: typeof securityEngine;
   sign: typeof sign;
   viaScore: typeof viaScore;
-  viaSwap: typeof viaSwap;
 }
 
 export const models: RootModel = {
@@ -63,5 +62,4 @@ export const models: RootModel = {
   securityEngine,
   sign,
   viaScore,
-  viaSwap,
 };

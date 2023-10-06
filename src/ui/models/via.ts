@@ -128,30 +128,3 @@ export const viaScore = createModel<RootModel>()({
     },
   }),
 });
-
-type ViaSwapStep = 'CHAIN' | 'FROM_TOKEN' | 'TO_TOKEN' | 'AMOUNT';
-
-interface ViaSwap {
-  step: ViaSwapStep;
-}
-
-export const viaSwap = createModel<RootModel>()({
-  name: 'viaSwap',
-  state: {
-    step: 'CHAIN',
-  } as ViaSwap,
-  reducers: {
-    setStep(state, step: ViaSwapStep) {
-      return {
-        ...state,
-        step,
-      };
-    },
-  },
-  selectors: (slice) => ({
-    getStep() {
-      return slice((state) => state.step);
-    },
-  }),
-  effects: (dispatch) => ({}),
-});
