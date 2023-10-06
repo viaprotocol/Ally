@@ -18,13 +18,13 @@
     font-size: 20px;
     line-height: 23px;
     text-align: center;
-    color: #161819;
+    color: #fff;
     margin-bottom: 20px;
   }
   .input-wrapper {
     width: 100%;
     padding: 0 16px;
-    margin: 0 auto @token-selector-px;
+    margin: 0 auto 10px;
     .ant-input-affix-wrapper::before {
       height: 16px;
     }
@@ -40,7 +40,7 @@
       }
       &:hover,
       &.active {
-        border-color: #8697ff;
+        border-color: #666;
       }
     }
   }
@@ -63,16 +63,16 @@
         margin-left: 4px;
       }
       &.active {
-        color: #8697ff;
+        color: #666;
       }
     }
   }
   .token-list {
     position: relative;
-    background-color: #fff;
     flex: 1;
     overflow-y: auto;
     margin: 0;
+    margin-top: 10px;
     li {
       display: flex;
       cursor: pointer;
@@ -89,7 +89,7 @@
             white-space: nowrap;
             font-size: 12px;
             line-height: 15px;
-            color: #4b4d59;
+            color: #ccc;
             margin-left: 12px;
           }
         }
@@ -98,14 +98,14 @@
           text-align: left;
           font-size: 12px;
           line-height: 14px;
-          color: #4b4d59;
+          color: #ccc;
         }
         &:nth-child(3) {
           width: 100px;
           text-align: right;
           font-size: 13px;
           line-height: 15px;
-          color: #13141a;
+          color: #ccc;
           font-weight: 500;
           flex: 1;
         }
@@ -115,24 +115,18 @@
       position: sticky;
       top: 0;
       z-index: 1;
-      background-color: #fff;
       cursor: initial;
       font-size: 12px;
       line-height: 14px;
-      color: #707880;
+      color: #ccc;
       height: 35px;
       align-items: center;
       margin-bottom: 8px;
-      &::after {
-        .part-border(360px);
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-      }
+      background: #1f1f1f;
       & > div {
         font-size: 12px;
         line-height: 14px;
-        color: #707880;
+        color: #666;
         font-weight: normal;
         &:nth-last-child(1) {
           flex: 1;
@@ -146,8 +140,8 @@
       border: 1px solid transparent;
       &:hover {
         border-radius: 6px;
-        border-color: #8697ff;
-        background: rgba(134, 151, 255, 0.1);
+        border-color: #333;
+        background: #292929;
       }
     }
     &.empty {
@@ -184,7 +178,8 @@
       align-items: center;
 
       border-radius: 4px;
-      background: #f5f6fa;
+      border: 1px solid #333;
+      background: #1f1f1f;
     }
 
     img.filter-item__chain-logo {
@@ -195,5 +190,11 @@
     .filter-item__chain-close {
       cursor: pointer;
     }
+  }
+  .ant-drawer-content {
+    background: #151515;
+  }
+  .ant-skeleton {
+    filter: invert();
   }
 }

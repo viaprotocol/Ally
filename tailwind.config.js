@@ -34,6 +34,10 @@ module.exports = {
     backgroundImage: {
       refreshGradient: 'linear-gradient(180deg, #A8A29E 0%, #78716C 100%)',
       buttonGradient: 'linear-gradient(180deg, #363636 0%, #292929 100%)',
+      mainButton: 'linear-gradient(180deg, #A8A29E 0%, #78716C 100%)',
+      mainButtonHover: 'linear-gradient(180deg, #CEC7C3 0%, #9B928C 100%)',
+      mainButtonActive: 'linear-gradient(180deg, #8D8884 0%, #524C48 100%)',
+      mainButtonDisabled: 'linear-gradient(180deg, #464240 0%, #373330 100%)',
     },
     colors: {
       form: {
@@ -70,14 +74,15 @@ module.exports = {
       gray: {
         bg2: '#F5F6FA',
         bg: '#F5F6FA',
-        divider: '#E5E9EF',
+        divider: '#333333',
         comment: '#B4BDCC',
-        content: '#707280',
+        content: '#ccc',
         subTitle: '#7A7A7A',
-        title: '#13141A',
+        title: '#fff',
         light: '#707880',
         common: '#666666',
       },
+      mainButton: '#1B1A18',
     },
     boxShadow: {
       default: '0px 1px 0px 0px rgba(0, 0, 0, 0.48)',

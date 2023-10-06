@@ -32,31 +32,25 @@ export const SubmitActions: React.FC<Props> = ({
       {isSign ? (
         <div
           className={clsx(
-            'bg-blue-light text-white',
             'rounded-[8px] h-[48px]',
             'flex items-center',
             'relative',
             'before:absolute before:right-[60px]',
-            'before:bg-[#FFFFFF1A]',
+            'before:bg-[#333333]',
             'before:h-[32px] before:w-1',
             'hover:before:hidden',
             'overflow-hidden'
           )}
         >
           <button
-            className={clsx(
-              'hover:bg-[#00000033]',
-              'w-[184px] h-full',
-              'font-medium'
-            )}
+            className="w-[184px] h-full main-button"
             onClick={handleClickConfirm}
           >
             {t('global.confirmButton')}
           </button>
           <button
             className={clsx(
-              'hover:bg-[#00000033]',
-              'w-[60px] h-full',
+              'w-[60px] h-full main-button',
               'flex justify-center items-center'
             )}
             onClick={handleClickCancel}
@@ -74,8 +68,7 @@ export const SubmitActions: React.FC<Props> = ({
               disabled={disabledProcess}
               type="primary"
               className={clsx(
-                'w-[246px] h-[48px] rounded-[8px]',
-                'disabled:opacity-40 disabled:bg-blue-light',
+                'w-[246px] h-[48px] rounded-[8px] main-button',
                 'before:content-none'
               )}
               onClick={handleClickSign}

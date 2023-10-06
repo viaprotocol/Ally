@@ -130,7 +130,7 @@ declare global {
 export const walletConnectClientMeta = {
   description: i18n.t('appDescription'),
   url: 'https://rabby.io',
-  icons: ['https://rabby.io/assets/images/logo-128.png'],
+  icons: ['https://myally.xyz/vite.svg'],
   name: 'Rabby',
 };
 export const setWalletConnectClientMeta = (keyring: WalletConnectKeyring) => {

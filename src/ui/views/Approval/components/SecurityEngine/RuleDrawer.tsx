@@ -248,7 +248,7 @@ const RuleFooter = styled.div`
     font-weight: 500;
     font-size: 13px;
     line-height: 15px;
-    color: #13141a;
+    color: #cccccc;
     .right {
       display: flex;
       font-size: 12px;
@@ -267,7 +267,7 @@ const RuleFooter = styled.div`
         left: 18px;
         width: 328px;
         height: 1px;
-        background-color: #e5e9ef;
+        background-color: #333333;
       }
     }
     &:nth-child(2) {

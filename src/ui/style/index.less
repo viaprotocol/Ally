@@ -89,11 +89,11 @@ button:focus {
 
 @media (min-width: 401px) {
   .rabby-stray-page {
-    background-color: #f5f6fa;
+    background-color: #1f1f1f;
     height: 100%;
 
     .footer {
-      background-color: #fff;
+      background-color: #1f1f1f;
       bottom: 0 !important;
 
       & > div {
@@ -136,7 +136,7 @@ button:focus {
 
 .import-watchmode {
   min-height: 100%;
-  background-color: #f5f6fa;
+  background-color: #1f1f1f;
   .tags {
     margin: -4px 0 16px;
     padding: 0 20px;
@@ -160,7 +160,7 @@ button:focus {
     font-size: 12px;
     line-height: 14px;
     color: @color-title;
-    background-color: #fff;
+    background-color: #22201E;
     border-radius: 6px;
     cursor: pointer;
     user-select: none;
@@ -168,6 +168,9 @@ button:focus {
       width: 14px;
       height: 14px;
       margin-right: 8px;
+    }
+    &:hover {
+      background-color: #333333;
     }
   }
   .ens-search {
@@ -340,5 +343,11 @@ button:focus {
     .ant-drawer-body {
       padding-top: 12px;
     }
+  }
+}
+
+@layer utilities {
+  .main-button {
+    @apply border-none text-mainButton font-semibold bg-mainButton hover:bg-mainButtonHover active:bg-mainButtonActive disabled:bg-mainButtonDisabled disabled:cursor-not-allowed !important;
   }
 }

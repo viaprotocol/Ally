@@ -61,7 +61,7 @@ export const TradingSettings = ({
           {list.map((item) => {
             return (
               <div
-                className="flex items-center h-[52px] bg-gray-bg rounded-[6px] px-12 py-14"
+                className="flex items-center h-[52px] bg-[#1f1f1f] rounded-[6px] px-12 py-14"
                 key={item.name}
               >
                 <div className="flex items-center gap-8 w-[188px]">
@@ -69,7 +69,7 @@ export const TradingSettings = ({
                     src={item.logo}
                     className="w-[24px] h-[24px] rounded-full"
                   />
-                  <span className="text-15 text-gray-title font-medium ">
+                  <span className="text-15 text-[#ccc] font-medium ">
                     {item.name}
                   </span>
                   <span
@@ -154,7 +154,7 @@ function EnableTrading({ onConfirm }: { onConfirm: () => void }) {
           type="primary"
           block
           disabled={!checked}
-          className="h-[40px] w-[188px] text-13 font-medium mx-auto"
+          className="main-button h-[40px] w-[188px] text-13 font-medium mx-auto"
           onClick={onConfirm}
         >
           {t('page.swap.confirm')}

@@ -95,7 +95,7 @@ const AddressInfo1 = ({ address, type, brandName, source }: Props) => {
               <Button
                 type="primary"
                 size="large"
-                className="w-[200px]"
+                className="main-button w-[200px]"
                 htmlType="submit"
               >
                 {t('global.Confirm')}

@@ -280,6 +280,7 @@ const Main = () => {
         <PrivateRoute exact path="/dex-swap">
           <Swap />
         </PrivateRoute>
+
         <PrivateRoute exact path="/custom-rpc">
           <CustomRPC />
         </PrivateRoute>

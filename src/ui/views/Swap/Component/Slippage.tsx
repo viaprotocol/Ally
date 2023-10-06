@@ -24,17 +24,17 @@ export const SlippageItem = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid transparent;
   cursor: pointer;
   border-radius: 6px;
   width: 52px;
   height: 28px;
   font-weight: 500;
   font-size: 12px;
-  background: #f5f6fa;
+  background: linear-gradient(180deg, #a8a29e 0%, #78716c 100%);
   border-radius: 4px;
+  color: #1b1a18;
   &:hover {
-    background: rgba(134, 151, 255, 0.2);
+    background: linear-gradient(180deg, #cec7c3 0%, #9b928c 100%);
   }
 `;
 
@@ -50,12 +50,12 @@ const Wrapper = styled.section`
   .input {
     font-weight: 500;
     font-size: 12px;
-    background: #f5f6fa;
-    border: 1px solid #e5e9ef;
+    background: #141414;
+    border: 1px solid #44403c;
     border-radius: 4px;
 
     &:placeholder-shown {
-      color: #707280;
+      color: #666;
     }
     .ant-input {
       border-radius: 0;

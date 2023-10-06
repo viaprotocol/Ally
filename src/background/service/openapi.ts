@@ -1,4 +1,5 @@
 import { INITIAL_OPENAPI_URL, INITIAL_TESTNET_OPENAPI_URL } from '@/constant';
+import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 import { OpenApiService } from '@rabby-wallet/rabby-api';
 import { createPersistStore } from 'background/utils';
 export * from '@rabby-wallet/rabby-api/dist/types';
@@ -27,6 +28,9 @@ if (!process.env.DEBUG) {
 }
 
 const service = new OpenApiService({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  adapter: fetchAdapter,
   store,
 });
 

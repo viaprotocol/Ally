@@ -112,18 +112,12 @@ const CardBody = styled.div<{
             cursor: pointer;
 
             &:hover {
-              border: 1px solid #8697ff;
+              background: #292929;
             }
 
             &.active {
-              background: rgba(134, 151, 255, 0.1);
-              border: 1px solid #8697ff;
-            }
-          }
-
-          .cardTitle {
-            &.active {
-              color: #8697ff !important;
+              background: #333333;
+              border: 1px solid #333333;
             }
           }
         `}
@@ -131,22 +125,22 @@ const CardBody = styled.div<{
   .card {
     width: 76px;
     height: 52px;
-    background: #f5f6fa;
+    background: #1f1f1f;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    border: 1px solid transparent;
+    border: 1px solid #333;
 
     .gas-level,
     .cardTitle {
       text-align: center;
       font-size: 12px;
       line-height: 14px;
-      color: ${LessPalette['@color-comment']};
+      color: #ccc;
       margin: 8px auto 0;
     }
     .cardTitle {
-      color: ${LessPalette['@color-title']} !important;
+      color: #ccc;
       font-weight: 500;
       font-size: 13px !important;
       margin: 4px auto 0;
@@ -158,15 +152,15 @@ const CardBody = styled.div<{
       text-align: center !important;
       font-size: 13px !important;
       font-weight: 500;
-      color: ${LessPalette['@color-title']};
+      color: #666;
       padding-top: 0;
       &.active {
-        color: #8697ff !important;
+        color: #ccc !important;
       }
     }
     .ant-input:focus,
     .ant-input-focused {
-      color: #000000;
+      color: #fff;
     }
   }
 `;
@@ -180,7 +174,7 @@ const ManuallySetGasLimitAlert = styled.div`
 `;
 
 const ErrorsWrapper = styled.div`
-  border-top: 1px solid #ededed;
+  border-top: 1px solid #333333;
   padding-top: 14px;
   margin-top: 14px;
   .item {
@@ -188,7 +182,7 @@ const ErrorsWrapper = styled.div`
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    color: #333333;
+    color: #ccc;
     margin-bottom: 10px;
     align-items: flex-start;
     .icon-alert {
@@ -631,7 +625,7 @@ const GasSelector = ({
               ) : (
                 <div className="gas-selector-card-content-item">
                   <div className="gas-selector-card-amount translate-y-1">
-                    <span className="text-blue-light font-medium text-15">
+                    <span className="text-white font-medium text-15">
                       {formatTokenAmount(
                         new BigNumber(gas.gasCostAmount).toString(10)
                       )}{' '}
@@ -913,7 +907,7 @@ const GasSelector = ({
         <div className="flex justify-center mt-32 popup-footer">
           <Button
             type="primary"
-            className="w-[200px]"
+            className="w-[200px] main-button"
             size="large"
             onClick={handleModalConfirmGas}
             disabled={!isReady || validateStatus.customGas.status === 'error'}
@@ -930,7 +924,7 @@ const GasPriceDesc = styled.ul`
   margin-top: 12px;
   margin-bottom: 0;
   font-size: 13px;
-  color: #4b4d59;
+  color: #666666;
   li {
     position: relative;
     margin-bottom: 8px;
@@ -944,7 +938,7 @@ const GasPriceDesc = styled.ul`
       width: 4px;
       height: 4px;
       border-radius: 100%;
-      background-color: #4b4d59;
+      background-color: #666666;
       left: 0;
       top: 8px;
     }

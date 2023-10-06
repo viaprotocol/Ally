@@ -19,23 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { getTokenSymbol } from '@/ui/utils/token';
 
 const CexListWrapper = styled.div`
-  border: 1px solid #e5e9ef;
-  border-radius: 6px;
   &:empty {
     display: none;
-  }
-
-  & > div:not(:last-child) {
-    position: relative;
-    &:not(:last-child):before {
-      content: '';
-      position: absolute;
-      width: 328px;
-      height: 0;
-      border-bottom: 1px solid #e5e9ef;
-      left: 16px;
-      bottom: 0;
-    }
   }
 `;
 
@@ -142,7 +127,7 @@ export const Quotes = ({
     const dex = sortedList.find((e) => e.isDex) as TDexQuoteData | undefined;
 
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col">
         {dex ? (
           <DexQuoteItem
             inSufficient={inSufficient}
@@ -179,7 +164,7 @@ export const Quotes = ({
   }
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col">
         {sortedList.map((params, idx) => {
           const { name, data, isDex } = params;
           if (!isDex) return null;
@@ -203,7 +188,7 @@ export const Quotes = ({
         <QuoteListLoading fetchedList={fetchedList} />
       </div>
       {!noCex && (
-        <div className="text-gray-light text-12 mt-20 mb-8">
+        <div className="text-white text-12 mt-20 mb-8">
           {t('page.swap.rates-from-cex')}
         </div>
       )}
@@ -225,11 +210,11 @@ export const Quotes = ({
         <QuoteListLoading fetchedList={fetchedList} isCex />
       </CexListWrapper>
       <div className="pt-[40px]" />
-      <div className="flex items-center justify-center fixed left-0 bottom-0 h-32 text-13 w-full  bg-gray-bg2  text-gray-light ">
+      <div className="flex items-center justify-center fixed left-0 bottom-0 h-32 text-13 w-full  bg-[#141414] text-white ">
         {t('page.swap.tradingSettingTips', { viewCount, tradeCount })}
         <span
           onClick={openSettings}
-          className="cursor-pointer pl-4 text-blue-light underline underline-blue-light"
+          className="cursor-pointer pl-4 text-white underline underline-blue-light"
         >
           {t('page.swap.edit')}
         </span>

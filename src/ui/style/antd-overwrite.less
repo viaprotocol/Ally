@@ -9,6 +9,8 @@
 
 .ant-input {
   border-radius: 6px;
+  background: transparent;
+  color: white;
   &[type='password'] {
     letter-spacing: 4px;
     &::placeholder {
@@ -52,7 +54,6 @@
   &:focus {
     background-color: @primary-color;
     border-color: @primary-color;
-    box-shadow: 0px 8px 16px #292929;
   }
 }
 .ant-input-suffix.ant-input-suffix.ant-input-suffix .anticon {
@@ -189,6 +190,8 @@
     max-height: 500px;
     overflow: auto;
     overflow: -moz-scrollbars-none;
+    background: #131313!important;
+    border: 1px solid #292929;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -241,7 +244,7 @@
   input {
   border-color: #44403c;
   background-color: transparent !important;
-  color: #666 !important;
+  color: #ccc !important;
 
   &:hover {
     border-color: #a8a29d;
@@ -256,7 +259,8 @@
         Switch
 ---------------------*/
 .ant-switch {
-  background: #b4bdcc;
+  background: #A8A29E
+  ;
 }
 
 .ant-switch-disabled {
@@ -368,6 +372,7 @@ textarea {
   .ant-drawer-close {
     font-size: 19px;
     line-height: 0;
+    color: #747474;
   }
   .ant-drawer-body {
     padding: 20px 20px 24px;
@@ -380,26 +385,28 @@ textarea {
 .ant-slider {
   margin: 0;
   .ant-slider-rail {
-    background-color: #e5e9ef;
+    background-color: #666;
   }
   .ant-slider-track {
-    background-color: #b4bdcc;
+    background-color: #888;
   }
   .ant-slider-handle {
-    border-color: #b4bdcc;
+    border-color: #888;
+    background: #aaa;
     transition: box-shadow 0.3s;
   }
   &:hover {
     .ant-slider-handle,
     .ant-slider-handle:not(.ant-tooltip-open) {
-      border-color: #b4bdcc;
+      border-color: #aaa;
+      background: #ccc;
       box-shadow: 0px 2px 6px rgba(28, 31, 53, 0.2);
     }
     .ant-slider-rail {
-      background-color: #e5e9ef;
+      background-color: #888;
     }
     .ant-slider-track {
-      background-color: #b4bdcc;
+      background-color: #aaa;
     }
   }
 }
@@ -418,5 +425,20 @@ textarea {
   &:hover {
     background-color: rgba(134, 151, 255, 0.2);
     border: 1px solid #8697ff;
+  }
+}
+
+.ant-tabs {
+  .ant-tabs-tab-btn {
+    color: #ccc;
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #fff;
+  }
+  .ant-tabs-ink-bar {
+    background: #fff;
+  }
+  .ant-tabs-content {
+    color: #fff;
   }
 }

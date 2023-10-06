@@ -46,7 +46,7 @@ const Wrapper = styled.section`
     align-items: center;
     position: relative;
     .origin {
-      color: #333;
+      color: #cccccc;
       flex: 1;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -57,7 +57,7 @@ const Wrapper = styled.section`
     .right {
       font-size: 12px;
       line-height: 14px;
-      color: #707280;
+      color: #666666;
     }
     .security-level-tag {
       margin-top: -15px;
@@ -126,9 +126,9 @@ const Shadow = styled.div`
   width: 100%;
   background: linear-gradient(
     180deg,
-    rgba(217, 217, 217, 0) 10.74%,
-    rgba(175, 175, 175, 0.168147) 41.66%,
-    rgba(130, 130, 130, 0.35) 83.44%
+    rgba(0, 0, 0, 0) 10.74%,
+    rgba(0, 0, 0, 0.168147) 41.66%,
+    rgba(0, 0, 0, 0.35) 83.44%
   );
 `;
 
@@ -172,7 +172,7 @@ export const FooterBar: React.FC<Props> = ({
 
   const displayOirigin = useMemo(() => {
     if (origin === INTERNAL_REQUEST_ORIGIN) {
-      return 'Rabby Wallet';
+      return 'Ally';
     }
     return origin;
   }, [origin]);
@@ -239,7 +239,7 @@ export const FooterBar: React.FC<Props> = ({
     <div className="relative">
       {hasShadow && <Shadow />}
       <Wrapper
-        className={clsx('bg-white', {
+        className={clsx('bg-[#292929]', {
           'has-shadow': hasShadow,
         })}
       >

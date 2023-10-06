@@ -331,11 +331,7 @@ function MnemonicsInputs({
         </div>
       </HeadToolbar>
       <MatrixWrapper
-        className={clsx(
-          'rounded-[6px] bg-gray-bg text-center',
-          'border border-[#E1E5F2] border-solid',
-          className
-        )}
+        className={clsx('rounded-[6px] text-center', className)}
         rowCount={rowCount}
       >
         {wordPlaceHolders.map((_, idx) => {

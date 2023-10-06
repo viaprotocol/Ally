@@ -21,7 +21,8 @@ export const SignTitle = styled.div`
     display: flex;
     font-size: 18px;
     line-height: 21px;
-    color: #333333;
+    color: #ffffff;
+    font-weight: 600;
     .icon-speedup {
       width: 10px;
       margin-right: 6px;
@@ -37,13 +38,14 @@ export const SignTitle = styled.div`
 `;
 
 export const ActionWrapper = styled.div`
+  border: 1px solid #333;
   border-radius: 8px;
   margin-bottom: 8px;
-  background-color: #fff;
+  background-color: #1c1c1c;
   .action-header {
     display: flex;
     justify-content: space-between;
-    background: #8697ff;
+    background: #333333;
     padding: 14px;
     align-items: center;
     color: #fff;
