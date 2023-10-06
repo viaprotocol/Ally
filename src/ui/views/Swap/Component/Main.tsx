@@ -30,17 +30,18 @@ import { Trans, useTranslation } from 'react-i18next';
 const tipsClassName = clsx('text-gray-subTitle text-12 mb-4 pt-10');
 
 const StyledInput = styled(Input)`
-  background: #f5f6fa;
+  background: #1c1c1c !important;
   border-radius: 6px;
   height: 46px;
   font-weight: 500;
   font-size: 18px;
-  color: #ffffff;
+  color: #ccc !important;
   box-shadow: none;
   & > .ant-input {
-    background: #f5f6fa;
+    background: transparent;
     font-weight: 500;
     font-size: 18px;
+    color: #ccc;
   }
 
   &.ant-input-affix-wrapper,
@@ -49,7 +50,7 @@ const StyledInput = styled(Input)`
     border: 1px solid transparent;
   }
   &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: #292929 !important;
     box-shadow: none;
   }
 
@@ -282,7 +283,7 @@ export const Main = () => {
           : 'pb-[110px]'
       )}
     >
-      <div className={clsx('bg-white rounded-[6px] p-12 pt-0 pb-10 mx-20')}>
+      <div className={clsx('p-12 pt-0 pb-10')}>
         <div className={clsx(tipsClassName)}>{t('page.swap.chain')}</div>
         <ChainSelectorInForm
           value={chain}
@@ -462,7 +463,6 @@ export const Main = () => {
       <div
         className={clsx(
           'fixed w-full bottom-0 mt-auto flex flex-col items-center justify-center p-20 gap-12',
-          'bg-white border border-gray-divider',
           activeProvider && activeProvider.shouldApproveToken && 'pt-16'
         )}
       >
@@ -484,7 +484,7 @@ export const Main = () => {
           type="primary"
           block
           size="large"
-          className="h-[48px] text-white text-[16px] font-medium"
+          className="h-[48px] text-[16px] main-button"
           onClick={() => {
             if (!activeProvider || expired || slippageChanged) {
               setVisible(true);

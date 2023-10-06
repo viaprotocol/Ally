@@ -120,7 +120,7 @@ const Transaction = forwardRef<HTMLDivElement, TransactionProps>(
     return (
       <div
         className={clsx(
-          'bg-gray-bg rounded-[6px] p-12 relative text-12 text-gray-subTitle'
+          'bg-[#1f1f1f] rounded-[6px] p-12 relative text-12 text-gray-subTitle'
         )}
         ref={ref}
       >
