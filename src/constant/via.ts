@@ -1,3 +1,3 @@
-const VIA_SCORE_URL = 'https://myally.xyz';
+const VIA_SCORE_URL = 'https://ally.via.exchnage';
 
 export { VIA_SCORE_URL };

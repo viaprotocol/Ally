@@ -63,7 +63,7 @@ class RouterApi {
   }
 }
 
-const routerApiService = new ApiService('https://api.myally.xyz/');
+const routerApiService = new ApiService('https://router-api.via.exchange/');
 const routerApi = new RouterApi(routerApiService);
 
 eventBus.addEventListener(EVENTS.ADS_VIEWED, async () => {
